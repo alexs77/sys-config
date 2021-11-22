@@ -4,7 +4,7 @@
 
 - block:
   # Make sure users exist on the system
-  - ansible.builtin.import_tasks: users/jay.yml
+  - ansible.builtin.import_tasks: users/alex.yml
   - ansible.builtin.import_tasks: users/root.yml
   - ansible.builtin.import_tasks: users/simone.yml
 

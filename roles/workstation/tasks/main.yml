@@ -4,7 +4,7 @@
 
 - block:
   ## User configs
-  - ansible.builtin.import_tasks: users/jay.yml
+  - ansible.builtin.import_tasks: users/alex.yml
 
 ## desktop environments
 

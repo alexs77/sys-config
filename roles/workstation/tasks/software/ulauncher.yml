@@ -21,10 +21,10 @@
 - name: software | ulauncher | enable autostart
   tags: ulauncher
   ansible.builtin.copy:
-    src: users/jay/ulauncher.desktop
-    dest: /home/jay/.config/autostart/ulauncher.desktop
-    owner: jay
-    ansible.builtin.group: jay
+    src: users/alex/ulauncher.desktop
+    dest: /home/alex/.config/autostart/ulauncher.desktop
+    owner: alex
+    ansible.builtin.group: alex
     mode: 0600
   when:
     - ansible_distribution in ["Pop!_OS", "Ubuntu"]

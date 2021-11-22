@@ -1,16 +1,16 @@
 - name: software | kdenlive | copy launcher
   tags: apps,appimage,software,kdenlive
   ansible.builtin.copy:
-    src: users/jay/kdenlive.desktop
-    dest: /home/jay/.local/share/applications/kdenlive.desktop
-    owner: jay
-    ansible.builtin.group: jay
+    src: users/alex/kdenlive.desktop
+    dest: /home/alex/.local/share/applications/kdenlive.desktop
+    owner: alex
+    ansible.builtin.group: alex
     mode: 0700
 
 - name: software | kdenlive | install package
   ansible.builtin.get_url:
     url: https://download.kde.org/stable/kdenlive/20.08/linux/kdenlive-20.08.2-x86_64.appimage
-    dest: /home/jay/bin/kdenlive.app
+    dest: /home/alex/bin/kdenlive.app
     mode: '0700'
-    owner: jay
-    ansible.builtin.group: jay
+    owner: alex
+    ansible.builtin.group: alex
