@@ -1,7 +1,7 @@
 - block:
   - name: send failure notification via telegram
     tags: always
-    telegram:
+    community.general.telegram:
       token: "{{ telegram_token }}"
       chat_id: "{{ telegram_chat_id }}"
       msg_format: markdown
@@ -14,7 +14,7 @@
   rescue:
     - name: send failure notification via telegram
       tags: always
-      telegram:
+      community.general.telegram:
         token: "{{ telegram_token }}"
         chat_id: "{{ telegram_chat_id }}"
         msg_format: markdown
@@ -24,7 +24,7 @@
 
 - name: ansible job failed, clear cache later on to trigger another provision run
   become: yes
-  at:
+  ansible.builtin.at:
     command: "if ! pgrep -f ansible-pull >/dev/null; then rm -rf /home/simone/.ansible; fi"
     count: 60
     units: minutes
