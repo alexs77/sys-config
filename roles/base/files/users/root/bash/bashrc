@@ -50,9 +50,9 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias rm='rm -I --preserve-root'
 
 # confirmation #
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
+# alias mv='mv -i'
+# alias cp='cp -i'
+# alias ln='ln -i'
 
 # Parenting changing perms on / #
 alias chown='chown --preserve-root'
