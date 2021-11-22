@@ -42,7 +42,7 @@ case :$PATH: in
 esac
 
 # Enable tab completion for tmux
-source /home/jay/.tmux/plugins/completion/tmux
+source /home/alex/.tmux/plugins/completion/tmux
 
 # Add /home/$USER/.tmux/tmuxifier to $PATH
 case :$PATH: in
@@ -55,14 +55,14 @@ esac
 alias rm='rm -I --preserve-root'
 
 # confirmation #
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
+#alias mv='mv -i'
+#alias cp='cp -i'
+#alias ln='ln -i'
 
 # Parenting changing perms on / #
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
+#alias chown='chown --preserve-root'
+#alias chmod='chmod --preserve-root'
+#alias chgrp='chgrp --preserve-root'
 
 # reload bash config
 alias reload="source ~/.bashrc"
