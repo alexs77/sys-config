@@ -1,0 +1,8 @@
+- name: software | ms teams | install package
+  tags: packages,flatpak,teams,workstation-packages
+  become_user: alex
+  community.general.flatpak:
+    name: com.microsoft.Teams
+    method: user
+    state: present
+  when: msteams is defined and msteams == true

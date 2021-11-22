@@ -1,0 +1,8 @@
+- name: software | visual studio code | install package
+  tags: packages,vscode,flatpak,workstation-packages
+  become_user: alex
+  community.general.flatpak:
+    name: com.visualstudio.code
+    method: user
+    state: present
+  when: vscode is defined and vscode == true

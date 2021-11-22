@@ -1,0 +1,36 @@
+- name: software | brave beta | add repository key
+  tags: packages,brave-beta
+  ansible.builtin.apt_key:
+    url: https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
+    state: present
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - brave-beta is defined
+    - brave-beta == true
+
+- name: software | brave beta | check if repository exists
+  ansible.builtin.stat:
+    path: /etc/apt/sources.list.d/brave-browser-beta.list
+  register: brave_beta_repo_file
+
+- name: software | brave beta | add repository
+  tags: packages,brave-beta
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main"
+    state: present
+    filename: brave-browser-beta
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - brave-beta is defined
+    - brave-beta == true
+    - brave_beta_repo_file.stat.exists == False
+
+- name: software | brave beta | install package
+  tags: packages,brave-beta
+  ansible.builtin.apt:
+    name: brave-browser-beta
+    state: latest
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - brave-beta is defined
+    - brave-beta == true
