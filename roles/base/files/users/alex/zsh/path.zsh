@@ -1,1 +1,1 @@
-path+=/home/alex/.local/bin
+path+=/home/jay/.local/bin
