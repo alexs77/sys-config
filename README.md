@@ -1,5 +1,9 @@
 # Personal Ansible Desktop Configs
 
+- Based on <https://github.com/LearnLinuxTV/personal_ansible_desktop_configs>.
+
+Notes from upstream:
+
 I use Ansible to configure all of my desktops, laptops, and servers. I
 use the Ansible Pull method, which I describe in both my Ansible Pull
 tutorial (already uploaded) and my Ansible desktop tutorial (will be
