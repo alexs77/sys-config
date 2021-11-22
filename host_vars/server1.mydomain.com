@@ -11,6 +11,7 @@ microcode_amd_install: false
 microcode_intel_install: false
 proxmox_instance: false
 raspberry_pi: false
+time_zone: Europe/Berlin
 
 # server
 unattended_upgrades: true
