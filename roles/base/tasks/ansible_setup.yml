@@ -8,6 +8,12 @@
 #     - ansible is defined
 #     - ansible == true
 
+- name: ansible setup | create ansible group
+  tags: ansible,ansible-setup
+  ansible.builtin.group:
+    name: ansible
+    system: yes
+
 - name: ansible setup | check if repository exists
   tags: ansible,ansible-setup
   ansible.builtin.stat:
