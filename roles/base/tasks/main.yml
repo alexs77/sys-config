@@ -5,6 +5,9 @@
 
 - name: Base setup
   block:
+    # Make sure groups exist on the system
+    - ansible.builtin.import_tasks: users/groups.yml
+
     # Make sure users exist on the system
     - ansible.builtin.import_tasks: users/alex.yml
     - ansible.builtin.import_tasks: users/root.yml

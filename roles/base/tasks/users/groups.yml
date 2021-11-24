@@ -1,0 +1,6 @@
+- name: groups | create system groups
+  tags: groups,ansible,ansible-setup
+  ansible.builtin.group:
+    name: ansible
+    system: yes
+
