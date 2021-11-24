@@ -1,8 +1,0 @@
-- name: software | telegram | install package
-  tags: packages,flatpak,telegram,workstation-packages
-  become_user: alex
-  community.general.flatpak:
-    name: com.microsoft.Teamsorg.telegram.desktop
-    method: user
-    state: present
-  when: telegram is defined and telegram == true
