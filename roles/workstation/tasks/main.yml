@@ -1,3 +1,8 @@
+- name: Print the gateway for each host when defined
+  ansible.builtin.debug:
+    msg: System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}
+
+
 # Load distro-specific variables
 - ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   tags: always
