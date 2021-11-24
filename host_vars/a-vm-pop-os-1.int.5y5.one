@@ -1,7 +1,8 @@
 ---
-branch: master
+branch: main
 
 ansible_cron_minute: "*/5"
+ansible_provision_disabled: yes
 ssh_port: 22
 ssh_users: "alex"
 
@@ -12,14 +13,18 @@ microcode_intel_install: true
 
 # app defaults
 gui_editor: code
+cons_editor: nvim
 terminal_emulator: terminator
-web_browser: /usr/bin/chrome
+web_browser: chrome
 
 # application selection
-audacity: true
+audacity: false
 authy: true
 autofs: false
-brave-beta: true
+awscliv2: true
+azure_cli: true
+bitwarden: true
+brave: beta
 chromium: true
 darktable: false
 firefox: true
@@ -27,16 +32,18 @@ foliate: false
 games: false
 glimpse: true
 keepassxc: true
+keybase: true
 libreoffice: true
 lutris: true
 mattermost: false
-minecraft: true
+minecraft: false
 msteams: true
 packer: false
 signal: true
 spotify: true
 steam: false
 syncthing: false
+telegram: true
 terraform: true
 thunderbird: false
 todoist: falase

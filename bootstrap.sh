@@ -2,8 +2,16 @@
 
 ansible_repo_url=https://github.com/alexs77/sys-config.git
 
-sudo apt-get update
-sudo apt-get install -y git ansible
+# Add Ansible repo
+sudo sh -c '
+  apt-get update
+  apt-get install --yes software-properties-common
+  add-apt-repository --yes --update ppa:ansible/ansible
+  apt-get install -y ansible
+'
+
+# Install git
+sudo apt-get install -y git
 
 case `lsb_release -is` in
   Pop)
@@ -11,6 +19,6 @@ case `lsb_release -is` in
     ;;
 esac
 
-ansible-pull -i $distrib -U $ansible_repo_url
+ansible-pull --inventory hosts --tags $distrib --url $ansible_repo_url
 
 exit $?

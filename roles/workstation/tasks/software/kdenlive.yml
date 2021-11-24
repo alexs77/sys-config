@@ -4,8 +4,11 @@
     src: users/alex/kdenlive.desktop
     dest: /home/alex/.local/share/applications/kdenlive.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0700
+  when:
+    - kdenlive is defined
+    - kdenlive == true
 
 - name: software | kdenlive | install package
   ansible.builtin.get_url:
@@ -13,4 +16,7 @@
     dest: /home/alex/bin/kdenlive.app
     mode: '0700'
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
+  when:
+    - kdenlive is defined
+    - kdenlive == true

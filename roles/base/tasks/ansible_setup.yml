@@ -1,3 +1,31 @@
+# - name: software | ansible | add repository key
+#   tags: packages,ansible
+#   ansible.builtin.apt_key:
+#     url: https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
+#     state: present
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - ansible is defined
+#     - ansible == true
+
+- name: ansible setup | check if repository exists
+  tags: ansible,ansible-setup
+  ansible.builtin.stat:
+    path: "/etc/apt/sources.list.d/ansible-ubuntu-ansible-{{ ansible_distribution_release }}.list"
+  register: ansible_repo_file
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- name: ansible setup | add repository
+  tags: ansible,ansible-setup
+  ansible.builtin.apt_repository:
+    repo: ppa:ansible/ansible
+    state: present
+    filename: "ansible-ubuntu-ansible-{{ ansible_distribution_release }}"
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - ansible_repo_file.stat.exists == False
+
 - name: ansible setup | ensure ansible is the latest version
   tags: ansible,ansible-setup
   ansible.builtin.package:
@@ -22,7 +50,7 @@
   tags: ansible,ansible-setup
   ansible.builtin.file:
     path: /var/log/ansible.log
-    owner: simone
+    owner: admin
     ansible.builtin.group: ansible
     mode: 0664
     state: touch

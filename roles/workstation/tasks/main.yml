@@ -62,16 +62,19 @@
   - ansible.builtin.import_tasks: software/audacious.yml
   - ansible.builtin.import_tasks: software/audacity.yml
   - ansible.builtin.import_tasks: software/authy.yml
+  - ansible.builtin.import_tasks: software/aws_cli.yml
+  - ansible.builtin.import_tasks: software/azure_cli.yml
   - ansible.builtin.import_tasks: software/bitwarden.yml
-  - ansible.builtin.import_tasks: software/caffeine.yml
-  - ansible.builtin.import_tasks: software/codecs.yml
   - ansible.builtin.import_tasks: software/boto.yml
+  - ansible.builtin.import_tasks: software/brave.yml
+  - ansible.builtin.import_tasks: software/caffeine.yml
   - ansible.builtin.import_tasks: software/chromium.yml
+  - ansible.builtin.import_tasks: software/codecs.yml
   - ansible.builtin.import_tasks: software/darktable.yml
   - ansible.builtin.import_tasks: software/firefox.yml
   - ansible.builtin.import_tasks: software/foliate.yml
-  - ansible.builtin.import_tasks: software/google_chrome.yml
   - ansible.builtin.import_tasks: software/glimpse.yml
+  - ansible.builtin.import_tasks: software/google_chrome.yml
   - ansible.builtin.import_tasks: software/kdenlive.yml
   - ansible.builtin.import_tasks: software/keepassxc.yml
   - ansible.builtin.import_tasks: software/libreoffice.yml
@@ -81,6 +84,7 @@
   - ansible.builtin.import_tasks: software/minecraft.yml
   - ansible.builtin.import_tasks: software/misc_games.yml
   - ansible.builtin.import_tasks: software/misc_packages.yml
+  - ansible.builtin.import_tasks: software/neovim.yml
   - ansible.builtin.import_tasks: software/openshot.yml
   - ansible.builtin.import_tasks: software/packer.yml
   - ansible.builtin.import_tasks: software/signal.yml
@@ -88,6 +92,7 @@
   - ansible.builtin.import_tasks: software/spotify.yml
   - ansible.builtin.import_tasks: software/steam.yml
   - ansible.builtin.import_tasks: software/syncthing.yml
+  - ansible.builtin.import_tasks: software/teams.yml
   - ansible.builtin.import_tasks: software/terraform.yml
   - ansible.builtin.import_tasks: software/thunderbird.yml
   - ansible.builtin.import_tasks: software/todoist.yml

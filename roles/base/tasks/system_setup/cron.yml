@@ -17,15 +17,16 @@
   tags: cron
   ansible.builtin.cron:
     name: "ansible provision"
-    ansible.builtin.user: simone
+    user: admin
     hour: "{{ ansible_cron_hour | default('*') }}"
     minute: "{{ ansible_cron_minute | default('*/30') }}"
     job: "/usr/local/bin/provision > /dev/null"
+    disabled: "{{ ansible_provision_disabled }}"
 
 - name: system setup | cron | schedule ansible cleanup at boot
   tags: cron
   ansible.builtin.cron:
     name: "ansible refresh at boot"
-    ansible.builtin.user: simone
+    user: admin
     special_time: reboot
-    job: "/bin/rm -rf /home/simone/.ansible"
+    job: "/bin/rm -rf /home/admin/.ansible || /bin/true"

@@ -3,29 +3,32 @@
   ansible.builtin.package:
     state: latest
     name:
+      - "{{ dns_utils_package}}"
+      - "{{ lm_sensors_package }}"
+      - "{{ nfs_client_package }}"
+      - "{{ rename_package }}"
+      - "{{ vim_package }}"
+      - apt-transport-https
       - at
       - colordiff
       - curl
-      - "{{ dns_utils_package}}"
+      - fish
       - htop
       - iotop
-      - "{{ lm_sensors_package }}"
       - lsof
       - mc
       - mosh
       - ncdu
       - neofetch
       - net-tools
-      - "{{ nfs_client_package }}"
       - nmap
       - ranger
-      - "{{ rename_package }}"
+      - ripgrep
       - rsync
       - screen
       - sshfs
       - tmux
       - traceroute
-      - "{{ vim_package }}"
       - wget
       - whois
       - zsh

@@ -18,7 +18,7 @@
       - "{{ font_inconsolata_package }}"
       - "{{ font_noto_emoji_package }}"
       - "{{ font_terminus_package }}"
-      - geany
+      #- geany
       - gparted
       - "{{ hunspell_package }}"
       - "{{ hyphen_package }}"
@@ -29,7 +29,7 @@
       - "{{ network_manager_package }}"
       - "{{ network_manager_pptp_package }}"
       - "{{ network_manager_vpnc_package }}"
-      - neovim
+      #- neovim
       - pavucontrol
       - shotwell
       - simplescreenrecorder
@@ -41,14 +41,15 @@
       - unrar
       - "{{ wireless_tools_package }}"
       - "{{ wpa_supplicant_package }}"
-      - x2goclient
+      - xsel
+      #- x2goclient
 
 - name: software | install system packages specific to debian and ubuntu
   tags: packages,system,system-packages,workstation-packages
   ansible.builtin.package:
     name:
       - synaptic
-      - vim-gtk3
+      #- vim-gtk3
   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
 - name: software | remove unneeded workstation packages on debian and ubuntu hosts

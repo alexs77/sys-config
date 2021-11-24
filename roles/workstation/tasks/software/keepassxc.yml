@@ -5,6 +5,7 @@
     name: org.keepassxc.KeePassXC
     method: user
     state: present
+  when: keepassxc is defined and keepassxc == true
 
 - name: software | keepassxc | enable autostart
   tags: packages,keepassxc,flatpak,workstation-packages
@@ -14,6 +15,7 @@
     owner: alex
     ansible.builtin.group: alex
     state: link
+  when: keepassxc is defined and keepassxc == true
 
 - name: software | keepassxc | create keepassxc install directory
   tags: packages,keepassxc,flatpak,workstation-packages

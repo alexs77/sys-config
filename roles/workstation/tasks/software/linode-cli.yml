@@ -5,3 +5,4 @@
     executable: /usr/bin/pip3
     state: latest
     name: linode-cli
+  when: linode_cli is defined and linode_cli == true

@@ -5,4 +5,4 @@
     name: com.microsoft.Teams
     method: user
     state: present
-  when: msteams is defined and msteams == true
+  when: teams is defined and teams == true

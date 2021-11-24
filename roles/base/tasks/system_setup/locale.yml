@@ -1,7 +1,7 @@
 - name: system setup | locale
   tags: locale,system,setup
   community.general.locale_gen:
-    name: en_US.UTF-8
+    name: "{{ item }}"
     state: present
   loop: "{{ locales|flatten(levels=1) }}"
   register: locale

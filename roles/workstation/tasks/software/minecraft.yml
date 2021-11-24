@@ -1,5 +1,5 @@
 - name: software | minecraft | install package
-  tags: packages,flatpak,games,minecraft,workstation-packages
+  tags: packages,flatpak,minecraft,gaming
   become_user: alex
   community.general.flatpak:
     name: com.mojang.Minecraft

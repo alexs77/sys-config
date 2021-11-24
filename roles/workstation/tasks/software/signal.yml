@@ -13,6 +13,6 @@
     src: /home/alex/.local/share/flatpak/exports/share/applications/org.signal.Signal.desktop
     dest: /home/alex/.config/autostart/org.signal.Signal.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when: signal is defined and signal == true
