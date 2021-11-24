@@ -10,10 +10,10 @@
     ansible.builtin.import_tasks: users/alex.yml
 
   ## desktop environments
-  - name: "workstation | import task | mate - {{ item }}"
-    ansible.builtin.include_tasks: "desktop_environments/mate/{{ item }}.yml"
+  - name: "workstation | import task | mate - {{ inc_task }}"
+    ansible.builtin.include_tasks: "desktop_environments/mate/{{ inc_task }}.yml"
     when: mate is defined and mate == true
-    loop:
+    with_items:
       # Do *NOT* sort these!
       - appearance
       - caja
@@ -22,11 +22,13 @@
       - peripherals
       - terminal
       - workspace_settings
+    loop_control:
+        loop_var: inc_task
 
-  - name: "workstation | import task | gnome - {{ item }}"
-    ansible.builtin.include_tasks: "desktop_environments/gnome/{{ item }}.yml"
+  - name: "workstation | import task | gnome - {{ inc_task }}"
+    ansible.builtin.include_tasks: "desktop_environments/gnome/{{ inc_task }}.yml"
     when: gnome is defined and gnome == true
-    loop:
+    with_items:
       # Do *NOT* sort these!
       - appearance
       - keybindings
@@ -36,20 +38,24 @@
       - shell_settings
       - terminal
       - tracker
+    loop_control:
+        loop_var: inc_task
 
   ## system setup
-  - name: "workstation | import task | system setup - {{ item }}"
-    ansible.builtin.include_tasks: "system_setup/{{ item }}.yml"
-    loop:
+  - name: "workstation | import task | system setup - {{ inc_task }}"
+    ansible.builtin.include_tasks: "system_setup/{{ inc_task }}.yml"
+    with_items:
       # Do *NOT* sort these!
       - autofs 
       - scripts
       - tweaks
+    loop_control:
+        loop_var: inc_task
 
   ## install software
-  - name: "workstation | import task | software - {{ item }}"
-    ansible.builtin.include_tasks: "software/{{ item }}.yml"
-    loop:
+  - name: "workstation | import task | software - {{ inc_task }}"
+    ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
+    with_items:
       # These _may_ be sorted.
       - audacious
       - audacity
@@ -94,6 +100,8 @@
       - vivaldi
       - vlc
       - xonotic
+    loop_control:
+        loop_var: inc_task
 
   rescue:
     - set_fact: task_failed=true

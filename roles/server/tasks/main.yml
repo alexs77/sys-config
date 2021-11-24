@@ -5,13 +5,15 @@
 
 - name: server | tasks
   block:
-  - name: "server | import task | {{ item }}"
-    ansible.builtin.import_tasks: "{{ item }}.yml"
-    loop:
+  - name: "server | import task | {{ inc_task }}"
+    ansible.builtin.import_tasks: "{{ inc_task }}.yml"
+    with_items:
       # May be sorted.
       - nrpe
       - ufw
       - qemu-agent
+    loop_control:
+        loop_var: inc_task
 
   - name: server | import task | unattended upgrades (Debian)
     ansible.builtin.include_tasks: unattended_upgrades.yml
