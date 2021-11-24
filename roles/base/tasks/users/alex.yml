@@ -14,6 +14,17 @@
     comment: "Alexander Skwar"
     shell: /bin/bash
 
+- name: users | alex | create home directory
+  tags: dotfiles,alex,ssh,users
+  ansible.builtin.file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: alex
+    group: alex
+    mode: 0700
+  with_items:
+    - { dir: '/home/alex' }
+
 - name: users | alex | alex | add sudoers file
   tags: alex,settings,sudo,system,users
   ansible.builtin.copy:
