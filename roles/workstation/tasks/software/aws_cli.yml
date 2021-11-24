@@ -12,3 +12,7 @@
 #     - ansible_distribution != "Archlinux"
 #     - awscliv2 is defined
 #     - awscliv2 == true
+
+- name: aws cli
+  ansible.builtin.debug:
+    msg: TO BE DONE
