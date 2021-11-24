@@ -18,13 +18,15 @@ terminal_emulator: terminator
 web_browser: chrome
 
 # application selection
+brave:
+  - beta
+
 audacity: false
 authy: true
 autofs: false
 awscliv2: true
 azure_cli: true
 bitwarden: true
-brave: beta
 chromium: true
 darktable: false
 firefox: true
