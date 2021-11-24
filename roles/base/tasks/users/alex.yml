@@ -12,7 +12,6 @@
     groups: adm,ansible,{{ sudo_group }}
     state: present
     comment: "Alexander Skwar"
-    password: "{{ alex_passwd }}"
     shell: /bin/bash
 
 - name: users | alex | alex | add sudoers file
