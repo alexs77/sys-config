@@ -13,6 +13,6 @@
     src: /home/alex/.local/share/flatpak/exports/share/applications/com.mattermost.Desktop.desktop
     dest: /home/alex/.config/autostart/com.mattermost.Desktop.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when: mattermost is defined and mattermost == true

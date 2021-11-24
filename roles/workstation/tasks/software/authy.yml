@@ -16,7 +16,7 @@
     src: /var/lib/snapd/desktop/applications/authy_authy.desktop
     dest: /home/alex/.config/autostart/authy.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when:
     - ansible_distribution != "Archlinux"

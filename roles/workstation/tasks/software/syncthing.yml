@@ -5,7 +5,7 @@
     path: /home/alex/{{ item.dir }}
     state: directory
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0700
   with_items:
     - { dir: bin }
@@ -22,7 +22,7 @@
     src: users/alex/stignore
     dest: /home/alex/{{ item.dir }}/.stignore
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0600
   with_items:
     - { dir: bin }

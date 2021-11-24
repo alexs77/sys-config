@@ -15,7 +15,7 @@
     src: /var/lib/snapd/desktop/applications/todoist_todoist.desktop
     dest: /home/alex/.config/autostart/todoist_todoist.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when:
     - ansible_distribution != "Archlinux"

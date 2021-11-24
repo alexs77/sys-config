@@ -5,5 +5,5 @@
     remote_src: yes
     mode: 0755
     owner: root
-    ansible.builtin.group: root
+    group: root
   when: terraform is defined and terraform == true

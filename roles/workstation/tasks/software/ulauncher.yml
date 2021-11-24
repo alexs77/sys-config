@@ -24,7 +24,7 @@
     src: users/alex/ulauncher.desktop
     dest: /home/alex/.config/autostart/ulauncher.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0600
   when:
     - ansible_distribution in ["Pop!_OS", "Ubuntu"]

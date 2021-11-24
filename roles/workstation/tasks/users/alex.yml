@@ -19,7 +19,7 @@
     path: /home/alex/{{ item.dir }}
     state: directory
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0700
   with_items:
     - { dir: .config }
@@ -43,7 +43,7 @@
     src: users/alex/user-dirs.dirs
     dest: /home/alex/.config/user-dirs.dirs
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0600
   notify: update_xdg
 
@@ -53,7 +53,7 @@
     src: users/alex/{{ item.src }}
     dest: /home/alex/{{ item.dest }}
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0600
   with_items:
     - { src: 'asunder', dest: '.asunder' }
@@ -71,5 +71,5 @@
     src: users/alex/profile_image.png
     dest: /var/lib/AccountsService/icons/alex.png
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644

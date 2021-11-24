@@ -13,7 +13,7 @@
     src: /home/alex/.local/share/flatpak/exports/share/applications/org.keepassxc.KeePassXC.desktop
     dest: /home/alex/.config/autostart/org.keepassxc.KeePassXC.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when: keepassxc is defined and keepassxc == true
 
@@ -23,7 +23,7 @@
     path: /home/alex/.config/keepassxc
     state: directory
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0700
   register: keepassxc_config_dir
   when: keepassxc is defined and keepassxc == true
@@ -34,6 +34,6 @@
     src: users/alex/keepassxc.ini
     dest: /home/alex/.config/keepassxc/keepassxc.ini
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     mode: 0600
   when: keepassxc is defined and keepassxc == true

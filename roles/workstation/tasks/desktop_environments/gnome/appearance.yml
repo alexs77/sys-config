@@ -4,7 +4,7 @@
     src: gnome/wallpaper.png
     dest: /usr/share/backgrounds/alex-wallpaper.png
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
 
 - name: gnome | appearance | set wallpaper
@@ -27,7 +27,7 @@
     src: files/gnome/lockscreen.jpg
     dest: /usr/share/backgrounds/alex-lockscreen.jpg
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
 
 - name: gnome | appearance | set lock screen background

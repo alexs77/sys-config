@@ -13,6 +13,6 @@
     src: /home/alex/.local/share/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop
     dest: /home/alex/.config/autostart/org.mozilla.Thunderbird.desktop
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     state: link
   when: thunderbird is defined and thunderbird == true

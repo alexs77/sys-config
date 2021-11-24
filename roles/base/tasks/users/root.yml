@@ -8,7 +8,7 @@
     path: /root/{{ item.dir }}
     state: directory
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0700
   with_items:
       - { dir: '.vim' }
@@ -20,7 +20,7 @@
     src: users/root/{{ item.src }}
     dest: /root/{{ item.dest}}
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0600
   with_items:
       - { src: 'bash/bashrc', dest: '.bashrc' }

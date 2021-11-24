@@ -11,12 +11,12 @@
   ansible.builtin.file:
     path: /home/alex/.tmux/plugins
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     recurse: true
 
 - name: update_vim_bundle_perms
   ansible.builtin.file:
     path: /home/alex/.vim/bundle
     owner: alex
-    ansible.builtin.group: alex
+    group: alex
     recurse: true

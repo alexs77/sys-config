@@ -51,7 +51,7 @@
   ansible.builtin.file:
     path: /var/log/ansible.log
     owner: admin
-    ansible.builtin.group: ansible
+    group: ansible
     mode: 0664
     state: touch
   changed_when: False
@@ -62,7 +62,7 @@
     src: files/ansible_setup/logrotate
     dest: /etc/logrotate.d/ansible
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
 
 - name: ansible setup | remove default ansible directory (/etc/ansible) from host
@@ -77,5 +77,5 @@
     src: provision.sh.j2
     dest: /usr/local/bin/provision
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0755

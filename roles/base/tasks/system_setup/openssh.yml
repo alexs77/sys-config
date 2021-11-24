@@ -18,7 +18,7 @@
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
   notify: restart_sshd
 
@@ -28,5 +28,5 @@
     src: system_setup/openssh_issue.net
     dest: /etc/issue.net
     owner: root
-    ansible.builtin.group: root
+    group: root
     mode: 0644
