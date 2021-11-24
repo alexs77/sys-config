@@ -6,7 +6,7 @@
 - name: server | tasks
   block:
   - name: "server | import task | {{ inc_task }}"
-    ansible.builtin.import_tasks: "{{ inc_task }}.yml"
+    ansible.builtin.include_tasks: "{{ inc_task }}.yml"
     with_items:
       # May be sorted.
       - nrpe
@@ -15,7 +15,7 @@
     loop_control:
         loop_var: inc_task
 
-  - name: server | import task | unattended upgrades (Debian)
+  - name: server | include task | unattended upgrades (Debian)
     ansible.builtin.include_tasks: unattended_upgrades.yml
     when:
       - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
