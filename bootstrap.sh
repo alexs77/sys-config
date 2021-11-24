@@ -13,12 +13,13 @@ sudo sh -c '
 # Install git
 sudo apt-get install -y git
 
-case `lsb_release -is` in
-  Pop)
-    distrib=pop_os
-    ;;
-esac
+# case `lsb_release -is` in
+#   Pop)
+#     distrib=pop_os
+#     ;;
+# esac
+# ansible-pull --inventory hosts --tags $distrib --url $ansible_repo_url
 
-ansible-pull --inventory hosts --tags $distrib --url $ansible_repo_url
+ansible-pull --url $ansible_repo_url
 
 exit $?
