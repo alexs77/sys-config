@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ansible_repo_url=https://github.com/alexs77/sys-config.git
+ansible_repo_url=git@github.com:alexs77/sys-config.git
 
 # Add Ansible repo
 sudo sh -c '
