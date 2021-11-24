@@ -6,7 +6,6 @@
   # Make sure users exist on the system
   - ansible.builtin.import_tasks: users/alex.yml
   - ansible.builtin.import_tasks: users/root.yml
-  - ansible.builtin.import_tasks: users/simone.yml
 
   # Set up the ansible environment
   - ansible.builtin.import_tasks: ansible_setup.yml

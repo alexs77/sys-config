@@ -11,12 +11,12 @@
     ansible.builtin.group: alex
     groups: adm,ansible,{{ sudo_group }}
     state: present
-    comment: "Jay LaCroix"
+    comment: "Alexander Skwar"
     password: "{{ alex_passwd }}"
     shell: /bin/bash
 
 - name: users | alex | alex | add sudoers file
-  tags: alex,settings,simone,sudo,system,users
+  tags: alex,settings,sudo,system,users
   ansible.builtin.copy:
     src: users/sudoers_alex
     dest: /etc/sudoers.d/alex
