@@ -1,107 +1,99 @@
 # Load distro-specific variables
-- ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+- name: workstation | include distribution variables
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
-- block:
+- name: workstation | tasks
+  block:
   ## User configs
-  - ansible.builtin.import_tasks: users/alex.yml
+  - name: workstation | import task | create user alex
+    ansible.builtin.import_tasks: users/alex.yml
 
-## desktop environments
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/appearance.yml
+  ## desktop environments
+  - name: "workstation | import task | mate - {{ item }}"
+    ansible.builtin.include_tasks: "desktop_environments/mate/{{ item }}.yml"
     when: mate is defined and mate == true
+    loop:
+      # Do *NOT* sort these!
+      - appearance
+      - caja
+      - keybindings
+      - packages
+      - peripherals
+      - terminal
+      - workspace_settings
 
-  - ansible.builtin.include_tasks: desktop_environments/mate/caja.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/keybindings.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/packages.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/peripherals.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/terminal.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/mate/workspace_settings.yml
-    when: mate is defined and mate == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/appearance.yml
+  - name: "workstation | import task | gnome - {{ item }}"
+    ansible.builtin.include_tasks: "desktop_environments/gnome/{{ item }}.yml"
     when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/keybindings.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/nautilus.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/packages.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/peripherals.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/shell_settings.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/terminal.yml
-    when: gnome is defined and gnome == true
-
-  - ansible.builtin.include_tasks: desktop_environments/gnome/tracker.yml
-    when: gnome is defined and gnome == true
+    loop:
+      # Do *NOT* sort these!
+      - appearance
+      - keybindings
+      - nautilus
+      - packages
+      - peripherals
+      - shell_settings
+      - terminal
+      - tracker
 
   ## system setup
-  - ansible.builtin.import_tasks: system_setup/autofs.yml
-  - ansible.builtin.import_tasks: system_setup/scripts.yml
-  - ansible.builtin.import_tasks: system_setup/tweaks.yml
+  - name: "workstation | import task | system setup - {{ item }}"
+    ansible.builtin.include_tasks: "system_setup/{{ item }}.yml"
+    loop:
+      # Do *NOT* sort these!
+      - autofs 
+      - scripts
+      - tweaks
 
   ## install software
-  - ansible.builtin.import_tasks: software/audacious.yml
-  - ansible.builtin.import_tasks: software/audacity.yml
-  - ansible.builtin.import_tasks: software/authy.yml
-  - ansible.builtin.import_tasks: software/aws_cli.yml
-  - ansible.builtin.import_tasks: software/azure_cli.yml
-  - ansible.builtin.import_tasks: software/bitwarden.yml
-  - ansible.builtin.import_tasks: software/boto.yml
-  - ansible.builtin.import_tasks: software/brave.yml
-  - ansible.builtin.import_tasks: software/caffeine.yml
-  - ansible.builtin.import_tasks: software/chromium.yml
-  - ansible.builtin.import_tasks: software/codecs.yml
-  - ansible.builtin.import_tasks: software/darktable.yml
-  - ansible.builtin.import_tasks: software/firefox.yml
-  - ansible.builtin.import_tasks: software/foliate.yml
-  - ansible.builtin.import_tasks: software/glimpse.yml
-  - ansible.builtin.import_tasks: software/google_chrome.yml
-  - ansible.builtin.import_tasks: software/kdenlive.yml
-  - ansible.builtin.import_tasks: software/keepassxc.yml
-  - ansible.builtin.import_tasks: software/libreoffice.yml
-  - ansible.builtin.import_tasks: software/linode-cli.yml
-  - ansible.builtin.import_tasks: software/lutris.yml
-  - ansible.builtin.import_tasks: software/mattermost.yml
-  - ansible.builtin.import_tasks: software/minecraft.yml
-  - ansible.builtin.import_tasks: software/misc_games.yml
-  - ansible.builtin.import_tasks: software/misc_packages.yml
-  - ansible.builtin.import_tasks: software/neovim.yml
-  - ansible.builtin.import_tasks: software/openshot.yml
-  - ansible.builtin.import_tasks: software/packer.yml
-  - ansible.builtin.import_tasks: software/signal.yml
-  - ansible.builtin.import_tasks: software/solaar.yml
-  - ansible.builtin.import_tasks: software/spotify.yml
-  - ansible.builtin.import_tasks: software/steam.yml
-  - ansible.builtin.import_tasks: software/syncthing.yml
-  - ansible.builtin.import_tasks: software/teams.yml
-  - ansible.builtin.import_tasks: software/terraform.yml
-  - ansible.builtin.import_tasks: software/thunderbird.yml
-  - ansible.builtin.import_tasks: software/todoist.yml
-  - ansible.builtin.import_tasks: software/ulauncher.yml
-  - ansible.builtin.import_tasks: software/vagrant.yml
-  - ansible.builtin.import_tasks: software/virtualbox.yml
-  - ansible.builtin.import_tasks: software/vivaldi.yml
-  - ansible.builtin.import_tasks: software/vlc.yml
-  - ansible.builtin.import_tasks: software/xonotic.yml
+  - name: "workstation | import task | software - {{ item }}"
+    ansible.builtin.include_tasks: "software/{{ item }}.yml"
+    loop:
+      # These _may_ be sorted.
+      - audacious
+      - audacity
+      - authy
+      - aws_cli
+      - azure_cli
+      - bitwarden
+      - boto
+      - brave
+      - caffeine
+      - chromium
+      - codecs
+      - darktable
+      - firefox
+      - foliate
+      - glimpse
+      - google_chrome
+      - kdenlive
+      - keepassxc
+      - libreoffice
+      - linode-cli
+      - lutris
+      - mattermost
+      - minecraft
+      - misc_games
+      - misc_packages
+      - neovim
+      - openshot
+      - packer
+      - signal
+      - solaar
+      - spotify
+      - steam
+      - syncthing
+      - teams
+      - terraform
+      - thunderbird
+      - todoist
+      - ulauncher
+      - vagrant
+      - virtualbox
+      - vivaldi
+      - vlc
+      - xonotic
 
   rescue:
     - set_fact: task_failed=true
