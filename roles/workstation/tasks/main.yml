@@ -10,7 +10,7 @@
     ansible.builtin.import_tasks: users/alex.yml
 
   ## desktop environments
-  - name: "workstation | include task | mate - {{ inc_task }}"
+  - name: "workstation | include task | mate"
     ansible.builtin.include_tasks: "desktop_environments/mate/{{ inc_task }}.yml"
     when: mate is defined and mate == true
     with_items:
@@ -25,7 +25,7 @@
     loop_control:
         loop_var: inc_task
 
-  - name: "workstation | include task | gnome - {{ inc_task }}"
+  - name: "workstation | include task | gnome"
     ansible.builtin.include_tasks: "desktop_environments/gnome/{{ inc_task }}.yml"
     when: gnome is defined and gnome == true
     with_items:
@@ -42,7 +42,7 @@
         loop_var: inc_task
 
   ## system setup
-  - name: "workstation | include task | system setup - {{ inc_task }}"
+  - name: "workstation | include task | system setup"
     ansible.builtin.include_tasks: "system_setup/{{ inc_task }}.yml"
     with_items:
       # Do *NOT* sort these!
@@ -53,7 +53,7 @@
         loop_var: inc_task
 
   ## install software
-  - name: "workstation | include task | software - {{ inc_task }}"
+  - name: "workstation | include task | software"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
     with_items:
       # These _may_ be sorted.
