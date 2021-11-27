@@ -16,3 +16,4 @@
 - name: aws cli
   ansible.builtin.debug:
     msg: TO BE DONE
+  when: aws_cli is defined and aws_cli == true
