@@ -55,7 +55,6 @@
   ## install software
   - name: "workstation | include task | software (always)"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    when: "{{ inc_task }} is defined and {{ inc_task }} != false"
     with_items:
       # These _may_ be sorted.
       - codecs
@@ -64,7 +63,7 @@
 
   - name: "workstation | include task | software"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    when: "{{ inc_task }} is defined and {{ inc_task }} != false"
+    when: inc_task is defined and inc_task != false
     with_items:
       # These _may_ be sorted.
       - audacious
