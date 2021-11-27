@@ -125,4 +125,10 @@
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/gnome-screenshot/auto-save-directory"
-    value: "'/home/alex'"
+- name: gnome | shell settings | show clock in middle
+  tags: gnome,gnome-shell
+  become_user: alex
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/pop-cosmic"
+    value: "'CENTER'"
+
