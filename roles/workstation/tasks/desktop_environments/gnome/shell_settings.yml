@@ -4,7 +4,9 @@
   community.general.dconf:
     key: "{{ item }}"
     value: "'24h'"
-  loop: ["/org/gnome/desktop/interface", "/org/gtk/settings/file-chooser"]
+  loop:
+    - /org/gnome/desktop/interface/clock-format
+    - /org/gtk/settings/file-chooser/clock-format
 
 - name: gnome | shell settings | button-layout
   tags: gnome,gnome-shell
