@@ -34,8 +34,11 @@
     - { dir: desktop }
     - { dir: documents }
     - { dir: downloads }
+    - { dir: music }
+    - { dir: pictures }
     - { dir: projects }
     - { dir: templates }
+    - { dir: videos }
 
 - name: users | alex | copy user-dirs.dirs
   tags: dotfiles,dotfiles-alex
