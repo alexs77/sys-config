@@ -1,3 +1,11 @@
+- name: gnome | shell settings | 24hr time format
+  tags: gnome,gnome-shell
+  become_user: alex
+  community.general.dconf:
+    key: "{{ item }}"
+    value: "'24h'"
+  loop: ["org/gnome/desktop/interface", "org/gtk/settings/file-chooser"]
+
 - name: gnome | shell settings | button-layout
   tags: gnome,gnome-shell
   become_user: alex
