@@ -134,3 +134,11 @@
     key: "/org/gnome/shell/extensions/pop-cosmic"
     value: "'CENTER'"
 
+- name: gnome | shell settings | show buttons
+  tags: gnome,gnome-shell
+  become_user: alex
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/show-{{ item }}-button"
+    value: "true"
+  loop: ['applications', 'workspaces']
+
