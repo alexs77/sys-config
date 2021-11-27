@@ -39,13 +39,13 @@ libreoffice: true
 lutris: true
 mattermost: false
 minecraft: false
-msteams: true
 neovim: true
 packer: false
 signal: true
 spotify: true
 steam: false
 syncthing: false
+teams: true
 telegram: true
 terraform: true
 thunderbird: false
