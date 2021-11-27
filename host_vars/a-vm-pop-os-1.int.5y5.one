@@ -40,6 +40,7 @@ lutris: true
 mattermost: false
 minecraft: false
 msteams: true
+neovim: true
 packer: false
 signal: true
 spotify: true
