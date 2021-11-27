@@ -1,4 +1,4 @@
-- name: system setup | pip packages | install bpytop
+- name: system setup | pip packages | install packages
   tags: bpytop,packages,pip,python
   become_user: alex
   ansible.builtin.pip:
