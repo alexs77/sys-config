@@ -65,7 +65,7 @@
 
   - name: "workstation | include task | software"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    when: lookup('vars', inc_task, false) and lookup('vars', inc_task, false) != false
+    when: lookup('vars', inc_task, false)
     with_items:
       # These _may_ be sorted.
       - audacious
