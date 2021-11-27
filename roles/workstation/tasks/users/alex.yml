@@ -70,9 +70,15 @@
 
 - name: users | alex | copy profile image
   tags: dotfiles,dotfiles-alex
-  ansible.builtin.copy:
-    src: users/alex/profile_image.png
-    dest: /var/lib/AccountsService/icons/alex.png
+  ansible.builtin.get_url:
+    url: https://thispersondoesnotexist.com/image
+    dest: /var/lib/AccountsService/icons/alex.jpg
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
+  # ansible.builtin.copy:
+  #   src: users/alex/profile_image.png
+  #   dest: /var/lib/AccountsService/icons/alex.png
+  #   owner: root
+  #   group: root
+  #   mode: 0644
