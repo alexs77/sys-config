@@ -60,6 +60,8 @@
       - codecs
       - misc_games
       - misc_packages
+    loop_control:
+      loop_var: inc_task
 
   - name: "workstation | include task | software"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
@@ -108,7 +110,7 @@
       - vscode
       - xonotic
     loop_control:
-        loop_var: inc_task
+      loop_var: inc_task
 
   rescue:
     - set_fact: task_failed=true
