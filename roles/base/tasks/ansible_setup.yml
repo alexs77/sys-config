@@ -50,7 +50,7 @@
   tags: ansible,ansible-setup
   ansible.builtin.file:
     path: /var/log/ansible.log
-    owner: admin
+    owner: guru
     group: ansible
     mode: 0664
     state: touch

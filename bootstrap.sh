@@ -49,7 +49,7 @@ sudo apt-get install -y git
 sudo sh -c '
   touch /var/log/ansible.log
   chown root /var/log/ansible.log
-  chgrp admin /var/log/ansible.log
+  chgrp guru /var/log/ansible.log
   chmod ug=rw,o=r /var/log/ansible.log
 '
 
