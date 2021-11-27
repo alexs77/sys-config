@@ -53,19 +53,8 @@
         loop_var: inc_task
 
   ## install software
-  - name: "workstation | include task | software (always)"
-    ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    with_items:
-      # These _may_ be sorted.
-      - codecs
-      - misc_games
-      - misc_packages
-    loop_control:
-      loop_var: inc_task
-
   - name: "workstation | include task | software"
     ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    when: lookup('vars', inc_task, false)
     with_items:
       # These _may_ be sorted.
       - audacious
@@ -78,6 +67,7 @@
       - brave
       - caffeine
       - chromium
+      - codecs
       - darktable
       - firefox
       - foliate
@@ -90,6 +80,8 @@
       - lutris
       - mattermost
       - minecraft
+      - misc_games
+      - misc_packages
       - neovim
       - openshot
       - packer
