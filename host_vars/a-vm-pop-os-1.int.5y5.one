@@ -33,6 +33,7 @@ firefox: true
 foliate: false
 games: false
 glimpse: true
+google_chrome: true
 keepassxc: true
 keybase: true
 libreoffice: true
