@@ -45,7 +45,7 @@
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-coordinates"
-    value: "{{ geo_location }}"
+    value: "({{ geo_location }})"
 
 - name: gnome | peripherals | set manual night-light schedule start time
   tags: gnome,peripherals,night-light
