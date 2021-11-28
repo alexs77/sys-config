@@ -23,12 +23,12 @@
     key: "/org/gnome/shell/interface/enable-hot-corners"
     value: "false"
 
-- name: gnome | shell settings | event-sounds (disable)
+- name: gnome | shell settings | event-sounds (enable)
   tags: gnome,audio,sounds,alerts
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/desktop/sound/event-sounds"
-    value: "false"
+    value: "true"
 
 - name: gnome | shell settings | disable hidpi-daemon
   tags: gnome,gnome-shell,hidpi
@@ -38,13 +38,13 @@
     value: "true"
   when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
 
-# Disable screen blanking
+# Screen blanking: 12min
 - name: gnome | shell settings | idle-delay
   tags: gnome,gnome-shell
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/desktop/session/idle-delay"
-    value: "uint32 0"
+    value: "uint32 720"
 
 # Disable input sounds
 - name: gnome | shell settings | input-feedback-sounds (disable input sounds)
@@ -54,13 +54,21 @@
     key: "/org/gnome/desktop/sound/input-feedback-sounds"
     value: "false"
 
-# Disable automatic screen lock
+# Enable automatic screen lock
 - name: gnome | shell settings | lock-enabled
   tags: gnome,gnome-shell
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/desktop/screensaver/lock-enabled"
-    value: "false"
+    value: "true"
+
+# Delay automatic screen lock
+- name: gnome | shell settings | lock-enabled
+  tags: gnome,gnome-shell
+  become_user: alex
+  community.general.dconf:
+    key: "/org/gnome/desktop/screensaver/lock-delay"
+    value: "uint32 180"
 
 - name: gnome | shell settings | old-files-age
   tags: gnome,gnome-shell
