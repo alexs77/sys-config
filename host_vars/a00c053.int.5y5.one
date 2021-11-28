@@ -17,6 +17,9 @@ cons_editor: nvim
 terminal_emulator: terminator
 web_browser: chrome
 
+# Geographic location of system - longitude, latitude
+geo_location: "47.364101439884813, 8.2359000000000009"
+
 # application selection
 brave:
   - beta
