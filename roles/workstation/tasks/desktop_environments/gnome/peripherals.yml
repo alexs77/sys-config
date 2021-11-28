@@ -33,26 +33,33 @@
     key: "/org/gnome/desktop/peripherals/touchpad/speed"
     value: "0.59999999999999998"
 
-- name: gnome | peripherals | set manual night-light schedule
+- name: gnome | peripherals | set automatic night-light schedule
   tags: gnome,peripherals,night-light
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic"
-    value: "false"
+    value: "true"
+
+- name: gnome | peripherals | set automatic night-light coordinates
+  tags: gnome,peripherals,night-light
+  become_user: alex
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-coordinates"
+    value: "{{ geo_location }}"
 
 - name: gnome | peripherals | set manual night-light schedule start time
   tags: gnome,peripherals,night-light
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-from"
-    value: "23.0"
+    value: "22.25"
 
 - name: gnome | peripherals | set manual night-light schedule stop time
   tags: gnome,peripherals,night-light
   become_user: alex
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-to"
-    value: "7.4999999999999982"
+    value: "6.75"
 
 - name: gnome | peripherals | enable night-light
   tags: gnome,peripherals,night-light
