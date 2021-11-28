@@ -12,7 +12,7 @@
     groups: adm,ansible,{{ sudo_group }}
     state: present
     comment: "Alexander Skwar"
-    shell: /bin/bash
+    shell: /usr/bin/fish
 
 - name: users | alex | create home directory
   tags: dotfiles,alex,ssh,users
