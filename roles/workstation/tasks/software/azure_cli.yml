@@ -7,7 +7,7 @@
     - azure_cli is defined
     - azure_cli == true
 
-- name: software | azure cli | add repository
+- name: software | azure cli | add repository (Debian family, not Ubuntu Impish)
   tags: packages,azure-cli,workstation-packages
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
@@ -15,6 +15,19 @@
   register: azure_cli_repo
   when:
     - ansible_os_family == "Debian"
+    - ansible_distribution_release != "impish"
+    - azure_cli is defined
+    - azure_cli == true
+
+# At 2021-11-28, there was no repo for Impish (21.10), only for Hirsute (21.04)
+- name: software | azure cli | add repository (Ubuntu Impish)
+  tags: packages,azure-cli,workstation-packages
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ hirsute main"
+    filename: azure-cli
+  register: azure_cli_repo
+  when:
+    - ansible_distribution_release == "impish"
     - azure_cli is defined
     - azure_cli == true
 
