@@ -6,3 +6,16 @@
     method: user
     state: present
   when: vscode is defined and vscode == true
+
+- name: software | visual studio code | add helper script
+  tags: packages,vscode,flatpak,workstation-packages
+  become_user: alex
+  ansible.builtin.copy:
+    dest: /home/alex/.local/bin/code
+    owner: alex
+    group: alex
+    mode: '0755'
+    content: |
+      #!/bin/sh
+      exec flatpak run com.visualstudio.code "$@""
+  when: vscode is defined and vscode == true
