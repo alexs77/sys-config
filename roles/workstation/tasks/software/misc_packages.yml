@@ -24,12 +24,12 @@
       - "{{ hyphen_package }}"
       - "{{ p7zip_package }}"
       - "{{ libnotify_package }}"
+      - meld
       - "{{ mpv_package}}"
       - "{{ network_manager_openvpn_package }}"
       - "{{ network_manager_package }}"
       - "{{ network_manager_pptp_package }}"
       - "{{ network_manager_vpnc_package }}"
-      #- neovim
       - pavucontrol
       - shotwell
       - simplescreenrecorder
