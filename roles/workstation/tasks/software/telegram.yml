@@ -2,7 +2,7 @@
   tags: packages,flatpak,telegram,workstation-packages
   become_user: "{{ user_name }}"
   community.general.flatpak:
-    name: com.microsoft.Teamsorg.telegram.desktop
+    name: org.telegram.desktop
     method: user
     state: present
   when: telegram is defined and telegram == true
