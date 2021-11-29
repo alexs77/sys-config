@@ -8,7 +8,7 @@
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - brave is defined
 
-- name: software | brave beta | add repository
+- name: software | brave | add repository
   tags: packages,brave,workstation-packages
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://brave-browser-apt-{{ item }}.s3.brave.com/ stable main"
@@ -19,7 +19,7 @@
     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
     - brave is defined
 
-- name: software | brave beta | install package
+- name: software | brave | install package
   tags: packages,brave,workstation-packages
   ansible.builtin.apt:
     name: "brave-browser-{{ item }}"
