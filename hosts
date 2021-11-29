@@ -8,3 +8,5 @@ a00c053.int.5y5.one
 a-vm-pop-os-1.int.5y5.one
 workstation2.mydomain.com
 workstation3.mydomain.com
+localhost ansible_connection=ssh ansible_user=guru
+
