@@ -1,5 +1,8 @@
 " Vim color file
 "
+" This file is managed by Ansible. Keep your hands off it!
+"
+"
 " Name:       xoria256.vim
 " Version:    1.5
 " Maintainer:	Dmitriy Y. Zotikov (xio) <xio@ungrund.org>

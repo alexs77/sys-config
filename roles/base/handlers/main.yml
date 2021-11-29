@@ -9,14 +9,14 @@
 
 - name: update_tmux_plugin_perms
   ansible.builtin.file:
-    path: /home/alex/.tmux/plugins
-    owner: alex
-    group: alex
+    path: "/home/{{ user_name }}/.tmux/plugins"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     recurse: true
 
 - name: update_vim_bundle_perms
   ansible.builtin.file:
-    path: /home/alex/.vim/bundle
-    owner: alex
-    group: alex
+    path: "/home/{{ user_name }}/.vim/bundle"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     recurse: true

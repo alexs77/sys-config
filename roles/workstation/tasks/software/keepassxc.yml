@@ -1,6 +1,6 @@
 - name: software | keepassxc | install package
   tags: packages,firefox,flatpak,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: org.keepassxc.KeePassXC
     method: user
@@ -10,30 +10,30 @@
 - name: software | keepassxc | enable autostart
   tags: packages,keepassxc,flatpak,workstation-packages
   ansible.builtin.file:
-    src: /home/alex/.local/share/flatpak/exports/share/applications/org.keepassxc.KeePassXC.desktop
-    dest: /home/alex/.config/autostart/org.keepassxc.KeePassXC.desktop
-    owner: alex
-    group: alex
+    src: /home/{{ user_name }}/.local/share/flatpak/exports/share/applications/org.keepassxc.KeePassXC.desktop
+    dest: /home/{{ user_name }}/.config/autostart/org.keepassxc.KeePassXC.desktop
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     state: link
   when: keepassxc is defined and keepassxc == true
 
 - name: software | keepassxc | create keepassxc install directory
   tags: packages,keepassxc,flatpak,workstation-packages
   ansible.builtin.file:
-    path: /home/alex/.config/keepassxc
+    path: /home/{{ user_name }}/.config/keepassxc
     state: directory
-    owner: alex
-    group: alex
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     mode: 0700
   register: keepassxc_config_dir
   when: keepassxc is defined and keepassxc == true
 
-- name: software | keepassxc | add initial keepassxc config
-  tags: packages,keepassxc,flatpak,workstation-packages
-  ansible.builtin.copy:
-    src: users/alex/keepassxc.ini
-    dest: /home/alex/.config/keepassxc/keepassxc.ini
-    owner: alex
-    group: alex
-    mode: 0600
-  when: keepassxc is defined and keepassxc == true
+# - name: software | keepassxc | add initial keepassxc config
+#   tags: packages,keepassxc,flatpak,workstation-packages
+#   ansible.builtin.copy:
+#     src: users/USER/keepassxc.ini
+#     dest: /home/{{ user_name }}/.config/keepassxc/keepassxc.ini
+#     owner: "{{ user_name }}"
+#     group: "{{ user_name }}"
+#     mode: 0600
+#   when: keepassxc is defined and keepassxc == true

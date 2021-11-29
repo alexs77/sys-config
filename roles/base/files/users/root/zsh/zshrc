@@ -1,3 +1,5 @@
+# This file is managed by Ansible. Keep your hands off it!
+
 ###### Prompt
 prompt='%F{35}%* [%j] [%m:%F{75}%f%F{69}%c%f%F{35}] %F{black}%K{red}%#%f%k '
 

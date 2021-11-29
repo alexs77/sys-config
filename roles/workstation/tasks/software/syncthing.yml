@@ -2,10 +2,10 @@
 - name: software | syncthing | create directories
   tags: syncthing
   ansible.builtin.file:
-    path: /home/alex/{{ item.dir }}
+    path: /home/{{ user_name }}/{{ item.dir }}
     state: directory
-    owner: alex
-    group: alex
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     mode: 0700
   with_items:
     - { dir: bin }
@@ -19,10 +19,10 @@
 - name: software | syncthing | copy .stignore file to synced directories
   tags: syncthing
   ansible.builtin.copy:
-    src: users/alex/stignore
-    dest: /home/alex/{{ item.dir }}/.stignore
-    owner: alex
-    group: alex
+    src: users/USER/stignore
+    dest: /home/{{ user_name }}/{{ item.dir }}/.stignore
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     mode: 0600
   with_items:
     - { dir: bin }
@@ -70,10 +70,10 @@
 #- name: software | syncthing | add .desktop file for autostarting syncthing-gtk
 #  tags: syncthing
 #  ansible.builtin.copy:
-#    src: users/alex/syncthing-gtk.desktop
-#    dest: /home/alex/.config/autostart/syncthing-gtk.desktop
-#    owner: alex
-#    ansible.builtin.group: alex
+#    src: users/USER/syncthing-gtk.desktop
+#    dest: /home/{{ user_name }}/.config/autostart/syncthing-gtk.desktop
+#    owner: "{{ user_name }}"
+#    ansible.builtin.group: "{{ user_name }}"
 #    mode: 0600
 #  when:
 #    - syncthing is defined
@@ -82,10 +82,10 @@
 #- name: software | syncthing | ensure syncthing-gtk config folder exists
 #  tags: syncthing
 #  ansible.builtin.file:
-#    path: /home/alex/.config/syncthing-gtk
+#    path: /home/{{ user_name }}/.config/syncthing-gtk
 #    state: directory
-#    owner: alex
-#    ansible.builtin.group: alex
+#    owner: "{{ user_name }}"
+#    ansible.builtin.group: "{{ user_name }}"
 #    mode: 0700
 #  when:
 #   - syncthing is defined
@@ -94,10 +94,10 @@
 #- name: software | syncthing | add initial configuration file for syncthing-gtk
 #  tags: syncthing
 #  ansible.builtin.copy:
-#    src: users/alex/syncthing_config.json
-#    dest: /home/alex/.config/syncthing-gtk/config.json
-#    owner: alex
-#    ansible.builtin.group: alex
+#    src: users/USER/syncthing_config.json
+#    dest: /home/{{ user_name }}/.config/syncthing-gtk/config.json
+#    owner: "{{ user_name }}"
+#    ansible.builtin.group: "{{ user_name }}"
 #    mode: 0600
 #  when:
 #    - syncthing is defined
@@ -109,24 +109,24 @@
   tags: syncthing
   ansible.builtin.command: "{{ item }}"
   with_items:
-    - systemctl enable syncthing@alex
-    - systemctl restart syncthing@alex
+    - systemctl enable syncthing@{{ user_name }}
+    - systemctl restart syncthing@{{ user_name }}
   when: syncthing_installed.changed
 
 # Adjust configuration file
 - name: software | syncthing | pause to ensure config file exists
   tags: syncthing
-  become_user: alex
+  become_user: "{{ user_name }}"
   wait_for:
-    path: /home/alex/.config/syncthing/config.xml
+    path: /home/{{ user_name }}/.config/syncthing/config.xml
     delay: 10
   when: syncthing_installed.changed
 
 - name: software | syncthing | config.xml - disable browser
   tags: syncthing
-  become_user: alex
+  become_user: "{{ user_name }}"
   ansible.builtin.replace:
-    path: /home/alex/.config/syncthing/config.xml
+    path: /home/{{ user_name }}/.config/syncthing/config.xml
     regexp: "<startBrowser>true</startBrowser>"
     ansible.builtin.replace: "<startBrowser>false</startBrowser>"
   notify: restart_syncthing
@@ -136,9 +136,9 @@
 
 - name: software | syncthing | config.xml - set ui theme
   tags: syncthing
-  become_user: alex
+  become_user: "{{ user_name }}"
   ansible.builtin.replace:
-    path: /home/alex/.config/syncthing/config.xml
+    path: /home/{{ user_name }}/.config/syncthing/config.xml
     regexp: "<theme>default</theme>"
     ansible.builtin.replace: "<theme>dark</theme>"
   notify: restart_syncthing
@@ -149,5 +149,5 @@
 - name: software | syncthing | remove default sync directory (~/Sync) from host
   tags: syncthing
   ansible.builtin.file:
-    path: /home/alex/Sync
+    path: /home/{{ user_name }}/Sync
     state: absent

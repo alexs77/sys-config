@@ -9,7 +9,7 @@
     - ansible.builtin.import_tasks: users/groups.yml
 
     # Make sure users exist on the system
-    - ansible.builtin.import_tasks: users/alex.yml
+    - ansible.builtin.import_tasks: users/user.yml
     - ansible.builtin.import_tasks: users/root.yml
 
     # Set up the ansible environment

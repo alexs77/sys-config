@@ -1,0 +1,4 @@
+# This file is managed by Ansible. Keep your hands off it!
+
+# Disable the annoying terminal beep
+set bell-style none

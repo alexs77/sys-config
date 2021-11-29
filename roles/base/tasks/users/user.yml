@@ -1,0 +1,246 @@
+- name: users | user | create group
+  tags: groups,user,users
+  ansible.builtin.group:
+    name: "{{ user_name }}"
+    state: present
+
+- name: users | user | create user
+  tags: user,sudo,users
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    group: "{{ user_name }}"
+    groups: adm,ansible,{{ sudo_group }}
+    state: present
+    comment: "{{ user_name }}"
+    shell: /usr/bin/fish
+
+- name: users | user | create home directory
+  tags: dotfiles,user,ssh,users
+  ansible.builtin.file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+  with_items:
+    - { dir: '/home/{{ user_name }}' }
+
+- name: users | user | add sudoers file
+  tags: user,settings,sudo,system,users
+  ansible.builtin.template:
+    src: users/sudoers_USER.j2
+    dest: /etc/sudoers.d/{{ user_name }}
+    owner: root
+    group: root
+    mode: "0440"
+
+- name: users | user | create .ssh directory
+  tags: dotfiles,user,ssh,users
+  ansible.builtin.file:
+    path: "{{ item.dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+  with_items:
+    - { dir: '/home/{{ user_name }}/.ssh' }
+
+# - name: users | user | add public key
+#   tags: dotfiles,user,ssh,ssh-keys,users
+#   authorized_key:
+#     user: "{{ user_name }}"
+#     key: "{{ item }}"
+#   with_file:
+#     - users/{{ user_name }}/ssh/{{ user_name }}_id_ed25519.pub
+
+- name: users | user | create config directories
+  tags: dotfiles,user,tmux,users,vim,zsh
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/{{ item.dir }}
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+  with_items:
+    - { dir: '.bash' }
+    - { dir: '.config' }
+    - { dir: '.config/htop' }
+    - { dir: '.config/mc' }
+    - { dir: '.tmux' }
+    - { dir: '.tmux/config' }
+    - { dir: '.tmux/plugins' }
+    - { dir: '.vim' }
+    - { dir: '.vim/autoload' }
+    - { dir: '.vim/bundle' }
+    - { dir: '.vim/colors' }
+    - { dir: '.vim/ftplugin' }
+    - { dir: '.zsh' }
+
+- name: users | user | generate tmux config (server version)
+  tags: dotfiles,users,user,tmux,users,vim,zsh
+  ansible.builtin.template:
+    src: users/USER/tmux/tmux.conf.server
+    dest: /home/{{ user_name }}/.tmux.conf
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  when: "'server' not in group_names"
+
+- name: users | user | generate tmux config (workstation version)
+  tags: dotfiles,users,user,tmux,users,vim,zsh
+  ansible.builtin.template:
+    src: users/USER/tmux/tmux.conf.workstation
+    dest: /home/{{ user_name }}/.tmux.conf
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  when: "'server' in group_names"
+
+- name: users | user | copy dotfiles
+  tags: dotfiles,users,user,tmux,users,vim,zsh
+  ansible.builtin.copy:
+    src: users/USER/{{ item.src }}
+    dest: /home/{{ user_name }}/{{ item.dest }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'bash/bash_profile', dest: '.bash_profile' }
+    - { src: 'bash/bash_prompt', dest: '.bash/bash_prompt' }
+    - { src: 'bash/bash_functions', dest: '.bash/bash_functions' }
+    - { src: 'bash/profile', dest: '.profile' }
+    - { src: 'htop/htoprc', dest: '.config/htop/htoprc' }
+    - { src: 'inputrc', dest: '.inputrc' }
+    - { src: 'mc/mc.ini', dest: '.config/mc/ini' }
+    - { src: 'vim/vimrc', dest: '.vimrc' }
+    - { src: 'zsh/zshrc', dest: '.zshrc' }
+
+- name: users | user | generate dotfiles
+  tags: dotfiles,users,user,tmux,users,vim,zsh
+  ansible.builtin.template:
+    src: users/USER/{{ item.src }}
+    dest: /home/{{ user_name }}/{{ item.dest }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'bash/bash_aliases', dest: '.bash/bash_aliases' }
+    - { src: 'bash/bashrc', dest: '.bashrc' }
+    - { src: 'git/gitconfig', dest: '.gitconfig' }
+
+- name: users | user | clone tmux-completion plugin repository
+  tags: dotfiles,user,users,tmux
+  ansible.builtin.git:
+    repo: https://github.com/srsudar/tmux-completion.git
+    dest: /home/{{ user_name }}/.tmux/plugins/completion
+    force: yes
+  notify: update_tmux_plugin_perms
+
+- name: users | user | clone tmux-continuum plugin repository
+  tags: dotfiles,user,users,tmux
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-continuum
+    dest: /home/{{ user_name }}/.tmux/plugins/continuum
+    force: yes
+  notify: update_tmux_plugin_perms
+
+- name: users | user | clone tmux-resurrect plugin repository
+  tags: dotfiles,user,users,tmux
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-resurrect
+    dest: /home/{{ user_name }}/.tmux/plugins/resurrect
+    force: yes
+  notify: update_tmux_plugin_perms
+
+- name: users | user | copy individual zsh config files
+  tags: dotfiles,user,users,zsh
+  ansible.builtin.copy:
+    src: users/USER/zsh/{{ item.src }}
+    dest: /home/{{ user_name }}/.zsh/{{ item.src }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'aliases.zsh' }
+    - { src: 'bindkey.zsh' }
+    - { src: 'completion.zsh' }
+    - { src: 'exports.zsh' }
+    - { src: 'functions.zsh' }
+    - { src: 'history.zsh' }
+    - { src: 'plugins.zsh' }
+    - { src: 'prompt.zsh' }
+    - { src: 'setopt.zsh' }
+    - { src: 'theming.zsh' }
+
+- name: users | user | generate individual zsh config files
+  tags: dotfiles,user,users,zsh
+  ansible.builtin.template:
+    src: users/USER/zsh/{{ item.src }}
+    dest: /home/{{ user_name }}/.zsh/{{ item.src }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'path.zsh' }
+
+- name: users | user | copy vim ftype files
+  tags: dotfiles,user,users,vim
+  ansible.builtin.copy:
+    src: users/USER/vim/{{ item.src }}
+    dest: /home/{{ user_name }}/.vim/ftplugin/{{ item.src }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'cmake.vim' }
+    - { src: 'cpp.vim' }
+    - { src: 'html.vim' }
+    - { src: 'perl.vim' }
+    - { src: 'python.vim' }
+    - { src: 'ruby.vim' }
+    - { src: 'sql.vim' }
+    - { src: 'xml.vim' }
+
+- name: users | user | copy vim color files
+  tags: dotfiles,user,users,vim
+  ansible.builtin.copy:
+    src: users/USER/vim/{{ item.src }}
+    dest: /home/{{ user_name }}/.vim/colors/{{ item.src }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"
+  with_items:
+    - { src: 'bubblegum-256-dark.vim' }
+    - { src: 'darktango.vim' }
+    - { src: 'jellybeans.vim' }
+    - { src: 'xoria256.vim' }
+    - { src: 'zenburn.vim' }
+
+- name: users | user | install pathogen
+  tags: dotfiles,user,users,vim
+  ansible.builtin.copy:
+    src: users/USER/vim/{{ item.src }}
+    dest: "{{ item.dest }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0700"
+  with_items:
+    - { src: 'pathogen.vim', dest: '/home/{{ user_name }}/.vim/autoload/pathogen.vim' }
+
+- name: users | user | checkout git repositories
+  tags: git,users,{{ user_name }}
+  become: yes
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    force: yes
+  with_items:
+    - { repo: 'https://github.com/ctrlpvim/ctrlp.vim.git', dest: '/home/{{ user_name }}/.vim/bundle/ctrlp.vim' }
+    - { repo: 'https://github.com/davidhalter/jedi-vim.git', dest: '/home/{{ user_name }}/.vim/bundle/jedi-vim' }
+    - { repo: 'https://github.com/pearofducks/ansible-vim', dest: '/home/{{ user_name }}/.vim/bundle/ansible-vim' }
+    - { repo: 'https://github.com/rhysd/vim-grammarous.git', dest: '/home/{{ user_name }}/.vim/bundle/vim-grammarous' }
+    - { repo: 'https://github.com/ron89/thesaurus_query.vim', dest: '/home/{{ user_name }}/.vim/bundle/thesaurus_query' }
+    - { repo: 'https://github.com/scrooloose/nerdtree.git', dest: '/home/{{ user_name }}/.vim/bundle/nerdtree' }
+    - { repo: 'https://github.com/tpope/vim-obsession.git', dest: '/home/{{ user_name }}/.vim/bundle/vim-obsession' }
+    - { repo: 'https://github.com/vim-syntastic/syntastic.git', dest: '/home/{{ user_name }}/.vim/bundle/syntastic' }
+  notify: update_vim_bundle_perms

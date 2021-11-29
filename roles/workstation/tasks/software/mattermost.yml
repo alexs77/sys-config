@@ -1,6 +1,6 @@
 - name: software | mattermost | install package
   tags: packages,flatpak,mattermost,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.mattermost.Desktop
     method: user
@@ -10,9 +10,9 @@
 - name: software | mattermost | enable autostart
   tags: packages,flatpak,mattermost,workstation-packages
   ansible.builtin.file:
-    src: /home/alex/.local/share/flatpak/exports/share/applications/com.mattermost.Desktop.desktop
-    dest: /home/alex/.config/autostart/com.mattermost.Desktop.desktop
-    owner: alex
-    group: alex
+    src: /home/{{ user_name }}/.local/share/flatpak/exports/share/applications/com.mattermost.Desktop.desktop
+    dest: /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
     state: link
   when: mattermost is defined and mattermost == true

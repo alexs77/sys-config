@@ -1,6 +1,6 @@
 - name: software | telegram | install package
   tags: packages,flatpak,telegram,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.microsoft.Teamsorg.telegram.desktop
     method: user

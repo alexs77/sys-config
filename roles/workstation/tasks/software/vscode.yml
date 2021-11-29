@@ -1,21 +1,69 @@
-- name: software | visual studio code | install package
+- name: software | visual studio code | remove flatpak package
   tags: packages,vscode,flatpak,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.visualstudio.code
     method: user
-    state: present
+    state: absent
   when: vscode is defined and vscode == true
 
-- name: software | visual studio code | add helper script
+# - name: software | visual studio code | add helper script
+#   tags: packages,vscode,flatpak,workstation-packages
+#   become_user: "{{ user_name }}"
+#   ansible.builtin.copy:
+#     dest: /home/{{ user_name }}/.local/bin/code
+#     owner: "{{ user_name }}"
+#     group: "{{ user_name }}"
+#     mode: '0755'
+#     content: |
+#       #!/bin/sh
+#       exec flatpak run com.visualstudio.code "$@"
+#   when: vscode is defined and vscode == true
+
+- name: software | visual studio code | remove helper script
   tags: packages,vscode,flatpak,workstation-packages
-  become_user: alex
-  ansible.builtin.copy:
-    dest: /home/alex/.local/bin/code
-    owner: alex
-    group: alex
-    mode: '0755'
-    content: |
-      #!/bin/sh
-      exec flatpak run com.visualstudio.code "$@"
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/.local/bin/code
+    state: absent
   when: vscode is defined and vscode == true
+
+- name: software | visual studio code | add repository key
+  tags: packages,vscode,workstation-packages
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - vscode is defined
+    - vscode == true
+
+- name: software | visual studio code | add repository
+  tags: packages,vscode,workstation-packages
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main"
+    filename: vscode
+  register: vscode_repo
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - vscode is defined
+    - vscode == true
+
+- name: software | visual studio code | update sources (repo added or changed)
+  tags: packages,vscode,workstation-packages
+  ansible.builtin.apt:
+    update_cache: yes
+  changed_when: False
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - vscode is defined
+    - vscode == true
+    - vscode_repo.changed
+
+- name: software | visual studio code | install package
+  tags: packages,vscode,workstation-packages
+  ansible.builtin.apt:
+    name: code
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - vscode is defined
+    - vscode == true

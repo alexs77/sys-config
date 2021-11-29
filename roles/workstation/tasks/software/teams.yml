@@ -1,6 +1,6 @@
 - name: software | ms teams | install package
   tags: packages,flatpak,teams,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.microsoft.Teams
     method: user

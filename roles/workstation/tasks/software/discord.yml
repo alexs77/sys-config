@@ -1,0 +1,8 @@
+- name: software | discord | install package
+  tags: packages,flatpak,discord,workstation-packages
+  become_user: "{{ user_name }}"
+  community.general.flatpak:
+    name: com.discordapp.Discord
+    method: user
+    state: present
+  when: discord is defined and discord == true

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# This file is managed by Ansible. Keep your hands off it!
+
 # from:
 # https://www.pragmaticlinux.com/2020/06/check-the-raspberry-pi-cpu-temperature/
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This file is managed by Ansible. Keep your hands off it!
+
 version="v0.1.2"
 
 CURRENT_DIR="$(pwd)"

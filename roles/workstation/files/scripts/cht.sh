@@ -1,6 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC1117,SC2001
 #
+# This file is managed by Ansible. Keep your hands off it!
+#
+#
 # [X] open section
 # [X] one shot mode
 # [X] usage info

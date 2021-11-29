@@ -1,6 +1,6 @@
 - name: software | linode-cli | install package
   tags: packages,linode,pip,python
-  become_user: alex
+  become_user: "{{ user_name }}"
   ansible.builtin.pip:
     executable: /usr/bin/pip3
     state: latest

@@ -1,6 +1,6 @@
 - name: software | minecraft | install package
   tags: packages,flatpak,minecraft,gaming
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.mojang.Minecraft
     method: user

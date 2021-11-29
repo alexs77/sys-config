@@ -1,6 +1,6 @@
 - name: software | bitwarden | install package
   tags: bitwarden,packages,flatpak,workstation-packages
-  become_user: alex
+  become_user: "{{ user_name }}"
   community.general.flatpak:
     name: com.bitwarden.desktop
     method: user

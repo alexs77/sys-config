@@ -15,24 +15,24 @@
 # Note: Not using systemd module because it triggers a dbus error due to no session while user is not logged in
 - name: restart_syncthing
   tags: packages,syncthing
-  ansible.builtin.command: systemctl restart syncthing@alex
+  ansible.builtin.command: "systemctl restart syncthing@{{ user_name }}"
 
 - name: update_xdg
   tags: users,config,xdg
-  become_user: alex
+  become_user: "{{ user_name }}"
   ansible.builtin.command: /usr/bin/xdg-user-dirs-update
 
 # GNOME stuff
 - name: gnome_tracker_clean_cache
   tags: gnome,tracker
   ansible.builtin.file:
-    path: /home/alex/.cache/tracker
+    path: "/home/{{ user_name }}/.cache/tracker"
     state: absent
 
 - name: gnome_tracker_clean_local_cache
   tags: gnome,tracker
   ansible.builtin.file:
-    path: /home/alex/.local/share/tracker
+    path: "/home/{{ user_name }}/.local/share/tracker"
     state: absent
 
 - name: enable_gnome_extensions

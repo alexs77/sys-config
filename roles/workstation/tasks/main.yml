@@ -6,8 +6,8 @@
 - name: workstation | tasks
   block:
   ## User configs
-  - name: workstation | import task | create user alex
-    ansible.builtin.import_tasks: users/alex.yml
+  - name: workstation | import task | create user
+    ansible.builtin.import_tasks: users/user.yml
 
   ## desktop environments
   - name: "workstation | include task | mate"
@@ -69,6 +69,7 @@
       - chromium
       - codecs
       - darktable
+      - discord
       - firefox
       - foliate
       - glimpse
