@@ -6,7 +6,7 @@ user_name: askwar
 ansible_cron_minute: "*/5"
 ansible_provision_disabled: yes
 ssh_port: 22
-ssh_users: "guru {{ user_name }}"
+ssh_users: "askwar guru"
 
 # platform-specific
 ansible_python_interpreter: /usr/bin/python3
