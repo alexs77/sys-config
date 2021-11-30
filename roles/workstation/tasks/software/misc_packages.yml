@@ -40,6 +40,7 @@
       - terminator
       - transmission-gtk
       - unrar
+      - "{{ wireguard_package }}"
       - "{{ wireless_tools_package }}"
       - "{{ wpa_supplicant_package }}"
       - xsel
