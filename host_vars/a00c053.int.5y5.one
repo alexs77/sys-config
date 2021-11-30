@@ -10,8 +10,7 @@ ssh_users: "guru {{ user_name }}"
 
 # platform-specific
 ansible_python_interpreter: /usr/bin/python3
-microcode_amd_install: false
-microcode_intel_install: true
+microcode_install: intel
 
 # app defaults
 gui_editor: code
