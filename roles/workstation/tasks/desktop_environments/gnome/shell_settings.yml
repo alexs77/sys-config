@@ -156,3 +156,14 @@
   community.general.dconf:
     key: "/org/gnome/system/location/enabled"
     value: "true"
+
+- name: gnome | shell settings | dash-to-dock
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "dash-max-icon-size", value: 32 }
+    - { key: "dock-fixed", value: "true" }
+    - { key: "dock-position", value: "'LEFT'" }
