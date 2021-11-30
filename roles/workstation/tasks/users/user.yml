@@ -38,6 +38,7 @@
     - { dir: pictures }
     - { dir: projects }
     - { dir: templates }
+    - { dir: tmp }
     - { dir: videos }
 
 - name: users | user | copy user-dirs.dirs
