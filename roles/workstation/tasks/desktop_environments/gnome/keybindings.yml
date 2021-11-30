@@ -210,3 +210,12 @@
 #  with_items:
 #      - { key: maximize, value: "'<Super>Up'" }
 #      - { key: unmaximize, value: "'<Super>Down'" }
+
+- name: gnome | keybindings | key settings
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/desktop/input-sources/{{ item.key }}"
+    value: "{{ item.value}}"
+  with_items:
+    - { key: per-window, value: "false" }
+    - { key: xkb-options, value: "['compose:menu']" }
