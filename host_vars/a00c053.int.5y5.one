@@ -55,7 +55,7 @@ teams: true
 telegram: true
 terraform: true
 thunderbird: false
-todoist: falase
+todoist: false
 ulauncher: false
 vagrant: false
 virtualbox: true
