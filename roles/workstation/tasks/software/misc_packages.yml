@@ -26,6 +26,7 @@
       - "{{ libnotify_package }}"
       - meld
       - "{{ mpv_package}}"
+      - "{{ network_manager_openconnect_package }}"
       - "{{ network_manager_openvpn_package }}"
       - "{{ network_manager_package }}"
       - "{{ network_manager_pptp_package }}"

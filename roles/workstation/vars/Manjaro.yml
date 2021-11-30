@@ -1,3 +1,5 @@
+alex_user_group: users
+
 autofs_master_config: /etc/autofs/auto.master
 autofs_nfs_config: /etc/autofs/auto.nfs
 cryptsetup_package: cryptsetup
@@ -12,10 +14,10 @@ gstreamer_libav_package: gst-libav
 gstreamer_plugins_bad_package: gst-plugins-bad-libs
 hunspell_package: hunspell-en_US
 hyphen_package: hyphen-en
-alex_user_group: users
 libnotify_package: libnotify
 mpv_package: mpv
 nethack_package: nethack
+network_manager_openconnect_package: network-manager-openconnect
 network_manager_openvpn_package: networkmanager-openvpn
 network_manager_package: networkmanager
 network_manager_pptp_package: networkmanager-pptp

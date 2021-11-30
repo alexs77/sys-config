@@ -39,6 +39,7 @@
   tags: gnome,gnome-packages,packages
   ansible.builtin.package:
     name:
+      - network-manager-openconnect-gnome
       - network-manager-openvpn-gnome
   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
