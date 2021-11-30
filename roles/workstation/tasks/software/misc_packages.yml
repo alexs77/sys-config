@@ -32,6 +32,7 @@
       - "{{ network_manager_pptp_package }}"
       - "{{ network_manager_vpnc_package }}"
       - pavucontrol
+      - resolvconf
       - shotwell
       - simplescreenrecorder
       - smbclient
