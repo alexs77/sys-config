@@ -86,12 +86,14 @@
       - neovim
       - openshot
       - packer
+      - podman
       - signal
       - solaar
       - spotify
       - steam
       - syncthing
       - teams
+      - telegram
       - terraform
       - thunderbird
       - todoist
