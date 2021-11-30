@@ -1,118 +1,169 @@
+- name: gnome | shell settings | 24hr time format
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "{{ item }}"
+    value: "'24h'"
+  loop:
+    - /org/gnome/desktop/interface/clock-format
+    - /org/gtk/settings/file-chooser/clock-format
+
 - name: gnome | shell settings | button-layout
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/wm/preferences/button-layout"
     value: "':close'"
 
 # Disable hot corners
 - name: gnome | shell settings | enable-hot-corners
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/shell/interface/enable-hot-corners"
     value: "false"
 
-- name: gnome | shell settings | event-sounds (disable)
+- name: gnome | shell settings | event-sounds (enable)
   tags: gnome,audio,sounds,alerts
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/sound/event-sounds"
-    value: "false"
+    value: "true"
 
 - name: gnome | shell settings | disable hidpi-daemon
   tags: gnome,gnome-shell,hidpi
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/com/system76/hidpi/enable"
-    value: "false"
+    value: "true"
   when: ansible_distribution in ["Pop!_OS", "Ubuntu"]
 
-# Disable screen blanking
+# Screen blanking: 12min
 - name: gnome | shell settings | idle-delay
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/session/idle-delay"
-    value: "uint32 0"
+    value: "uint32 720"
 
 # Disable input sounds
 - name: gnome | shell settings | input-feedback-sounds (disable input sounds)
   tags: gnome,audio,sounds,alerts
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/sound/input-feedback-sounds"
     value: "false"
 
-# Disable automatic screen lock
+# Enable automatic screen lock
 - name: gnome | shell settings | lock-enabled
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/screensaver/lock-enabled"
-    value: "false"
+    value: "true"
+
+# Delay automatic screen lock
+- name: gnome | shell settings | lock-enabled
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/screensaver/lock-delay"
+    value: "uint32 180"
 
 - name: gnome | shell settings | old-files-age
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/privacy/old-files-age"
     value: "uint32 14"
 
 - name: gnome | shell settings | remove-old-temp-files
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/privacy/remove-old-temp-files"
     value: "true"
 
 - name: gnome | shell settings | remove-old-trash-files
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/privacy/remove-old-trash-files"
     value: "true"
 
 - name: gnome | shell settings | search-providers
   tags: gnome,search
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/search-providers/disabled"
     value: "['org.gnome.Nautilus.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Photos.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Calendar.desktop']"
 
 - name: gnome | shell settings | show-battery-percentage
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/interface/show-battery-percentage"
     value: "true"
 
 # Disable lock screen notifications
 - name: gnome | shell settings | show-in-lock-screen
   tags: gnome,gnome-lockscreen
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/desktop/notifications/show-in-lock-screen"
     value: "false"
 
 - name: gnome | shell settings | tile-by-default
   tags: gnome,gnome-lockscreen
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/shell/extensions/pop-shell/tile-by-default"
     value: "true"
   when: ansible_distribution == "Pop!_OS"
 
 - name: gnome | shell settings | workspaces-only-on-primary
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/shell/overrides/workspaces-only-on-primary"
     value: "true"
 
 - name: gnome | shell settings | set gnome-screenshot default save directory
   tags: gnome,gnome-shell
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/gnome/gnome-screenshot/auto-save-directory"
-    value: "'/home/jay'"
+    value: "'/home/{{ user_name }}/pictures'"
+
+- name: gnome | shell settings | show clock in middle
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/pop-cosmic"
+    value: "'CENTER'"
+
+- name: gnome | shell settings | show buttons
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/show-{{ item }}-button"
+    value: "true"
+  loop: ['applications', 'workspaces']
+
+- name: gnome | shell settings | enable location services
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/system/location/enabled"
+    value: "true"
+
+- name: gnome | shell settings | dash-to-dock
+  tags: gnome,gnome-shell
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "dash-max-icon-size", value: 32 }
+    - { key: "dock-fixed", value: "true" }
+    - { key: "dock-position", value: "'LEFT'" }

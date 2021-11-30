@@ -1,0 +1,76 @@
+{{ ansible_managed | comment }}
+
+##################################################################
+# general config                                                 #
+##################################################################
+
+Host *
+    ServerAliveInterval 15
+    ServerAliveCountMax 5
+
+##################################################################
+# home machines                                                  #
+##################################################################
+
+Host gateway
+    Hostname gateway.home-network.io
+    Port 65001
+    User {{ user_name }}
+
+Host ha
+    Hostname ha.home-network.io
+    Port 22
+    User root
+
+Host home
+    Hostname vpn.home-network.io
+    Port 2099
+    User {{ user_name }}
+
+Host jarvis
+    Hostname jarvis.home-network.io
+    Port 22
+    User pi
+
+Host music
+    Hostname music.home-network.io
+    Port 22
+    User volumio
+
+Host retro*
+    Hostname %h.home-network.io
+    Port 22
+    User pi
+
+Host storage
+    Hostname storage.home-network.io
+    Port 22
+    User {{ user_name }}
+
+Host vm-host-*
+    Hostname %h.home-network.io
+    Port 22
+    User {{ user_name }}
+
+##################################################################
+# vps                                                            #
+##################################################################
+Host community
+    Hostname community.learnlinux.tv
+    Port 22
+    User {{ user_name }}
+
+Host *link
+    Hostname learnlinux.link
+    Port 22
+    User {{ user_name }}
+
+Host web
+    Hostname web.learnlinux.tv
+    Port 22
+    User {{ user_name }}
+
+Host wiki
+    Hostname wiki.learnlinux.tv
+    Port 22
+    User {{ user_name }}

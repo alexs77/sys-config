@@ -1,3 +1,11 @@
 ---
 telegram_chat_id: "<telegram_chat_id_here>"
 telegram_token: "<telegram_token_here>"
+time_zone: Europe/Zurich
+locales:
+  - de_CH.UTF-8
+  - en_US.UTF-8
+  - en_US
+  - de_CH
+  - de_DE.UTF-8
+  - de_DE

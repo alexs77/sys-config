@@ -1,6 +1,6 @@
 - name: nrpe | install nrpe package and plugins
   tags: nagios,nrpe
-  package:
+  ansible.builtin.package:
     state: latest
     name:
       - "{{ monitoring_plugins_package }}"
@@ -10,7 +10,7 @@
 
 - name: nrpe | generate nrpe.cfg file from template
   tags: openssh,ssh,system,settings
-  template:
+  ansible.builtin.template:
     src: nrpe.cfg.j2
     dest: "{{ nrpe_config_file_dest }}"
     owner: root
@@ -20,14 +20,14 @@
 
 - name: nrpe | enable and start nrpe service
   tags: nagios,nrpe
-  service:
+  ansible.builtin.service:
     name: "{{ nrpe_service }}"
     enabled: yes
     state: started
 
 - name: nrpe | copy additional plugins
   tags: nagios,nrpe
-  copy:
+  ansible.builtin.copy:
     src: nrpe/{{ item }}
     dest: "{{ monitoring_plugins_path }}/{{ item }}"
     owner: root
@@ -41,7 +41,7 @@
 
 - name: nrpe | create log file
   tags: ansible,ansible-setup
-  file:
+  ansible.builtin.file:
     path: /var/log/nrpe.log
     owner: "{{ nrpe_user }}"
     group: "{{ nrpe_group }}"
@@ -51,7 +51,7 @@
 
 - name: nrpe | add logrotate config for nrpe log file
   tags: nrpe,server
-  copy:
+  ansible.builtin.copy:
     src: nrpe/logrotate
     dest: /etc/logrotate.d/nrpe
     owner: root
@@ -60,7 +60,7 @@
 
 - name: nrpe | clean up unneeded files (debian, etc)
   tags: nrpe,server
-  file:
+  ansible.builtin.file:
     path: /etc/nagios/{{ item }}
     state: absent
   with_items:

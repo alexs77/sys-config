@@ -1,7 +1,10 @@
-- name: system setup | pip packages | install bpytop
+- name: system setup | pip packages | install packages
   tags: bpytop,packages,pip,python
-  become_user: jay
-  pip:
+  become: yes
+  become_user: "{{ user_name }}"
+  ansible.builtin.pip:
     executable: /usr/bin/pip3
     state: latest
-    name: bpytop
+    name:
+      - bpytop
+      - psutil

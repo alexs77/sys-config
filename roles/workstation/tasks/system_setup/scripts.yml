@@ -1,6 +1,6 @@
 - name: system setup | scripts | copy cht.sh script
   tags: distro-setup
-  copy:
+  ansible.builtin.copy:
     src: scripts/cht.sh
     dest: /usr/local/bin/cht.sh
     owner: root
@@ -9,7 +9,7 @@
 
 - name: system setup | scripts | copy pishrink.sh script
   tags: distro-setup
-  copy:
+  ansible.builtin.copy:
     src: scripts/pishrink.sh
     dest: /usr/local/bin/pishrink.sh
     owner: root

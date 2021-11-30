@@ -1,3 +1,5 @@
+" This file is managed by Ansible. Keep your hands off it!
+
 " Set color scheme. Other good ones are bubblegum-256-dark, sorcerer, and zenburn
 colorscheme xoria256
 

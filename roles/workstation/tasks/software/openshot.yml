@@ -1,7 +1,11 @@
 - name: software | openshot | install package
-  get_url:
+  tags: apps,openshot,appimage,software,workstation-packages
+  ansible.builtin.get_url:
     url: https://github.com/OpenShot/openshot-qt/releases/download/v2.5.1/OpenShot-v2.5.1-x86_64.AppImage
-    dest: /home/jay/bin/openshot.app
+    dest: /home/{{ user_name }}/bin/openshot.app
     mode: '0700'
-    owner: jay
-    group: jay
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  when:
+    - openshot is defined
+    - openshot == true

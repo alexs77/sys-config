@@ -1,0 +1,69 @@
+---
+branch: main
+
+user_name: askwar
+
+ansible_cron_minute: "*/5"
+ansible_provision_disabled: yes
+ssh_port: 22
+ssh_users: "guru {{ user_name }}"
+
+# platform-specific
+ansible_python_interpreter: /usr/bin/python3
+microcode_install: intel
+
+# app defaults
+gui_editor: code
+cons_editor: nvim
+terminal_emulator: terminator
+web_browser: chrome
+
+# Geographic location of system - longitude, latitude
+geo_location: "47.364101439884813, 8.2359000000000009"
+
+# application selection
+brave:
+  - beta
+
+audacity: false
+authy: true
+autofs: false
+awscliv2: true
+azure_cli: true
+bitwarden: true
+chromium: true
+darktable: false
+firefox: true
+foliate: false
+games: false
+google_chrome: true
+glimpse: true
+keepassxc: true
+keybase: true
+libreoffice: true
+lutris: true
+mattermost: false
+minecraft: false
+neovim: true
+packer: false
+podman: true
+signal: true
+spotify: true
+steam: false
+syncthing: false
+teams: true
+telegram: true
+terraform: true
+thunderbird: false
+todoist: false
+ulauncher: false
+vagrant: false
+virtualbox: true
+vivaldi: true
+vlc: true
+vscode: true
+xonotic: true
+
+# desktop environment selection
+gnome: true
+mate: false

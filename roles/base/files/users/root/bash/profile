@@ -1,3 +1,5 @@
+# This file is managed by Ansible. Keep your hands off it!
+
 if [ -f ~/.bashrc ]; then
-	source ~/.bashrc
+  source ~/.bashrc
 fi

@@ -1,3 +1,5 @@
+# This file is managed by Ansible. Keep your hands off it!
+
 /var/log/ansible.log {
   rotate 3
   daily

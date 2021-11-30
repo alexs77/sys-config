@@ -1,13 +1,22 @@
 # Load distro-specific variables
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: server | include distribution variables
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
-- block:
-  - import_tasks: nrpe.yml
-  - import_tasks: ufw.yml
-  - import_tasks: qemu-agent.yml
+- name: server | tasks
+  block:
+  - name: "server | import task | {{ inc_task }}"
+    ansible.builtin.include_tasks: "{{ inc_task }}.yml"
+    with_items:
+      # May be sorted.
+      - nrpe
+      - ufw
+      - qemu-agent
+    loop_control:
+        loop_var: inc_task
 
-  - include_tasks: unattended_upgrades.yml
+  - name: server | include task | unattended upgrades (Debian)
+    ansible.builtin.include_tasks: unattended_upgrades.yml
     when:
       - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
       - unattended_upgrades is defined

@@ -1,3 +1,5 @@
+alex_user_group: "{{ user_name }}"
+
 autofs_master_config: /etc/auto.master
 autofs_nfs_config: /etc/auto.nfs
 cryptsetup_package: cryptsetup-bin
@@ -12,10 +14,10 @@ gstreamer_libav_package: gstreamer1.0-libav
 gstreamer_plugins_bad_package: gstreamer1.0-plugins-bad
 hunspell_package: hunspell-en-us
 hyphen_package: hyphen-en-us
-jay_user_group: jay
 libnotify_package: libnotify-bin
 mpv_package: gnome-mpv
 nethack_package: nethack-console
+network_manager_openconnect_package: network-manager-openconnect
 network_manager_openvpn_package: network-manager-openvpn
 network_manager_package: network-manager
 network_manager_pptp_package: network-manager-pptp
@@ -24,7 +26,7 @@ p7zip_package: p7zip-full
 packer_version: 1.6.5
 ssh_askpass_package: ssh-askpass-gnome
 steam_package: steam
-terraform_version: 0.13.5
+terraform_version: 1.0.11
 vagrant_version: 2.2.14
 virtualbox_package: virtualbox
 wireless_tools_package: wireless-tools

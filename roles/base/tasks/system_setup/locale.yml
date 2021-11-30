@@ -1,24 +1,12 @@
-- name: system setup | locale | add en_US
+- name: system setup | locale
   tags: locale,system,setup
-  locale_gen:
-    name: en_US.UTF-8
+  community.general.locale_gen:
+    name: "{{ item }}"
     state: present
-
-- name: system setup | locale | set locale to en_US
-  tags: locale,system,setup
-  locale_gen:
-    name: en_US.UTF-8
-    state: present
+  loop: "{{ locales|flatten(levels=1) }}"
   register: locale
 
-- name: system setup | locale | set en_US as default locale
+- name: system setup | locale | set first locale as default locale
   tags: locale,system,setup
-  command: localectl set-locale LANG=en_US.UTF-8
-  when: locale.changed
-
-- name: system setup | locale | remove en_GB
-  tags: locale,system,setup
-  locale_gen:
-    name: en_GB.UTF-8
-    state: absent
+  ansible.builtin.command: "localectl set-locale LANG={{ locales|first }}"
   when: locale.changed

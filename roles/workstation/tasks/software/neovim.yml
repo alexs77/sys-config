@@ -1,0 +1,41 @@
+# - name: software | neovim | add repository key
+#   tags: packages,neovim
+#   neovim.builtin.apt_key:
+#     url: https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
+#     state: present
+#   when:
+#     - neovim_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - neovim is defined
+#     - neovim == true
+
+- name: software | neovim | check if repository exists
+  tags: packages,neovim
+  ansible.builtin.stat:
+    path: "/etc/apt/sources.list.d/neovim-ppa-ubuntu-stable-{{ ansible_distribution_release }}.list"
+  register: neovim_repo_file
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - neovim is defined
+    - neovim == true
+
+- name: software | neovim | add repository
+  tags: packages,neovim
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/stable
+    state: present
+    filename: "neovim-ppa-ubuntu-stable-{{ ansible_distribution_release }}"
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - neovim is defined
+    - neovim == true
+    - neovim_repo_file.stat.exists == False
+
+- name: software | neovim | install package
+  tags: packages,neovim
+  ansible.builtin.apt:
+    name: neovim
+    state: latest
+  when:
+    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - neovim is defined
+    - neovim == true

@@ -1,7 +1,7 @@
 - name: mate | keybindings | set primary browser keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -12,8 +12,8 @@
 
 - name: mate | keybindings | set primary browser keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -24,8 +24,8 @@
 
 - name: mate | keybindings | set browser keybinding (alternate)
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -35,19 +35,19 @@
 
 - name: mate | keybindings | set file manager keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
     - { key: "/org/mate/desktop/keybindings/custom2/name", value: "'file manager'" }
     - { key: "/org/mate/desktop/keybindings/custom2/binding", value: "'<Mod4>f'" }
-    - { key: "/org/mate/desktop/keybindings/custom2/action", value: "'caja --no-desktop /home/jay'" }
+    - { key: "/org/mate/desktop/keybindings/custom2/action", value: "'caja --no-desktop /home/{{ user_name }}'" }
 
 - name: mate | keybindings | set bpytop keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -58,8 +58,8 @@
 
 - name: mate | keybindings | set bpytop keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -70,8 +70,8 @@
 
 - name: mate | keybindings | set keepassxc keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -81,8 +81,8 @@
 
 - name: gnome | set screenshot keybinding
   tags: gnome,keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -92,8 +92,8 @@
 
 - name: gnome | set screenshot (selection) keybinding
   tags: gnome,keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -103,8 +103,8 @@
 
 - name: mate | keybindings | set terminal keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -115,8 +115,8 @@
 
 - name: mate | keybindings | set terminal keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -127,8 +127,8 @@
 
 - name: mate | keybindings | set text editor keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -139,8 +139,8 @@
 
 - name: mate | keybindings | set text editor keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -151,8 +151,8 @@
 
 - name: mate | keybindings | set tmux keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -163,8 +163,8 @@
 
 - name: mate | keybindings | set tmux keybinding
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -175,8 +175,8 @@
 
 - name: mate | keybindings | set keybinding for switching between workspaces
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -191,8 +191,8 @@
 
 - name: mate | keybindings | set keybinding for moving windows to other workspaces
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
@@ -201,8 +201,8 @@
 
 - name: mate | keybindings | set tiling keybindings
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
       key: "{{ item.key }}"
       value: "{{ item.value }}"
   with_items:
@@ -213,7 +213,7 @@
 
 - name: mate | keybindings | set keybinding for locking screen
   tags: mate,mate-keybindings
-  become_user: jay
-  dconf:
+  become_user: "{{ user_name }}"
+  community.general.dconf:
     key: "/org/mate/settings-daemon/plugins/media-keys/screensaver"
     value: "'<Mod4>l'"

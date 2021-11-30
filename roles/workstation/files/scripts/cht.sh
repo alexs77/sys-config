@@ -1,6 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC1117,SC2001
 #
+# This file is managed by Ansible. Keep your hands off it!
+#
+#
 # [X] open section
 # [X] one shot mode
 # [X] usage info
@@ -551,9 +554,9 @@ cmd_cd() {
 
 cmd_copy() {
   if [ -z "$DISPLAY" ]; then
-    echo copy: supported only in the Desktop version
+    echo ansible.builtin.copy: supported only in the Desktop version
   elif [ -z "$input" ]; then
-    echo copy: Make at least one query first.
+    echo ansible.builtin.copy: Make at least one query first.
   else
     curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?T)" > "$TMP1"
     if [ "$is_macos" != yes ]; then
@@ -567,9 +570,9 @@ cmd_copy() {
 
 cmd_ccopy() {
   if [ -z "$DISPLAY" ]; then
-    echo copy: supported only in the Desktop version
+    echo ansible.builtin.copy: supported only in the Desktop version
   elif [ -z "$input" ]; then
-    echo copy: Make at least one query first.
+    echo ansible.builtin.copy: Make at least one query first.
   else
     curl -s "${CHTSH_URL}"/"$(get_query_options "$query"?TQ)" > "$TMP1"
     if [ "$is_macos" != yes ]; then
