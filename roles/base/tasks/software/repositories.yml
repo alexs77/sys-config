@@ -31,3 +31,20 @@
       - software-properties-common
     state: latest
   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- name: system setup | fish shell | add repository
+  tags: packages,repositories,system
+  ansible.builtin.apt_repository:
+    repo: ppa:fish-shell/release-3
+    filename: fish-shell
+  register: fish_shell_repo
+  when: ansible_os_family == "Debian"
+
+- name: system setup | fish shell | update sources (repo added or changed)
+  tags: packages,repositories,system
+  ansible.builtin.apt:
+    update_cache: yes
+  changed_when: false
+  when:
+    - ansible_os_family == "Debian"
+    - fish_shell_repo.changed
