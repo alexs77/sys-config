@@ -38,7 +38,7 @@
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic"
-    value: "true"
+    value: "false"
 
 - name: gnome | peripherals | set automatic night-light coordinates
   tags: gnome,peripherals,night-light
