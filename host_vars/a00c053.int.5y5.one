@@ -46,6 +46,7 @@ mattermost: false
 minecraft: false
 neovim: true
 packer: false
+podman: true
 signal: true
 spotify: true
 steam: false
