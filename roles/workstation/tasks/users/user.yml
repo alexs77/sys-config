@@ -79,17 +79,38 @@
     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
     - { src: 'ssh_client_config', dest: '.ssh/config' }
 
-- name: users | user | copy profile image
+- name: users | user | copy profile image - user
   tags: dotfiles,dotfiles-user
   ansible.builtin.get_url:
     url: https://thispersondoesnotexist.com/image
-    dest: /var/lib/AccountsService/icons/{{ user_name }}.jpg
+    dest: "/var/lib/AccountsService/icons/{{ user_name }}.jpg"
     owner: root
     group: root
     mode: '0644'
-  # ansible.builtin.copy:
-  #   src: users/USER/profile_image.png
-  #   dest: /var/lib/AccountsService/icons/{{ user_name }}.png
-  #   owner: root
-  #   group: root
-  #   mode: 0644
+
+- name: users | user | set profile image - user
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.blockinfile:
+    path: "/var/lib/AccountsService/users/{{ user_name }}"
+    block: |
+      [User]
+      Icon=/var/lib/AccountsService/icons/{{ user_name }}.jpg
+      SystemAccount=false
+
+- name: users | user | copy profile image - guru
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.get_url:
+    url: https://thispersondoesnotexist.com/image
+    dest: "/var/lib/AccountsService/icons/guru.jpg"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: users | user | set profile image - guru
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.blockinfile:
+    path: "/var/lib/AccountsService/users/guru"
+    block: |
+      [User]
+      Icon=/var/lib/AccountsService/icons/guru.jpg
+      SystemAccount=false
