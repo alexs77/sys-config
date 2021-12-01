@@ -108,6 +108,8 @@
       - xonotic
     loop_control:
       loop_var: inc_task
+    when:
+      - lookup('vars', inc_task, default=false)
 
   rescue:
     - set_fact: task_failed=true
