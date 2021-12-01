@@ -10,6 +10,7 @@
       - gnome-backgrounds
       - gnome-books
       - gnome-boxes
+      - gnome-connections
       - gnome-control-center
       - gnome-disk-utility
 #      - gnome-documents

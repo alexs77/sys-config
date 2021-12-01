@@ -76,6 +76,7 @@
       - google_chrome
       - kdenlive
       - keepassxc
+      - ksnip
       - libreoffice
       - linode_cli
       - lutris
@@ -87,6 +88,7 @@
       - openshot
       - packer
       - podman
+      - shutter
       - signal
       - solaar
       - spotify

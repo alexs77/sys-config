@@ -1,0 +1,38 @@
+- name: "software | {{ item.name }} | repository key"
+  tags: "packages,{{ item.flag }},workstation-packages"
+  ansible.builtin.apt_key:
+    url: "{{ item.key_url }}"
+    state: "{{ lookup('vars', item.flag) }}"
+  when:
+    - ansible_os_family == "Debian"
+    - lookup('vars', item.flag, default=false)
+    - item.key_url is defined
+
+- name: "software | {{ item.name }} | repository"
+  tags: "packages,{{ item.flag }},workstation-packages"
+  ansible.builtin.apt_repository:
+    repo: "{{ item.repo }}"
+    state: "{{ lookup('vars', item.flag) }}"
+  register: repo_file
+  when:
+    - ansible_os_family == "Debian"
+    - lookup('vars', item.flag, default=false)
+
+- name: "software | {{ item.name }} | update sources (repo added or changed)"
+  tags: "packages,{{ item.flag }},workstation-packages"
+  ansible.builtin.apt:
+    update_cache: yes
+  changed_when: false
+  when:
+    - ansible_os_family == "Debian"
+    - lookup('vars', item.flag, default=false)
+    - repo_file.changed
+
+- name: "software | {{ item.name }} | package"
+  tags: "packages,{{ item.flag }},workstation-packages"
+  ansible.builtin.apt:
+    name: "{{ item.pkg }}"
+    state: "{{ lookup('vars', item.flag) }}"
+  when:
+    - ansible_os_family == "Debian"
+    - lookup('vars', item.flag, default=false)

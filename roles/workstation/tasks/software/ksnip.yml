@@ -1,0 +1,8 @@
+- name: software | ksnip | install package
+  tags: packages,flatpak,ksnip,workstation-packages
+  become_user: "{{ user_name }}"
+  community.general.flatpak:
+    name: org.ksnip.ksnip
+    method: user
+    state: present
+  when: ksnip is defined and ksnip
