@@ -4,5 +4,5 @@
   community.general.flatpak:
     name: org.ksnip.ksnip
     method: user
-    state: present
-  when: ksnip is defined and ksnip
+    state: "{{ ksnip }}"
+  when: ksnip is defined and ksnip != false
