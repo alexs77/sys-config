@@ -1,0 +1,5 @@
+- name: software | flameshot | install package
+  ansible.builtin.include_tasks: _apt_repo_pkg.yml
+  loop:
+    - { name: "flameshot", flag: flameshot, pkg: flameshot }
+  when: flameshot is defined and flameshot

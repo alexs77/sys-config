@@ -17,6 +17,7 @@
   when:
     - ansible_os_family == "Debian"
     - lookup('vars', item.flag, default=false)
+    - item.repo is defined
 
 - name: "software | {{ item.name }} | update sources (repo added or changed)"
   tags: "packages,{{ item.flag }},workstation-packages"
