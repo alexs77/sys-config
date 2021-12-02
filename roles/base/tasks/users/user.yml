@@ -128,29 +128,17 @@
     - { src: 'bash/bashrc', dest: '.bashrc' }
     - { src: 'git/gitconfig', dest: '.gitconfig' }
 
-- name: users | user | clone tmux-completion plugin repository
+- name: users | user | clone tmux plugin repositories
   tags: dotfiles,user,users,tmux
   ansible.builtin.git:
-    repo: https://github.com/srsudar/tmux-completion.git
-    dest: /home/{{ user_name }}/.tmux/plugins/completion
+    repo: "{{ item.repo }}"
+    dest: /home/{{ user_name }}/.tmux/plugins/{{ item.dest }}
     force: yes
   notify: update_tmux_plugin_perms
-
-- name: users | user | clone tmux-continuum plugin repository
-  tags: dotfiles,user,users,tmux
-  ansible.builtin.git:
-    repo: https://github.com/tmux-plugins/tmux-continuum
-    dest: /home/{{ user_name }}/.tmux/plugins/continuum
-    force: yes
-  notify: update_tmux_plugin_perms
-
-- name: users | user | clone tmux-resurrect plugin repository
-  tags: dotfiles,user,users,tmux
-  ansible.builtin.git:
-    repo: https://github.com/tmux-plugins/tmux-resurrect
-    dest: /home/{{ user_name }}/.tmux/plugins/resurrect
-    force: yes
-  notify: update_tmux_plugin_perms
+  with_items:
+    - { repo: 'https://github.com/srsudar/tmux-completion.git', dest: 'completion' }
+    - { repo: 'https://github.com/tmux-plugins/tmux-continuum.git', dest: 'continuum' }
+    - { repo: 'https://github.com/tmux-plugins/tmux-resurrect.git', dest: 'resurrect' }
 
 - name: users | user | copy individual zsh config files
   tags: dotfiles,user,users,zsh
