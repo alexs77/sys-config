@@ -253,4 +253,5 @@
     executable: /usr/bin/pip3
     state: latest
     name:
+      - ansible-lint[yamllint]
       - pre-commit
