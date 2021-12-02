@@ -24,7 +24,6 @@
   with_items:
     - { dir: .config }
     - { dir: .config/autostart }
-    - { dir: .config/bpytop }
     - { dir: .config/gtk-3.0 }
     - { dir: .config/terminator }
     - { dir: .local }
@@ -60,7 +59,6 @@
     group: "{{ user_name }}"
     mode: 0600
   with_items:
-    - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
     - { src: 'gvimrc', dest: '.gvimrc' }
     - { src: 'linode-cli', dest: '.config/linode-cli' }
