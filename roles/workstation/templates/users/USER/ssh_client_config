@@ -44,8 +44,6 @@ Host contabo
 ##################################################################
 
 Host *
-  {# Only on macOS use "UseKeyChain" #}
-  {% if ansible_distribution == "MacOSX" %}UseKeychain yes{% endif %}
   AddKeysToAgent         yes
   IdentityFile           ~/.ssh/id_ed25519
   IdentityFile           ~/.ssh/id_rsa
@@ -54,3 +52,5 @@ Host *
   ControlMaster          auto
   ControlPath            ~/.ssh/.mux:%C
   ControlPersist         3600
+  {# Only on macOS use "UseKeyChain" #}
+  {% if ansible_distribution == "MacOSX" %}UseKeychain yes{% endif %}
