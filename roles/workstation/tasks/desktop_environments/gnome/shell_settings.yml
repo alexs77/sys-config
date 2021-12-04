@@ -23,6 +23,13 @@
     key: "/org/gnome/shell/interface/enable-hot-corners"
     value: "true"
 
+- name: gnome | shell settings | show weekday
+  tags: gnome,audio,sounds,alerts
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/clock-show-weekday"
+    value: "true"
+
 - name: gnome | shell settings | event-sounds (enable)
   tags: gnome,audio,sounds,alerts
   become_user: "{{ user_name }}"
