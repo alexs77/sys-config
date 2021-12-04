@@ -19,7 +19,7 @@
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: restart_sshd
 
 - name: system setup | openssh | copy issue.net
@@ -29,4 +29,4 @@
     dest: /etc/issue.net
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"

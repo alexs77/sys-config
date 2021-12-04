@@ -5,7 +5,7 @@
     dest: "/usr/share/backgrounds/{{ user_name }}-wallpaper.png"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: gnome | appearance | set wallpaper
   tags: gnome,gnome-wallpaper
@@ -28,7 +28,7 @@
     dest: "/usr/share/backgrounds/{{ user_name }}-lockscreen.jpg"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: gnome | appearance | set lock screen background
   tags: gnome,gnome-lockscreen
