@@ -30,6 +30,13 @@
     key: "/org/gnome/desktop/interface/clock-show-weekday"
     value: "true"
 
+- name: gnome | shell settings | font hinting
+  tags: gnome,audio,sounds,alerts
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/font-hinting"
+    value: "'full'"
+
 - name: gnome | shell settings | event-sounds (enable)
   tags: gnome,audio,sounds,alerts
   become_user: "{{ user_name }}"
