@@ -13,7 +13,7 @@
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/desktop/wm/preferences/button-layout"
-    value: "':close'"
+    value: "':minimize,maximize,close'"
 
 # Enable hot corners
 - name: gnome | shell settings | enable-hot-corners
