@@ -1,16 +1,9 @@
 - name: system setup | memory | adjust current swappiness
   tags: swappiness,sysctl,system,setup
-  ansible.builtin.lineinfile:
-    dest: "/etc/sysctl.conf"
-    create: yes
-    regexp: "swappiness ="
-    line: "vm.swappiness = 5"
-  register: swappiness
-
-- name: system setup | memory | apply swappiness
-  tags: swappiness,sysctl,system,setup
-  ansible.builtin.command: sysctl vm.swappiness={{ swappiness_value }}
-  when: swappiness.changed
+  ansible.posix.sysctl:
+    name: vm.swappiness
+    value: '5'
+    state: present
 
 - name: system setup | memory | install earlyoom package
   tags: earlyoom,packages,system,setup
