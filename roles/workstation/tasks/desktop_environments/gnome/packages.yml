@@ -3,9 +3,9 @@
   tags: gnome,gnome-packages
   ansible.builtin.package:
     name:
+      - "{{ gdm_package }}"
       - eog
       - file-roller
-      - "{{ gdm_package }}"
       - gedit
       - gnome-backgrounds
       - gnome-books
@@ -13,10 +13,7 @@
       - gnome-connections
       - gnome-control-center
       - gnome-disk-utility
-#      - gnome-documents
       - gnome-icon-theme
-#      - gnome-music
-#      - gnome-photos
       - gnome-power-manager
       - gnome-remote-desktop
       - gnome-shell
@@ -26,6 +23,9 @@
       - gnome-todo
       - gnome-tweaks
       - nautilus
+#      - gnome-documents
+#      - gnome-music
+#      - gnome-photos
 
 - name: gnome | packages | install flatpak support in gnome software
   tags: gnome,gnome-packages
