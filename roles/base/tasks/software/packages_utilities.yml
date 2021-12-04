@@ -4,10 +4,6 @@
     state: latest
     name:
       - "{{ dns_utils_package}}"
-      - "{{ lm_sensors_package }}"
-      - "{{ nfs_client_package }}"
-      - "{{ rename_package }}"
-      - "{{ vim_package }}"
       - apt-transport-https
       - at
       - colordiff
@@ -16,13 +12,10 @@
       - htop
       - iotop
       - lsof
-      - mc
-      - mosh
       - ncdu
       - neofetch
       - net-tools
       - nmap
-      - ranger
       - ripgrep
       - rsync
       - screen
@@ -32,6 +25,19 @@
       - wget
       - whois
       - zsh
+
+- name: system setup | utilities | remove utility packages
+  tags: packages,system,settings
+  ansible.builtin.package:
+    state: absent
+    name:
+      - "{{ lm_sensors_package }}"
+      - "{{ nfs_client_package }}"
+      - "{{ rename_package }}"
+      - "{{ vim_package }}"
+      - mc
+      - mosh
+      - ranger
 
 - name: system setup | utilities | install man-pages (arch)
   tags: packages,system,settings
