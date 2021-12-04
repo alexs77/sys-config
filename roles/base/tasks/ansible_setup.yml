@@ -52,7 +52,7 @@
     path: /var/log/ansible.log
     owner: guru
     group: ansible
-    mode: 0664
+    mode: "0664"
     state: touch
   changed_when: False
 
@@ -63,7 +63,7 @@
     dest: /etc/logrotate.d/ansible
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: ansible setup | remove default ansible directory (/etc/ansible) from host
   tags: ansible,ansible-setup
@@ -78,4 +78,4 @@
     dest: /usr/local/bin/provision
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
