@@ -24,14 +24,14 @@
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/desktop/peripherals/mouse/speed"
-    value: "0.59999999999999998"
+    value: "0.6"
 
 - name: gnome | peripherals | increase cursor speed (touchpad)
   tags: gnome,mouse,peripherals
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/speed"
-    value: "0.59999999999999998"
+    value: "0.6"
 
 - name: gnome | peripherals | set automatic night-light schedule
   tags: gnome,peripherals,night-light
