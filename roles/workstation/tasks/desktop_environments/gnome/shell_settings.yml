@@ -15,13 +15,13 @@
     key: "/org/gnome/desktop/wm/preferences/button-layout"
     value: "':close'"
 
-# Disable hot corners
+# Enable hot corners
 - name: gnome | shell settings | enable-hot-corners
   tags: gnome,gnome-shell
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/shell/interface/enable-hot-corners"
-    value: "false"
+    value: "true"
 
 - name: gnome | shell settings | event-sounds (enable)
   tags: gnome,audio,sounds,alerts
