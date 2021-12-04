@@ -2,17 +2,23 @@
   tags: dev,development,packages,python,ruby
   ansible.builtin.package:
     name:
-      - fabric
-      - flake8
       - git
       - perl
-      - "{{ python_flake8_package }}"
       - "{{ python_package }}"
       - "{{ python_pip_package }}"
-      - "{{ python_pyflakes_package }}"
       - python-setuptools
       - "{{ python_virtualenv_package }}"
       - ruby
       - "{{ ruby_rake_package }}"
-      - tig
     state: latest
+
+- name: system setup | development packages | remove packages
+  tags: dev,development,packages,python,ruby
+  ansible.builtin.package:
+    name:
+      - fabric
+      - flake8
+      - "{{ python_flake8_package }}"
+      - "{{ python_pyflakes_package }}"
+      - tig
+    state: absent
