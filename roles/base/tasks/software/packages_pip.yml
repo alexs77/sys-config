@@ -1,10 +1,12 @@
 - name: system setup | pip packages | install packages
-  tags: bpytop,packages,pip,python
+  tags: packages,pip,python
   become: yes
   become_user: "{{ user_name }}"
   ansible.builtin.pip:
     executable: /usr/bin/pip3
     state: latest
     name:
+      - ansible-lint[yamllint]
       - bpytop
+      - pre-commit
       - psutil

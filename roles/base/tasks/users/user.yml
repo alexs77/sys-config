@@ -232,14 +232,3 @@
     - { repo: 'https://github.com/tpope/vim-obsession.git', dest: '/home/{{ user_name }}/.vim/bundle/vim-obsession' }
     - { repo: 'https://github.com/vim-syntastic/syntastic.git', dest: '/home/{{ user_name }}/.vim/bundle/syntastic' }
   notify: update_vim_bundle_perms
-
-- name: users | user | install pip packages
-  tags: packages,pip,python
-  become: yes
-  become_user: "{{ user_name }}"
-  ansible.builtin.pip:
-    executable: /usr/bin/pip3
-    state: latest
-    name:
-      - ansible-lint[yamllint]
-      - pre-commit
