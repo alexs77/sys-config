@@ -21,10 +21,10 @@ web_browser: chrome
 # Geographic location of system - longitude, latitude
 geo_location: "47.364101439884813, 8.2359000000000009"
 
-# application selection
-brave:
-  - beta
+# Gnome extensions
+custom_hot_corners_extended: present
 
+# application selection
 audacity: false
 authy: true
 autofs: false
