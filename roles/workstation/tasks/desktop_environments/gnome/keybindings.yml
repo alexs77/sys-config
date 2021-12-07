@@ -30,7 +30,7 @@
   with_items:
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'browser'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Super>b'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'{{ web_browser | default("firefox") }}'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'{{ web_browser | default('firefox') }}'" }
 
 - name: gnome | keybindings | set browser (alternate) keybinding
   tags: gnome,keybindings
@@ -63,7 +63,7 @@
   with_items:
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name", value: "'bpytop'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding", value: "'<Super>r'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command", value: "'{{ terminal_emulator | default("gnome-terminal") }} -e bpytop'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command", value: "'{{ terminal_emulator | default('gnome-terminal') }} -e bpytop'" }
 
 - name: gnome | keybindings | set terminal keybinding
   tags: gnome,keybindings
@@ -74,7 +74,7 @@
   with_items:
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name", value: "'terminal'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding", value: "'<Super>t'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command", value: "'{{ terminal_emulator | default("gnome-terminal") }}'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command", value: "'{{ terminal_emulator | default('gnome-terminal') }}'" }
 
 - name: gnome | keybindings | set text editor keybinding
   tags: gnome,keybindings
@@ -85,7 +85,7 @@
   with_items:
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/name", value: "'text editor'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding", value: "'<Super>e'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command", value: "'{{ gui_editor | default("gedit") }}'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command", value: "'{{ gui_editor | default('gedit') }}'" }
 
 - name: gnome | keybindings | set tmux keybinding
   tags: gnome,keybindings
@@ -96,7 +96,7 @@
   with_items:
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/name", value: "'tmux'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/binding", value: "'<Shift><Super>t'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/command", value: "'{{ terminal_emulator | default("gnome-terminal") }} -e tmux'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/command", value: "'{{ terminal_emulator | default('gnome-terminal') }} -e tmux'" }
 
 # Uncommenting the below plays will restore the default GNOME shortcuts for these actions:
 #- name: gnome | keybindings | set keybindings for switching between workspaces
@@ -130,7 +130,7 @@
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/desktop/desktop/input-sources/{{ item.key }}"
-    value: "{{ item.value}}"
+    value: "{{ item.value }}"
   with_items:
     - { key: per-window, value: "false" }
     - { key: xkb-options, value: "['compose:menu']" }
