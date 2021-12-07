@@ -1,0 +1,21 @@
+# https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/
+# uuid: custom-hot-corners-extended@G-dH.github.com
+# src: https://extensions.gnome.org/extension-data/custom-hot-corners-extendedG-dH.github.com.v11.shell-extension.zip
+
+  # ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  # loop:
+  #   - { name: "Display Name", 
+  #       flag: flag_from_host_var_file,
+  #       src: source url to download from,
+  #       uuid: uuid to enable or disable,
+  #       state: "present" to enable, "absent" to disable }
+
+- name: gnome | extension | custom-hot-corners-extended
+  tags: gnome,extension,custom_hot_corners_extended
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "custom-hot-corners-extended", 
+        flag: custom_hot_corners_extended,
+        src: "https://extensions.gnome.org/extension-data/custom-hot-corners-extendedG-dH.github.com.v11.shell-extension.zip",
+        uuid: "custom-hot-corners-extended@G-dH.github.com" }
+  when: custom_hot_corners_extended is defined and custom_hot_corners_extended
