@@ -6,6 +6,5 @@
     mode: 0755
     owner: root
     group: root
-  when:
-    - vagrant is defined
-    - vagrant == true
+  when: vagrant is defined and vagrant == true
+
