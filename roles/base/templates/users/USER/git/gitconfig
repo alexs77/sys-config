@@ -1,7 +1,7 @@
 {{ ansible_managed | comment}}
 
 [user]
-	email = a@skwar.me
+	email = alexander.skwar@advellence.com
 	name = Alexander Skwar
 
 [pull]
