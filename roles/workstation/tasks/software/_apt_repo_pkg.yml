@@ -1,8 +1,17 @@
+# Usage:
+  # ansible.builtin.include_tasks: _apt_repo_pkg.yml
+  # loop:
+  #   - { name: "Display Name", 
+  #       flag: flag_from_host_var_file,
+  #       key_url: url of key file,
+  #       repo: "sources.list line",
+  #       pkg: name-of-pkg }
+
 - name: "software | {{ item.name }} | repository key"
   tags: "packages,{{ item.flag }},workstation-packages"
   ansible.builtin.apt_key:
     url: "{{ item.key_url }}"
-    state: "{{ lookup('vars', item.flag) }}"
+    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}"
   when:
     - ansible_os_family == "Debian"
     - lookup('vars', item.flag, default=false)
@@ -12,7 +21,7 @@
   tags: "packages,{{ item.flag }},workstation-packages"
   ansible.builtin.apt_repository:
     repo: "{{ item.repo }}"
-    state: "{{ lookup('vars', item.flag) }}"
+    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}"
   register: repo_file
   when:
     - ansible_os_family == "Debian"
@@ -33,7 +42,7 @@
   tags: "packages,{{ item.flag }},workstation-packages"
   ansible.builtin.apt:
     name: "{{ item.pkg }}"
-    state: "{{ lookup('vars', item.flag) }}"
+    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}" 
   when:
     - ansible_os_family == "Debian"
     - lookup('vars', item.flag, default=false)

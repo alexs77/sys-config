@@ -31,6 +31,7 @@ autofs: false
 awscliv2: true
 azure_cli: true
 bitwarden: true
+brave: beta
 chromium: true
 darktable: false
 firefox: true
