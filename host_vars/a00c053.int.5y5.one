@@ -33,6 +33,7 @@ azure_cli: true
 bitwarden: true
 brave: beta
 chromium: true
+edge: dev
 darktable: false
 firefox: true
 flameshot: present
