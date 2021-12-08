@@ -7,6 +7,15 @@
   #       uuid: uuid to enable or disable,
   #       state: "present" to enable, "absent" to disable }
 
+- name: "gnome | extension | {{ item.name }} | Enabling | create extension directory"
+  become_user: "{{ user_name }}"
+  ansible.builtin.file:
+    dest: "~/.local/share/gnome-shell/extensions/{{ item.uuid }}"
+    state: directory
+  when:
+    # should it be enabled? (ie. value = present)
+    - lookup('vars', item.flag, default="absent") == "present"
+
 - name: "gnome | extension | {{ item.name }} | Enabling | unarchive package"
   become_user: "{{ user_name }}"
   ansible.builtin.unarchive:
