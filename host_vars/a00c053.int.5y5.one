@@ -23,6 +23,15 @@ geo_location: "47.364101439884813, 8.2359000000000009"
 
 # Gnome extensions
 custom_hot_corners_extended: present
+ding_rastersoft_com: present
+apps_menu_gnome_shell_extensions_gcampax_github_com: present
+drive_menu_gnome_shell_extensions_gcampax_github_com: present
+native_window_placement_gnome_shell_extensions_gcampax_github_com: present
+places_menu_gnome_shell_extensions_gcampax_github_com: present
+screenshot_window_sizer_gnome_shell_extensions_gcampax_github_com: present
+window_list_gnome_shell_extensions_gcampax_github_com: absent
+windowsNavigator_gnome_shell_extensions_gcampax_github_com: absent
+workspace_indicator_gnome_shell_extensions_gcampax_github_com: present
 
 # application selection
 audacity: false

@@ -31,7 +31,7 @@
     with_items:
       # Do *NOT* sort these!
       - appearance
-      - extension-custom-hot-corners-extended
+      - extensions
       - keybindings
       - nautilus
       - packages

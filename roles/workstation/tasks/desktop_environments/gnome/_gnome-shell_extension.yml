@@ -3,9 +3,9 @@
   # loop:
   #   - { name: "Display Name", 
   #       flag: flag_from_host_var_file,
-  #       src: source url to download from,
+  #       src: source url to download from - optional,
   #       uuid: uuid to enable or disable,
-  #       state: "present" to enable, "absent" to disable }
+  #       state: 'present' to enable, 'absent' to disable }
 
 - name: "gnome | extension | {{ item.name }} | Enabling | create extension directory"
   become_user: "{{ user_name }}"
@@ -14,7 +14,8 @@
     state: directory
   when:
     # should it be enabled? (ie. value = present)
-    - lookup('vars', item.flag, default="absent") == "present"
+    - lookup('vars', item.flag, default='absent') == 'present'
+    - item.src is defined
 
 - name: "gnome | extension | {{ item.name }} | Enabling | unarchive package"
   become_user: "{{ user_name }}"
@@ -24,7 +25,8 @@
     remote_src: yes
   when:
     # should it be enabled? (ie. value = present)
-    - lookup('vars', item.flag, default="absent") == "present"
+    - lookup('vars', item.flag, default='absent') == 'present'
+    - item.src is defined
 
 - name: "gnome | extension | {{ item.name }} | Get list of enabled extensions"
   tags: gnome,extension,{{ item.flag }}
@@ -54,11 +56,11 @@
     # or:
     # - ['abc', 'def']
     # Identical to "add to ...". Difference: use "difference()" filter to remove element
-    value: "{{ ('[' + ((disabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') | difference([item.uuid])) | sort | unique | join(',')) + ']') | replace('[,', '[') | replace('[]', '@as []') | string }}"
+    value: "{{ ('[' + ((disabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') | difference([(\"'\" + item.uuid + \"'\")])) | sort | unique | join(',')) + ']') | replace('[,', '[') | replace('[]', '@as []') | string }}"
     state: present
   when:
     # should it be enabled? (ie. value = present)
-    - lookup('vars', item.flag, default="absent") == "present"
+    - lookup('vars', item.flag, default='absent') == 'present'
     # only try to remove from disabled extensions, if uuid is in the list 
     # -> don't do anything, if there's nothing to be done.
     - item.uuid in disabled_extensions.value
@@ -82,14 +84,14 @@
     # - Add '[' and ']' as prefix/suffix
     # - Convert result to string, so that there's no
     #   implicit conversion from list to string
-    value: "{{ ('[' + ((enabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') + [uuid]) | sort | unique | join(',')) + ']') | replace('[,', '[') | string }}"
+    value: "{{ ('[' + ((enabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') + [(\"'\" + item.uuid + \"'\")]) | sort | unique | join(',')) + ']') | replace('[,', '[') | string }}"
     state: present
   when:
     # should it be enabled? (ie. value = present)
-    - lookup('vars', item.flag, default="absent") == "present"
-    # only try to add it to enabled extensions, if uuid is already in the list 
+    - lookup('vars', item.flag, default='absent') == 'present'
+    # only try to add it to enabled extensions, if uuid is not already in the list 
     # -> don't do anything, if there's nothing to be done.
-    - item.uuid in disabled_extensions.value
+    - item.uuid not in enabled_extensions.value
 
 - name: "gnome | extension | {{ item.name }} | Disabling | Remove from list of enabled extensions"
   tags: gnome,extension,{{ item.flag }}
@@ -97,11 +99,11 @@
   community.general.dconf:
     key: /org/gnome/shell/enabled-extensions
     # Explanation: See above.
-    value: "{{ ('[' + ((enabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') | difference([item.uuid])) | sort | unique | join(',')) + ']') | replace('[,', '[') | replace('[]', '@as []') | string }}"
+    value: "{{ ('[' + ((enabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') | difference([(\"'\" + item.uuid + \"'\")])) | sort | unique | join(',')) + ']') | replace('[,', '[') | replace('[]', '@as []') | string }}"
     state: present
   when:
     # should it be disabled? (ie. value = absent)
-    - lookup('vars', item.flag, default="absent") == "absent"
+    - lookup('vars', item.flag, default='absent') == 'absent'
     # only try to remove from disabled extensions, if uuid is in the list 
     # -> don't do anything, if there's nothing to be done.
     - item.uuid in enabled_extensions.value
@@ -112,14 +114,14 @@
   community.general.dconf:
     key: /org/gnome/shell/disabled-extensions
     # Explanation: See above.
-    value: "{{ ('[' + ((disabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') + [item.uuid]) | sort | unique | join(',')) + ']') | replace('[,', '[') | string }}"
+    value: "{{ ('[' + ((disabled_extensions.value | regex_replace('(?:]|(?:@as )?[,[])', '') | split(' ') + [(\"'\" + item.uuid + \"'\")]) | sort | unique | join(',')) + ']') | replace('[,', '[') | string }}"
     state: present
   when:
     # should it be disabled? (ie. value = absent)
-    - lookup('vars', item.flag, default="absent") == "absent"
+    - lookup('vars', item.flag, default='absent') == 'absent'
     # only try to add it to enabled extensions, if uuid is already in the list 
     # -> don't do anything, if there's nothing to be done.
-    - item.uuid in enabled_extensions.value
+    - item.uuid not in disabled_extensions.value
 
 - name: "gnome | extension | {{ item.name }} | Disabling | delete package files"
   tags: gnome,extension,{{ item.flag }}
@@ -129,4 +131,5 @@
     state: absent
   when:
     # should it be enabled? (ie. value = present)
-    - lookup('vars', item.flag, default="absent") == "absent"
+    - lookup('vars', item.flag, default='absent') == 'absent'
+    - item.src is defined

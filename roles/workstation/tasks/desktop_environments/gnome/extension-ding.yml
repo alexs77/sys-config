@@ -1,0 +1,32 @@
+# https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/
+# uuid: custom-hot-corners-extended@G-dH.github.com
+# src: https://extensions.gnome.org/extension-data/custom-hot-corners-extendedG-dH.github.com.v11.shell-extension.zip
+
+  # ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  # loop:
+  #   - { name: "Display Name", 
+  #       flag: flag_from_host_var_file,
+  #       src: source url to download from,
+  #       uuid: uuid to enable or disable,
+  #       state: "present" to enable, "absent" to disable }
+
+- name: gnome | extension | Desktop Icons NG
+  tags: gnome,extension,ding
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Desktop Icons NG", 
+        flag: ding_rastersoft_com,
+        uuid: "ding@rastersoft.com" }
+  when: ding_rastersoft_com is defined and ding_rastersoft_com
+
+- name: gnome | extension | Desktop Icons NG | settings
+  tags: gnome,extension,ding
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/ding/{{ item.key }}"
+    value: "{{ item.value}}"
+  with_items:
+    - { key: "icon-size", value: "'large'" }
+    - { key: "show-network-volumes", value: "true" }
+    - { key: "show-trash", value: "true" }
+    - { key: "show-volumes", value: "true" }
