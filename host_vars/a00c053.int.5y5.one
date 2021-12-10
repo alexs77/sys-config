@@ -23,7 +23,7 @@ geo_location: "47.364101439884813, 8.2359000000000009"
 
 # Gnome extensions
 custom_hot_corners_extended: present
-ding_rastersoft_com: present
+ding_rastersoft_com: absent
 apps_menu_gnome_shell_extensions_gcampax_github_com: present
 drive_menu_gnome_shell_extensions_gcampax_github_com: present
 native_window_placement_gnome_shell_extensions_gcampax_github_com: present
