@@ -5,6 +5,7 @@
   #       flag: flag_from_host_var_file,
   #       key_url: url of key file,
   #       repo: "sources.list line",
+  #       repo_file: Sets the name of the source list file in sources.list.d,
   #       pkg: name-of-pkg }
 
 - name: "software | {{ item.name }} | repository key"
@@ -21,6 +22,7 @@
   tags: "packages,{{ item.flag }},workstation-packages"
   ansible.builtin.apt_repository:
     repo: "{{ item.repo }}"
+    filename: "{{ item.repo_file | default(omit) }}"
     state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}"
   register: repo_file
   when:
