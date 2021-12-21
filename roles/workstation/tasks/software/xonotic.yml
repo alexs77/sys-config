@@ -5,6 +5,4 @@
     name: org.xonotic.Xonotic
     method: user
     state: present
-  when:
-    - xonotic is defined
-    - xonotic == true
+  when: xonotic is defined and xonotic == true

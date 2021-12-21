@@ -1,8 +1,8 @@
-- name: software | audacity | install package
+- name: software | audacity | install/remove package
   tags: packages,flatpak,audacity,workstation-packages
   become_user: "{{ user_name }}"
   community.general.flatpak:
     name: org.audacityteam.Audacity
     method: user
-    state: present
-  when: audacity is defined and audacity == true
+    state: "{{ audacity | ternary('present', 'absent')}}"
+  when: audacity is defined

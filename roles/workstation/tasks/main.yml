@@ -53,66 +53,114 @@
     loop_control:
         loop_var: inc_task
 
-  ## install software
-  - name: "workstation | include task | software"
-    ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
-    with_items:
-      # These _may_ be sorted.
-      - audacious
-      - audacity
-      - authy
-      - aws_cli
-      - azure_cli
-      - bitwarden
-      - boto
-      - brave
-      - caffeine
-      - chromium
-      - codecs
-      - darktable
-      - discord
-      - edge
-      - firefox
-      - flameshot
-      - foliate
-      - glimpse
-      - google_chrome
-      - kdenlive
-      - keepassxc
-      - ksnip
-      - libreoffice
-      - linode_cli
-      - lutris
-      - mattermost
-      - minecraft
-      - misc_games
-      - misc_packages
-      - neovim
-      - openshot
-      - packer
-      - podman
-      - shutter
-      - signal
-      - solaar
-      - spotify
-      - steam
-      - syncthing
-      - teams
-      - telegram
-      - terraform
-      - thunderbird
-      - todoist
-      - ulauncher
-      - vagrant
-      - virtualbox
-      - vivaldi
-      - vlc
-      - vscode
-      - xonotic
-    loop_control:
-      loop_var: inc_task
-    when:
-      - lookup('vars', inc_task, default=false)
+  # ## install software
+  # - name: "workstation | include task | software"
+  #   ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
+  #   with_items:
+  #     # These _can_ be sorted.
+  #     - audacious
+  #     - audacity
+  #     - authy
+  #     - aws_cli
+  #     - azure_cli
+  #     - bitwarden
+  #     - boto
+  #     - brave
+  #     - caffeine
+  #     - chromium
+  #     - codecs
+  #     - darktable
+  #     - discord
+  #     - edge
+  #     - firefox
+  #     - flameshot
+  #     - foliate
+  #     - glimpse
+  #     - google_chrome
+  #     - kdenlive
+  #     - keepassxc
+  #     - ksnip
+  #     - libreoffice
+  #     - linode_cli
+  #     - lutris
+  #     - mattermost
+  #     - minecraft
+  #     - misc_games
+  #     - misc_packages
+  #     - neovim
+  #     - openshot
+  #     - packer
+  #     - podman
+  #     - shutter
+  #     - signal
+  #     - solaar
+  #     - spotify
+  #     - steam
+  #     - syncthing
+  #     - teams
+  #     - telegram
+  #     - terraform
+  #     - thunderbird
+  #     - todoist
+  #     - ulauncher
+  #     - vagrant
+  #     - virtualbox
+  #     - vivaldi
+  #     - vlc
+  #     - vscode
+  #     - xonotic
+  #   loop_control:
+  #     loop_var: inc_task
+
+  - name: "workstation | include task | software - apts"
+    ansible.builtin.include_tasks: "software/_apts.yml"
+
+#  ## install software
+#  - name: "workstation | include task | apt packages"
+#    ansible.builit.include_tasks: software/_apt_packages.yml
+
+  # - name: debug apts items
+  #   debug:
+  #     var: item
+  #   loop:
+  #     - "{{ apts }}"
+
+  # - name: software | apt | remove & install packages
+  #   tags: packages,apt,remove,workstation-packages
+  #   ansible.builtin.include_tasks: software/_apt_packages.yml
+  #   loop:
+  #     - "{{ apts }}"
+  #   loop_control:
+  #     loop_var: apt_pkg
+
+#  - name: software | apt | remove packages
+#    tags: packages,apt,remove,workstation-packages
+#    ansible.builtin.include_tasks: software/_apt_repo_pkg.yml
+#    loop:
+#      - "{{ apts_remove }}"
+
+#  - name: software | apt | install packages
+#    tags: packages,apt,install,workstation-packages
+#    ansible.builtin.include_tasks: software/_apt_repo_pkg.yml
+#    loop:
+#      - "{{ apts_install }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   rescue:
     - set_fact: task_failed=true

@@ -10,4 +10,5 @@
       - supertux
       - supertuxkart
       - wesnoth
-  when: games is defined and games == true
+    state: "{{ games | ternary('present', 'absent') }}""
+  when: games is defined

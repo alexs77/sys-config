@@ -1,24 +1,22 @@
-# note: snap packages not automated in arch yet, snapd is not available in repo
-- name: software | authy | install package
-  tags: packages,authy,snap,workstation-packages
-  community.general.snap:
-    name:  authy
-    channel: latest/edge
-    state: present
-  when:
-    - ansible_distribution != "Archlinux"
-    - authy is defined
-    - authy == true
+# # note: snap packages not automated in arch yet, snapd is not available in repo
+# - name: software | authy | install/remove package
+#   tags: packages,authy,snap,workstation-packages
+#   community.general.snap:
+#     name:  authy
+#     channel: latest/edge
+#     state: "{{ authy | ternary('present', 'absent')}}"
+#   when:
+#     - ansible_distribution != "Archlinux"
+#     - authy is defined
 
-- name: software | authy | enable autostart
+- name: software | authy | enable/disable autostart
   tags: packages,authy,snap,workstation-packages
   ansible.builtin.file:
     src: /var/lib/snapd/desktop/applications/authy_authy.desktop
     dest: /home/{{ user_name }}/.config/autostart/authy.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
+    state: "{{ authy | ternary('link', 'absent')}}"
   when:
     - ansible_distribution != "Archlinux"
     - authy is defined
-    - authy == true

@@ -1,8 +1,8 @@
-- name: software | audacious | install package
+- name: software | audacious | install/remove package
   tags: packages,flatpak,audacious,workstation-packages
   become_user: "{{ user_name }}"
   community.general.flatpak:
     name: org.atheme.audacious
     method: user
-    state: present
-  when: audacious is defined and audacious == true
+    state: "{{ audacious | ternary('present', 'absent')}}"
+  when: audacious is defined

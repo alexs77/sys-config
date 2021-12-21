@@ -1,69 +1,103 @@
-# https://podman.io/getting-started/installation
+# # https://podman.io/getting-started/installation
 
-- name: software | podman | add repository key (Debian family, not Ubuntu Impish)
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt_key:
-    url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_distribution_version }}/Release.key
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - ansible_distribution_release != "impish"
-    - podman is defined
-    - podman == true
+# - name: software | podman | add repository key (Debian family, not Ubuntu Impish)
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt_key:
+#     url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_distribution_version }}/Release.key
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - ansible_distribution_release != "impish"
+#     - podman is defined
+#     - podman == true
 
-- name: software | podman | add repository key (Debian family, Ubuntu Impish)
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt_key:
-    url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_21.04/Release.key
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - ansible_distribution_release == "impish"
-    - podman is defined
-    - podman == true
+# - name: software | podman | add repository key (Debian family, Ubuntu Impish)
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt_key:
+#     url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_21.04/Release.key
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - ansible_distribution_release == "impish"
+#     - podman is defined
+#     - podman == true
 
-- name: software | podman | add repository (Debian family, not Ubuntu Impish)
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt_repository:
-    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_distribution_version }}/ /"
-    filename: podman
-  register: podman_repo
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - ansible_distribution_release != "impish"
-    - podman is defined
-    - podman == true
+# - name: software | podman | add repository (Debian family, not Ubuntu Impish)
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt_repository:
+#     repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_distribution_version }}/ /"
+#     filename: podman
+#   register: podman_repo
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - ansible_distribution_release != "impish"
+#     - podman is defined
+#     - podman == true
 
-# At 2021-11-29, there was no repo for Impish (21.10), only for Hirsute (21.04)
-- name: software | podman | add repository (Debian family, Ubuntu Impish)
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt_repository:
-    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_21.04/ /"
-    filename: podman
-  register: podman_repo
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - ansible_distribution_release == "impish"
-    - podman is defined
-    - podman == true
+# # At 2021-11-29, there was no repo for Impish (21.10), only for Hirsute (21.04)
+# - name: software | podman | add repository (Debian family, Ubuntu Impish)
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt_repository:
+#     repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_21.04/ /"
+#     filename: podman
+#   register: podman_repo
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - ansible_distribution_release == "impish"
+#     - podman is defined
+#     - podman == true
 
-- name: software | podman | update sources (repo added or changed)
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt:
-    update_cache: yes
-  changed_when: False
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - podman is defined
-    - podman == true
-    - podman_repo.changed
+# - name: software | podman | update sources (repo added or changed)
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt:
+#     update_cache: yes
+#   changed_when: False
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - podman is defined
+#     - podman == true
+#     - podman_repo.changed
 
-- name: software | podman | install packages
-  tags: packages,podman,workstation-packages
-  ansible.builtin.apt:
-    name: podman
-  when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    - podman is defined
-    - podman == true
+# - name: software | podman | install packages
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt:
+#     name: podman
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - podman is defined
+#     - podman == true
+
+# - name: software | podman | install docker-compose
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.apt:
+#     name: docker-compose
+#     install_recommends: no
+#   when:
+#     - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+#     - podman is defined
+#     - podman == true
+
+# - name: software | podman | get uid of user_name
+#   ansible.builtin.getent:
+#     database: passwd
+#     key: "{{ user_name }}"
+
+# - name: software | podman | enable podman socket for user
+#   tags: packages,podman,workstation-packages
+#   ansible.builtin.systemd:
+#     name: podman.socket
+#     scope: user
+#     enabled: yes
+#     state: started
+#   environment:
+#     XDG_RUNTIME_DIR: "/run/user/{{ getent_passwd[user_name].1 }}"
+#   become: yes
+#   become_user: "{{ user_name }}"
+#   when:
+#     - podman is defined
+#     - podman == true
+
+
+
+
 
 - name: software | podman | install docker-compose
   tags: packages,podman,workstation-packages
@@ -79,6 +113,7 @@
   ansible.builtin.getent:
     database: passwd
     key: "{{ user_name }}"
+  when: podman is defined and podman
 
 - name: software | podman | enable podman socket for user
   tags: packages,podman,workstation-packages
@@ -91,6 +126,4 @@
     XDG_RUNTIME_DIR: "/run/user/{{ getent_passwd[user_name].1 }}"
   become: yes
   become_user: "{{ user_name }}"
-  when:
-    - podman is defined
-    - podman == true
+  when: podman is defined and podman
