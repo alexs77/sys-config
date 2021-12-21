@@ -7,5 +7,13 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   when:
-    - openshot is defined
-    - openshot == true
+    - (packages | selectattr('name', 'equalto', 'openshot') | first).state not in ['false', 'absent', 'no', false])
+
+- name: software | openshot | remove files
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/bin/openshot.app
+  when:
+    - (packages | selectattr('name', 'equalto', 'openshot') | first).state in ['false', 'absent', 'no', false])

@@ -6,4 +6,5 @@
     mode: 0755
     owner: root
     group: root
-  when: terraform is defined and terraform == true
+  when:
+    - (packages | selectattr('name', 'equalto', 'terraform') | first).state not in ['false', 'absent', 'no', false])

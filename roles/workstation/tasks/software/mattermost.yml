@@ -5,5 +5,4 @@
     dest: /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
-  when: mattermost is defined and mattermost == true
+    state: "{{ (packages | selectattr('name', 'equalto', 'mattermost') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"

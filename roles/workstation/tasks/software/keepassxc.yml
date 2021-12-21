@@ -5,8 +5,7 @@
     dest: /home/{{ user_name }}/.config/autostart/org.keepassxc.KeePassXC.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
-  when: keepassxc is defined and keepassxc == true
+    state: "{{ (packages | selectattr('name', 'equalto', 'keepassxc') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
 
 - name: software | keepassxc | create keepassxc install directory
   tags: packages,keepassxc,flatpak,workstation-packages
@@ -15,9 +14,8 @@
     state: directory
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    mode: 0700
-  register: keepassxc_config_dir
-  when: keepassxc is defined and keepassxc == true
+    mode: '0700'
+  when: (packages | selectattr('name', 'equalto', 'keepassxc') | first).state not in ['false', 'absent', 'no', false])
 
 # - name: software | keepassxc | add initial keepassxc config
 #   tags: packages,keepassxc,flatpak,workstation-packages

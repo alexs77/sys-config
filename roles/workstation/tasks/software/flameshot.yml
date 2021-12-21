@@ -1,3 +1,4 @@
+# Force remove apt...
 - name: software | flameshot | remove apt package
   ansible.builtin.apt:
     name: flameshot
@@ -5,6 +6,7 @@
     state: absent
   when: flameshot is defined and flameshot
 
+# ...and snap package
 - name: software | flameshot | remove snap package
   tags: packages,snap,flameshot,workstation-packages
   community.general.snap:
@@ -25,8 +27,7 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   when:
-    - flameshot is defined
-    - flameshot == "present"
+    - (packages | selectattr('name', 'equalto', 'flameshot') | first).state not in ['false', 'absent', 'no', false])
 
 - name: software | flameshot | remove appimage package
   tags: apps,flameshot,appimage,software,workstation-packages
@@ -34,5 +35,4 @@
     path: /home/{{ user_name }}/bin/flameshot
     state: absent
   when:
-    - flameshot is defined
-    - flameshot == "absent"
+    - (packages | selectattr('name', 'equalto', 'flameshot') | first).state in ['false', 'absent', 'no', false])

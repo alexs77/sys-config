@@ -7,8 +7,7 @@
     group: "{{ user_name }}"
     mode: 0700
   when:
-    - kdenlive is defined
-    - kdenlive == true
+    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state not in ['false', 'absent', 'no', false])
 
 - name: software | kdenlive | install package
   ansible.builtin.get_url:
@@ -18,5 +17,14 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
   when:
-    - kdenlive is defined
-    - kdenlive == true
+    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state not in ['false', 'absent', 'no', false])
+
+- name: software | kdenlive | remove files
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.local/share/applications/kdenlive.desktop
+    - /home/{{ user_name }}/bin/kdenlive.app
+  when:
+    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state in ['false', 'absent', 'no', false])

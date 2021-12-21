@@ -6,5 +6,4 @@
     dest: /home/{{ user_name }}/.config/autostart/org.mozilla.Thunderbird.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
-  when: thunderbird is defined and thunderbird == true
+    state: "{{ (packages | selectattr('name', 'equalto', 'thunderbird') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"

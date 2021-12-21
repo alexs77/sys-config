@@ -5,7 +5,6 @@
     dest: /home/{{ user_name }}/.config/autostart/authy.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: "{{ authy | ternary('link', 'absent')}}"
+    state: "{{ (packages | selectattr('name', 'equalto', 'authy') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
   when:
     - ansible_distribution != "Archlinux"
-    - authy is defined

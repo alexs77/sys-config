@@ -3,4 +3,5 @@
   ansible.builtin.file:
     path: /etc/xdg/autostart/solaar.desktop
     state: absent
-  when: solaar is defined and solaar == true
+  when:
+    - (packages | selectattr('name', 'equalto', 'solaar') | first).state not in ['false', 'absent', 'no', false])

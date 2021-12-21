@@ -5,8 +5,6 @@
     dest: /home/{{ user_name }}/.config/autostart/todoist_todoist.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
+    state: "{{ (packages | selectattr('name', 'equalto', 'todoist') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
   when:
     - ansible_distribution != "Archlinux"
-    - todoist is defined
-    - todoist == true

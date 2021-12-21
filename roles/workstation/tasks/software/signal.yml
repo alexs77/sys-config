@@ -5,5 +5,4 @@
     dest: "/home/{{ user_name }}/.config/autostart/org.signal.Signal.desktop"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: link
-  when: signal is defined and signal == true
+    state: "{{ (packages | selectattr('name', 'equalto', 'mattermost') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"

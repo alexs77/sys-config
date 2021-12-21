@@ -5,8 +5,16 @@
     dest: /home/{{ user_name }}/.config/autostart/ulauncher.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    mode: 0600
+    mode: '0600'
   when:
     - ansible_distribution in ["Pop!_OS", "Ubuntu"]
-    - ulauncher is defined
-    - ulauncher == true
+    - (packages | selectattr('name', 'equalto', 'ulauncher') | first).state not in ['false', 'absent', 'no', false])
+
+- name: software | openshot | remove files
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.config/autostart/ulauncher.desktop
+  when:
+    - (packages | selectattr('name', 'equalto', 'ulauncher') | first).state in ['false', 'absent', 'no', false])
