@@ -8,43 +8,47 @@
   #       repo_file: Sets the name of the source list file in sources.list.d,
   #       pkg: name-of-pkg }
 
-- name: "software | {{ item.name }} | repository key"
-  tags: "packages,{{ item.flag }},workstation-packages"
+# Search for pkg in apts list of dicts:
+# (apts | selectattr('name', 'equalto', package.name) | first)
+# https://www.reddit.com/r/ansible/comments/rkpt61/get_element_in_list_of_dictionaries/
+
+# remove item?
+# ⇒ package.state in ['false', 'absent', 'no', false]
+# ⇒ (package.state in ['false', 'absent', 'no', false]) | ternary('absent', 'present')
+
+- name: "software | {{ package.name }} | repository key"
+  tags: packages,workstation-packages
   ansible.builtin.apt_key:
-    url: "{{ item.key_url }}"
-    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}"
+    url: "{{ (apts | selectattr('name', 'equalto', package.name) | first).key_url }}"
+    state: "{{ (package.state in ['false', 'absent', 'no', false]) | ternary('absent', 'present') }}"
   when:
     - ansible_os_family == "Debian"
-    - lookup('vars', item.flag, default=false)
-    - item.key_url is defined
+    - (apts | selectattr('name', 'equalto', package.name) | first).key_url is defined
 
-- name: "software | {{ item.name }} | repository"
-  tags: "packages,{{ item.flag }},workstation-packages"
+- name: "software | {{ package.name }} | repository"
+  tags: packages,workstation-packages
   ansible.builtin.apt_repository:
-    repo: "{{ item.repo }}"
-    filename: "{{ item.repo_file | default(omit) }}"
-    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}"
+    repo: "{{ (apts | selectattr('name', 'equalto', package.name) | first).repo }}"
+    filename: "{{ (apts | selectattr('name', 'equalto', package.name) | first).repo_file | default(omit) }}"
+    state: "{{ (package.state in ['false', 'absent', 'no', false]) | ternary('absent', 'present') }}"
   register: repo_file
   when:
     - ansible_os_family == "Debian"
-    - lookup('vars', item.flag, default=false)
-    - item.repo is defined
+    - (apts | selectattr('name', 'equalto', package.name) | first).repo is defined
 
-- name: "software | {{ item.name }} | update sources (repo added or changed)"
-  tags: "packages,{{ item.flag }},workstation-packages"
+- name: "software | {{ package.name }} | update sources (repo added or changed)"
+  tags: packages,workstation-packages
   ansible.builtin.apt:
     update_cache: yes
-  changed_when: false
+  changed_when: no
   when:
     - ansible_os_family == "Debian"
-    - lookup('vars', item.flag, default=false)
     - repo_file.changed
 
-- name: "software | {{ item.name }} | package"
-  tags: "packages,{{ item.flag }},workstation-packages"
+- name: "software | {{ package.name }} | package"
+  tags: packages,workstation-packages
   ansible.builtin.apt:
-    name: "{{ item.pkg }}"
-    state: "{{ (lookup('vars', item.flag) == 'absent') | ternary('absent', 'present') }}" 
+    name: "{{ (apts | selectattr('name', 'equalto', package.name) | first).pkg }}"
+    state: "{{ (package.state in ['false', 'absent', 'no', false]) | ternary('absent', 'present') }}"
   when:
     - ansible_os_family == "Debian"
-    - lookup('vars', item.flag, default=false)

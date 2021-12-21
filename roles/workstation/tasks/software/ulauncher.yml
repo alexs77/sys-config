@@ -1,23 +1,3 @@
-- name: software | ulauncher | install ppa
-  tags: ulauncher
-  ansible.builtin.apt_repository:
-    repo: 'ppa:agornostal/ulauncher'
-    state: present
-  when:
-    - ansible_distribution in ["Pop!_OS", "Ubuntu"]
-    - ulauncher is defined
-    - ulauncher == true
-
-- name: software | ulauncher | install package
-  tags: ulauncher
-  ansible.builtin.apt:
-    name: ulauncher
-    state: latest
-  when:
-    - ansible_distribution in ["Pop!_OS", "Ubuntu"]
-    - ulauncher is defined
-    - ulauncher == true
-
 - name: software | ulauncher | enable autostart
   tags: ulauncher
   ansible.builtin.copy:

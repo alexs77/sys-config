@@ -1,6 +1,0 @@
-- name: software | google-chrome | install package
-  tags: packages,google-chrome,workstation-packages
-  ansible.builtin.include_tasks: _apt_repo_pkg.yml
-  loop:
-    - { name: "Google Chrome", flag: google_chrome, key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub, repo: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main", pkg: google-chrome-stable }
-  when: google_chrome is defined and google_chrome

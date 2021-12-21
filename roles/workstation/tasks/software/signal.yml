@@ -1,12 +1,3 @@
-- name: software | signal | install package
-  tags: packages,flatpak,signal,workstation-packages
-  become_user: "{{ user_name }}"
-  community.general.flatpak:
-    name: org.signal.Signal
-    method: user
-    state: present
-  when: signal is defined and signal == true
-
 - name: software | signal | enable autostart
   tags: packages,flatpak,signal,workstation-packages
   ansible.builtin.file:

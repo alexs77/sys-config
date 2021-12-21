@@ -1,6 +1,0 @@
-- name: software | brave | install package
-  tags: packages,brave,workstation-packages
-  ansible.builtin.include_tasks: _apt_repo_pkg.yml
-  loop:
-    - { name: brave, flag: brave, key_url: "https://brave-browser-apt-{{ brave }}.s3.brave.com/brave-browser-{{ brave }}-archive-keyring.gpg", repo: "deb [arch=amd64] https://brave-browser-apt-{{ brave }}.s3.brave.com/ stable main", pkg: "brave-browser-{{ brave }}" }
-  when: brave is defined and brave

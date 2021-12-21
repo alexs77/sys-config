@@ -1,12 +1,3 @@
-# - name: software | keepassxc | install package
-#   tags: packages,firefox,flatpak,workstation-packages
-#   become_user: "{{ user_name }}"
-#   community.general.flatpak:
-#     name: org.keepassxc.KeePassXC
-#     method: user
-#     state: present
-#   when: keepassxc is defined and keepassxc == true
-
 - name: software | keepassxc | enable autostart
   tags: packages,keepassxc,flatpak,workstation-packages
   ansible.builtin.file:

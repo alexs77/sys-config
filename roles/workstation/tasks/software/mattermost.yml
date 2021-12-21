@@ -1,12 +1,3 @@
-- name: software | mattermost | install package
-  tags: packages,flatpak,mattermost,workstation-packages
-  become_user: "{{ user_name }}"
-  community.general.flatpak:
-    name: com.mattermost.Desktop
-    method: user
-    state: present
-  when: mattermost is defined and mattermost == true
-
 - name: software | mattermost | enable autostart
   tags: packages,flatpak,mattermost,workstation-packages
   ansible.builtin.file:
