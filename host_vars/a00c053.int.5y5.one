@@ -34,8 +34,59 @@ windowsNavigator_gnome_shell_extensions_gcampax_github_com: absent
 workspace_indicator_gnome_shell_extensions_gcampax_github_com: present
 
 # application selection
+packages:
+  - {name: audacity, state: false}
+  - {name: authy, state: false}
+  - {name: autofs, state: false}
+  - {name: awscliv2, state: true}
+  - {name: azure_cli, state: true}
+  - {name: bitwarden, state: true}
+  - {name: brave, state: beta}
+  - {name: chromium, state: true}
+  - {name: edge, state: dev}
+  - {name: darktable, state: false}
+  - {name: firefox, state: true}
+  - {name: flameshot, state: present}
+  - {name: foliate, state: false}
+  - {name: games, state: false}
+  - {name: glimpse, state: true}
+  - {name: google_chrome, state: true}
+  - {name: keepassxc, state: true}
+  - {name: keybase, state: true}
+  - {name: ksnip, state: present}
+  - {name: libreoffice, state: true}
+  - {name: lutris, state: false}
+  - {name: mattermost, state: false}
+  - {name: minecraft, state: false}
+  - {name: neovim, state: true}
+  - {name: packer, state: false}
+  - {name: podman, state: true}
+  - {name: shutter, state: absent}
+  - {name: signal, state: true}
+  - {name: spotify, state: true}
+  - {name: linode_cli, state: absent}
+  - {name: boto, state: present}
+  - {name: docker_compose, state: present}
+  - {name: solaar, state: absent}
+  - {name: gstreamer_libav_package, state: present}
+  - {name: gstreamer_plugins_bad_package, state: present}
+  - {name: steam, state: false}
+  - {name: syncthing, state: false}
+  - {name: teams, state: false}
+  - {name: telegram, state: true}
+  - {name: terraform, state: true}
+  - {name: thunderbird, state: false}
+  - {name: todoist, state: false}
+  - {name: ulauncher, state: false}
+  - {name: vagrant, state: false}
+  - {name: virtualbox, state: true}
+  - {name: vivaldi, state: true}
+  - {name: vlc, state: true}
+  - {name: vscode, state: true}
+  - {name: xonotic, state: true}
+
 audacity: false
-authy: true
+authy: false
 autofs: false
 awscliv2: true
 azure_cli: true
@@ -54,7 +105,7 @@ keepassxc: true
 keybase: true
 ksnip: present
 libreoffice: true
-lutris: true
+lutris: false
 mattermost: false
 minecraft: false
 neovim: true
@@ -65,7 +116,7 @@ signal: true
 spotify: true
 steam: false
 syncthing: false
-teams: true
+teams: false
 telegram: true
 terraform: true
 thunderbird: false

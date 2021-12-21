@@ -1,0 +1,116 @@
+- name: users | user | remove preinstalled clutter from home directory
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/{{ item }}
+    state: absent
+  with_items:
+    - examples.desktop
+    - Desktop
+    - Documents
+    - Downloads
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: users | user | create personal config directories
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/{{ item.dir }}
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0700
+  with_items:
+    - { dir: .config }
+    - { dir: .config/autostart }
+    - { dir: .config/gtk-3.0 }
+    - { dir: .config/terminator }
+    - { dir: .local }
+    - { dir: .local/share }
+    - { dir: .local/share/applications }
+    - { dir: bin }
+    - { dir: desktop }
+    - { dir: documents }
+    - { dir: downloads }
+    - { dir: music }
+    - { dir: pictures }
+    - { dir: projects }
+    - { dir: templates }
+    - { dir: tmp }
+    - { dir: videos }
+
+- name: users | user | copy user-dirs.dirs
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.copy:
+    src: users/USER/user-dirs.dirs
+    dest: /home/{{ user_name }}/.config/user-dirs.dirs
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0600'
+  notify: update_xdg
+
+- name: users | user | copy personal config files
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.copy:
+    src: users/USER/{{ item.src }}
+    dest: /home/{{ user_name }}/{{ item.dest }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0600
+  with_items:
+    - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
+    - { src: 'gvimrc', dest: '.gvimrc' }
+    - { src: 'linode-cli', dest: '.config/linode-cli' }
+    - { src: 'terminator_config', dest: '.config/terminator/config' }
+
+- name: users | user | generate personal config files
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.template:
+    src: users/USER/{{ item.src }}
+    dest: /home/{{ user_name }}/{{ item.dest }}
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0600
+  with_items:
+    - { src: 'asunder', dest: '.asunder' }
+    - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
+    - { src: 'ssh_client_config', dest: '.ssh/config' }
+
+- name: users | user | copy profile image - user
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.get_url:
+    url: https://thispersondoesnotexist.com/image
+    dest: "/var/lib/AccountsService/icons/{{ user_name }}.jpg"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: users | user | set profile image - user
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.blockinfile:
+    path: "/var/lib/AccountsService/users/{{ user_name }}"
+    create: yes
+    block: |
+      [User]
+      Icon=/var/lib/AccountsService/icons/{{ user_name }}.jpg
+      SystemAccount=false
+
+- name: users | user | copy profile image - guru
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.get_url:
+    url: https://thispersondoesnotexist.com/image
+    dest: "/var/lib/AccountsService/icons/guru.jpg"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: users | user | set profile image - guru
+  tags: dotfiles,dotfiles-user
+  ansible.builtin.blockinfile:
+    path: "/var/lib/AccountsService/users/guru"
+    create: yes
+    block: |
+      [User]
+      Icon=/var/lib/AccountsService/icons/guru.jpg
+      SystemAccount=false

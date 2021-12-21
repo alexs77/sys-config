@@ -1,0 +1,18 @@
+# askwar@a00c053 ~/Code> dconf read /org/gnome/shell/disabled-extensions
+# ['apps-menu@gnome-shell-extensions.gcampax.github.com', 'custom-hot-corners-extended@G-dH.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com']
+
+---
+# - hosts: localhost
+#   tasks:
+
+#   - name: loop
+#     debug:
+#       var: item
+#     loop:
+#       - "{{ apts }}"
+
+- hosts: workstation
+  tags: workstation
+  become: true
+  roles:
+    - debug

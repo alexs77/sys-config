@@ -1,0 +1,81 @@
+- name: "workstation | include task | extensions"
+  ansible.builtin.include_tasks: "desktop_environments/gnome/{{ extension }}.yml"
+  when: gnome is defined and gnome == true
+  with_items:
+    # Do *NOT* sort these!
+    - extension-custom-hot-corners-extended
+    - extension-ding
+  loop_control:
+      loop_var: extension
+
+- name: gnome | extension | Apps Menu
+  tags: gnome,extension,apps_menu
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Apps Menu", 
+        flag: apps_menu_gnome_shell_extensions_gcampax_github_com,
+        uuid: "apps-menu@gnome-shell-extensions.gcampax.github.com" }
+  when: apps_menu_gnome_shell_extensions_gcampax_github_com is defined and apps_menu_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Drive Menu
+  tags: gnome,extension,drive_menu
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Drive Menu", 
+        flag: drive_menu_gnome_shell_extensions_gcampax_github_com,
+        uuid: "drive-menu@gnome-shell-extensions.gcampax.github.com" }
+  when: drive_menu_gnome_shell_extensions_gcampax_github_com is defined and drive_menu_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Native Window Placement
+  tags: gnome,extension,native_window_placement
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Native Window Placement", 
+        flag: native_window_placement_gnome_shell_extensions_gcampax_github_com,
+        uuid: "native-window-placement@gnome-shell-extensions.gcampax.github.com" }
+  when: native_window_placement_gnome_shell_extensions_gcampax_github_com is defined and native_window_placement_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Places Menu
+  tags: gnome,extension,places_menu
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Places Menu", 
+        flag: places_menu_gnome_shell_extensions_gcampax_github_com,
+        uuid: "places-menu@gnome-shell-extensions.gcampax.github.com" }
+  when: places_menu_gnome_shell_extensions_gcampax_github_com is defined and places_menu_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Screenshot Window Sizer
+  tags: gnome,extension,screenshot_window_sizer
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Screenshot Window Sizer", 
+        flag: screenshot_window_sizer_gnome_shell_extensions_gcampax_github_com,
+        uuid: "screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com" }
+  when: screenshot_window_sizer_gnome_shell_extensions_gcampax_github_com is defined and screenshot_window_sizer_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Workspace Indicator
+  tags: gnome,extension,workspace_indicator
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Workspace Indicator", 
+        flag: workspace_indicator_gnome_shell_extensions_gcampax_github_com,
+        uuid: "workspace-indicator@gnome-shell-extensions.gcampax.github.com" }
+  when: workspace_indicator_gnome_shell_extensions_gcampax_github_com is defined and workspace_indicator_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Window List
+  tags: gnome,extension,window_list
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Window List", 
+        flag: window_list_gnome_shell_extensions_gcampax_github_com,
+        uuid: "window-list@gnome-shell-extensions.gcampax.github.com" }
+  when: window_list_gnome_shell_extensions_gcampax_github_com is defined and window_list_gnome_shell_extensions_gcampax_github_com
+
+- name: gnome | extension | Windows Navigator
+  tags: gnome,extension,windows_naigator
+  ansible.builtin.include_tasks: _gnome-shell_extension.yml
+  loop:
+    - { name: "Windows Navigator", 
+        flag: windowsNavigator_gnome_shell_extensions_gcampax_github_com,
+        uuid: "windowsNavigator@gnome-shell-extensions.gcampax.github.com" }
+  when: windowsNavigator_gnome_shell_extensions_gcampax_github_com is defined and windowsNavigator_gnome_shell_extensions_gcampax_github_com

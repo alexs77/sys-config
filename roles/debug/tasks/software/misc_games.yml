@@ -1,0 +1,14 @@
+- name: software | install misc game packages
+  tags: gaming
+  ansible.builtin.package:
+    name:
+      - chromium-bsu
+      - extremetuxracer
+      - frozen-bubble
+      - gnome-chess
+      - "{{ nethack_package }}"
+      - supertux
+      - supertuxkart
+      - wesnoth
+    state: "{{ games | ternary('present', 'absent') }}""
+  when: games is defined

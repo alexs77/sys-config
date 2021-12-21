@@ -1,0 +1,38 @@
+- name: software | flameshot | remove apt package
+  ansible.builtin.apt:
+    name: flameshot
+    purge: yes
+    state: absent
+  when: flameshot is defined and flameshot
+
+- name: software | flameshot | remove snap package
+  tags: packages,snap,flameshot,workstation-packages
+  community.general.snap:
+    name: flameshot
+    # channel: latest/edge
+    state: absent
+  when:
+    - ansible_distribution != "Archlinux"
+    - flameshot is defined
+    - flameshot
+
+- name: software | flameshot | install appimage package
+  tags: apps,flameshot,appimage,software,workstation-packages
+  ansible.builtin.get_url:
+    url: https://github.com/flameshot-org/flameshot/releases/download/v0.10.2/Flameshot-0.10.2.x86_64.AppImage
+    dest: /home/{{ user_name }}/bin/flameshot
+    mode: '0700'
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  when:
+    - flameshot is defined
+    - flameshot == "present"
+
+- name: software | flameshot | remove appimage package
+  tags: apps,flameshot,appimage,software,workstation-packages
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/bin/flameshot
+    state: absent
+  when:
+    - flameshot is defined
+    - flameshot == "absent"

@@ -1,0 +1,12 @@
+- name: software | ulauncher | enable autostart
+  tags: ulauncher
+  ansible.builtin.copy:
+    src: users/USER/ulauncher.desktop
+    dest: /home/{{ user_name }}/.config/autostart/ulauncher.desktop
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: 0600
+  when:
+    - ansible_distribution in ["Pop!_OS", "Ubuntu"]
+    - ulauncher is defined
+    - ulauncher == true

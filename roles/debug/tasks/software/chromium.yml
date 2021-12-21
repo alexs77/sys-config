@@ -1,0 +1,9 @@
+- name: software | chromium | install distro package (arch)
+  tags: packages,chromium,snap,workstation-packages
+  ansible.builtin.package:
+    name: chromium
+    state: latest
+  when:
+    - ansible_distribution == "Archlinux"
+    - chromium is defined
+    - chromium == true
