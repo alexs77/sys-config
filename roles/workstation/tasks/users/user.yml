@@ -90,6 +90,7 @@
   tags: dotfiles,dotfiles-user
   ansible.builtin.blockinfile:
     path: "/var/lib/AccountsService/users/{{ user_name }}"
+    create: yes
     block: |
       [User]
       Icon=/var/lib/AccountsService/icons/{{ user_name }}.jpg
@@ -108,6 +109,7 @@
   tags: dotfiles,dotfiles-user
   ansible.builtin.blockinfile:
     path: "/var/lib/AccountsService/users/guru"
+    create: yes
     block: |
       [User]
       Icon=/var/lib/AccountsService/icons/guru.jpg
