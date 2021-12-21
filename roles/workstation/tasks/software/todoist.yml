@@ -5,6 +5,18 @@
     dest: /home/{{ user_name }}/.config/autostart/todoist_todoist.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: "{{ (packages | selectattr('name', 'equalto', 'todoist') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
+    state: link
   when:
     - ansible_distribution != "Archlinux"
+    - packages | selectattr('name', 'equalto', 'todoist') != []
+    - (packages | selectattr('name', 'equalto', 'todoist') | first).state not in ['false', 'absent', 'no', false]
+
+- name: software | todoist | remove files
+  tags: packages,todoist,snap,workstation-packages
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.config/autostart/todoist_todoist.desktop
+  when:
+    - (packages | selectattr('name', 'equalto', 'todoist') == []) or ((packages | selectattr('name', 'equalto', 'todoist') | first).state in ['false', 'absent', 'no', false])

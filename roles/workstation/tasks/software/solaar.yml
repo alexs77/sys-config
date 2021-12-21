@@ -4,4 +4,5 @@
     path: /etc/xdg/autostart/solaar.desktop
     state: absent
   when:
-    - (packages | selectattr('name', 'equalto', 'solaar') | first).state not in ['false', 'absent', 'no', false])
+    - packages | selectattr('name', 'equalto', 'solaar') != []
+    - (packages | selectattr('name', 'equalto', 'solaar') | first).state not in ['false', 'absent', 'no', false]

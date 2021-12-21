@@ -18,21 +18,13 @@
     - flameshot is defined
     - flameshot
 
-- name: software | flameshot | install appimage package
+- name: software | flameshot | install/remove appimage package
   tags: apps,flameshot,appimage,software,workstation-packages
-  ansible.builtin.get_url:
-    url: https://github.com/flameshot-org/flameshot/releases/download/v0.10.2/Flameshot-0.10.2.x86_64.AppImage
-    dest: /home/{{ user_name }}/bin/flameshot
-    mode: '0700'
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-  when:
-    - (packages | selectattr('name', 'equalto', 'flameshot') | first).state not in ['false', 'absent', 'no', false])
-
-- name: software | flameshot | remove appimage package
-  tags: apps,flameshot,appimage,software,workstation-packages
-  ansible.builtin.file:
-    path: /home/{{ user_name }}/bin/flameshot
-    state: absent
-  when:
-    - (packages | selectattr('name', 'equalto', 'flameshot') | first).state in ['false', 'absent', 'no', false])
+  ansible.builtin.include_tasks: "_appimage_pkg.yml"
+  vars:
+    package: {
+      name: flameshot,
+      flag: flameshot,
+      url: https://github.com/flameshot-org/flameshot/releases/download/v0.10.2/Flameshot-0.10.2.x86_64.AppImage,
+      dest: bin/flameshot
+    }

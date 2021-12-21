@@ -5,7 +5,10 @@
     dest: /home/{{ user_name }}/.config/autostart/org.keepassxc.KeePassXC.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: "{{ (packages | selectattr('name', 'equalto', 'keepassxc') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
+    state: link
+  when:
+    - packages | selectattr('name', 'equalto', 'keepassxc') != []
+    - (packages | selectattr('name', 'equalto', 'keepassxc') | first).state not in ['false', 'absent', 'no', false]
 
 - name: software | keepassxc | create keepassxc install directory
   tags: packages,keepassxc,flatpak,workstation-packages
@@ -15,7 +18,19 @@
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
     mode: '0700'
-  when: (packages | selectattr('name', 'equalto', 'keepassxc') | first).state not in ['false', 'absent', 'no', false])
+  when:
+    - packages | selectattr('name', 'equalto', 'keepassxc') != []
+    - (packages | selectattr('name', 'equalto', 'keepassxc') | first).state not in ['false', 'absent', 'no', false]
+
+- name: software | keepassxc | remove files
+  tags: packages,keepassxc,flatpak,workstation-packages
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.config/autostart/org.keepassxc.KeePassXC.desktop
+  when:
+    - (packages | selectattr('name', 'equalto', 'keepassxc') == []) or ((packages | selectattr('name', 'equalto', 'authy') | first).state in ['false', 'absent', 'no', false])
 
 # - name: software | keepassxc | add initial keepassxc config
 #   tags: packages,keepassxc,flatpak,workstation-packages

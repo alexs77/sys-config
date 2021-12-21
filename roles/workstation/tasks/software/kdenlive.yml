@@ -1,3 +1,14 @@
+- name: software | kdenlive | install/remove appimage package
+  tags: apps,appimage,software,kdenlive
+  ansible.builtin.include_tasks: "_appimage_pkg.yml"
+  vars:
+    package: {
+      name: kdenlive,
+      flag: kdenlive,
+      url: https://download.kde.org/stable/kdenlive/21.12/linux/kdenlive-21.12.0-x86_64.appimage,
+      dest: bin/kdenlive.app
+    }
+
 - name: software | kdenlive | copy launcher
   tags: apps,appimage,software,kdenlive
   ansible.builtin.template:
@@ -5,26 +16,17 @@
     dest: /home/{{ user_name }}/.local/share/applications/kdenlive.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    mode: 0700
-  when:
-    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state not in ['false', 'absent', 'no', false])
-
-- name: software | kdenlive | install package
-  ansible.builtin.get_url:
-    url: https://download.kde.org/stable/kdenlive/20.08/linux/kdenlive-20.08.2-x86_64.appimage
-    dest: /home/{{ user_name }}/bin/kdenlive.app
     mode: '0700'
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
   when:
-    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state not in ['false', 'absent', 'no', false])
+    - packages | selectattr('name', 'equalto', 'kdenlive') != []
+    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state not in ['false', 'absent', 'no', false]
 
 - name: software | kdenlive | remove files
+  tags: apps,appimage,software,kdenlive
   ansible.builtin.file:
     path: '{{ item }}'
     state: absent
   loop:
     - /home/{{ user_name }}/.local/share/applications/kdenlive.desktop
-    - /home/{{ user_name }}/bin/kdenlive.app
   when:
-    - (packages | selectattr('name', 'equalto', 'kdenlive') | first).state in ['false', 'absent', 'no', false])
+    - (packages | selectattr('name', 'equalto', 'kdenlive') == []) or ((packages | selectattr('name', 'equalto', 'kdenlive') | first).state in ['false', 'absent', 'no', false])

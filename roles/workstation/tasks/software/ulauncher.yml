@@ -8,13 +8,14 @@
     mode: '0600'
   when:
     - ansible_distribution in ["Pop!_OS", "Ubuntu"]
-    - (packages | selectattr('name', 'equalto', 'ulauncher') | first).state not in ['false', 'absent', 'no', false])
+    - packages | selectattr('name', 'equalto', 'ulauncher') != []
+    - (packages | selectattr('name', 'equalto', 'ulauncher') | first).state not in ['false', 'absent', 'no', false]
 
-- name: software | openshot | remove files
+- name: software | ulauncher | remove files
   ansible.builtin.file:
     path: '{{ item }}'
     state: absent
   loop:
     - /home/{{ user_name }}/.config/autostart/ulauncher.desktop
   when:
-    - (packages | selectattr('name', 'equalto', 'ulauncher') | first).state in ['false', 'absent', 'no', false])
+    - (packages | selectattr('name', 'equalto', 'ulauncher') == []) or ((packages | selectattr('name', 'equalto', 'ulauncher') | first).state in ['false', 'absent', 'no', false])

@@ -5,4 +5,16 @@
     dest: "/home/{{ user_name }}/.config/autostart/org.signal.Signal.desktop"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: "{{ (packages | selectattr('name', 'equalto', 'mattermost') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
+  when:
+    - packages | selectattr('name', 'equalto', 'signal') != []
+    - (packages | selectattr('name', 'equalto', 'signal') | first).state not in ['false', 'absent', 'no', false]
+
+- name: software | signal | remove files
+  tags: packages,flatpak,signal,workstation-packages
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
+  when:
+    - (packages | selectattr('name', 'equalto', 'signal') == []) or ((packages | selectattr('name', 'equalto', 'signal') | first).state in ['false', 'absent', 'no', false])

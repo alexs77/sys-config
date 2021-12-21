@@ -5,4 +5,17 @@
     dest: /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
-    state: "{{ (packages | selectattr('name', 'equalto', 'mattermost') | first).state in ['false', 'absent', 'no', false]) | ternary('absent', 'link') }}"
+    state: link
+  when:
+    - packages | selectattr('name', 'equalto', 'mattermost') != []
+    - (packages | selectattr('name', 'equalto', 'mattermost') | first).state not in ['false', 'absent', 'no', false]
+
+- name: software | mattermost | remove files
+  tags: packages,flatpak,mattermost,workstation-packages
+  ansible.builtin.file:
+    path: '{{ item }}'
+    state: absent
+  loop:
+    - /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
+  when:
+    - (packages | selectattr('name', 'equalto', 'mattermost') == []) or ((packages | selectattr('name', 'equalto', 'mattermost') | first).state in ['false', 'absent', 'no', false])

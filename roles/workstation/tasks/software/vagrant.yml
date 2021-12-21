@@ -7,4 +7,4 @@
     owner: root
     group: root
   when:
-    - (packages | selectattr('name', 'equalto', 'vagrant') | first).state not in ['false', 'absent', 'no', false])
+    - (packages | selectattr('name', 'equalto', 'vagrant') == []) or ((packages | selectattr('name', 'equalto', 'vagrant') | first).state not in ['false', 'absent', 'no', false])
