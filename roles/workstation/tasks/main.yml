@@ -131,7 +131,7 @@
       - aws_cli
       - chromium
       - flameshot
-      - kdenline
+      - kdenlive
       - keepassxc
       - mattermost
       - misc_games
