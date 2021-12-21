@@ -1,0 +1,27 @@
+# Usage:
+  # ansible.builtin.include_tasks: _appimage_pkg.yml
+  # loop:
+  #   - { name: "Display Name", 
+  #       flag: name of flag to check,
+  #       url: url of AppImage file to download,
+  #       dest: installation target, relative to /home/{{ user_name }} }
+
+- name: software | {{ package.name }} | install appimage package
+  tags: apps,appimage,workstation-packages
+  ansible.builtin.get_url:
+    url: '{{ package.url }}'
+    dest: /home/{{ user_name }}/{{ package.dest }}
+    mode: '0700'
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+  when:
+    - packages | selectattr('name', 'equalto', package.flag) != []
+    - (packages | selectattr('name', 'equalto', package.flag) | first).state not in ['false', 'absent', 'no', false]
+
+- name: software | {{ package.name }} | remove appimage package
+  tags: apps,appimage,workstation-packages
+  ansible.builtin.file:
+    path: /home/{{ user_name }}/{{ package.dest }}
+    state: absent
+  when:
+    - (packages | selectattr('name', 'equalto', package.flag) == []) or ((packages | selectattr('name', 'equalto', package.flag) | first).state in ['false', 'absent', 'no', false])
