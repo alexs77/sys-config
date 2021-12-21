@@ -1,3 +1,4 @@
+# Use generic package onlyon Archlinux
 - name: software | chromium | install distro package (arch)
   tags: packages,chromium,snap,workstation-packages
   ansible.builtin.package:
