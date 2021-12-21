@@ -12,12 +12,12 @@
     key: "/org/gnome/nautilus/preferences/default-folder-viewer"
     value: "'list-view'"
 
-- name: gnome | nautilus | configure single-click to open files
+- name: gnome | nautilus | configure double-click to open files
   tags: gnome,nautilus
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/nautilus/preferences/click-policy"
-    value: "'single'"
+    value: "'double'"
 
 - name: gnome | nautilus | set executable text activation
   tags: gnome,nautilus
@@ -33,9 +33,9 @@
     key: "/org/gnome/nautilus/preferences/show-delete-permanently"
     value: "'true'"
 
-- name: gnome | nautilus | set directories to not be shown before files in nautilus
+- name: gnome | nautilus | set directories to be shown before files in nautilus
   tags: gnome,nautilus
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gtk/settings/file-chooser/sort-directories-first"
-    value: "false"
+    value: "true"
