@@ -125,7 +125,7 @@
       - package.name in pips
 
   - name: "workstation | include task | specific packages"
-    ansible.builtin.include_tasks: "system_setup/{{ inc_task }}.yml"
+    ansible.builtin.include_tasks: "software/{{ inc_task }}.yml"
     with_items:
       - authy
       - aws_cli
