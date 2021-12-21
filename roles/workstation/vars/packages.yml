@@ -46,7 +46,7 @@ packages_games_remove:
   - wesnoth
 
 apts:
-  - {name: azure_cli, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main", pkg: azure-cli}
+  - {name: azure_cli, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ (ansible_distribution_release == 'impish') | ternary('hirsute', ansible_distribution_release) }} main", pkg: azure-cli}
   - {name: brave-beta, key_url: "https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg", repo: "deb [arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main", pkg: "brave-browser-beta"}
   - {name: chrome-stable, key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub, repo: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main", pkg: google-chrome-stable}
   - {name: edga-beta, key_url: "https://packages.microsoft.com/keys/microsoft.asc", repo: "deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main", repo_file: "microsoft-edge-beta", pkg: "microsoft-edge-beta"}
