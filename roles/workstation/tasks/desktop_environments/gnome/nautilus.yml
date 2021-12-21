@@ -31,7 +31,14 @@
   become_user: "{{ user_name }}"
   community.general.dconf:
     key: "/org/gnome/nautilus/preferences/show-delete-permanently"
-    value: "'true'"
+    value: "true"
+
+- name: gnome | nautilus | enable option to create links
+  tags: gnome,nautilus
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/nautilus/preferences/show-create-link"
+    value: "true"
 
 - name: gnome | nautilus | set directories to be shown before files in nautilus
   tags: gnome,nautilus
@@ -39,3 +46,10 @@
   community.general.dconf:
     key: "/org/gtk/settings/file-chooser/sort-directories-first"
     value: "true"
+
+- name: gnome | nautilus | configure icon-view in nautilus
+  tags: gnome,nautilus
+  become_user: "{{ user_name }}"
+  community.general.dconf:
+    key: "/org/gnome/nautilus/icon-view/captions"
+    value: "['recency', 'size', 'type']"
