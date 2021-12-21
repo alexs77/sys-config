@@ -1,9 +1,0 @@
-- name: software | signal | enable autostart
-  tags: packages,flatpak,signal,workstation-packages
-  ansible.builtin.file:
-    src: "/home/{{ user_name }}/.local/share/flatpak/exports/share/applications/org.signal.Signal.desktop"
-    dest: "/home/{{ user_name }}/.config/autostart/org.signal.Signal.desktop"
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    state: link
-  when: signal is defined and signal == true

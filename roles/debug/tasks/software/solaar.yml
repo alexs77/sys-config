@@ -1,6 +1,0 @@
-- name: software | solaar | make sure solaar doesn't autostart
-  tags: packages,solaar,workstation-packages
-  ansible.builtin.file:
-    path: /etc/xdg/autostart/solaar.desktop
-    state: absent
-  when: solaar is defined and solaar == true

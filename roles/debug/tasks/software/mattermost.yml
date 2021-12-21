@@ -1,9 +1,0 @@
-- name: software | mattermost | enable autostart
-  tags: packages,flatpak,mattermost,workstation-packages
-  ansible.builtin.file:
-    src: /home/{{ user_name }}/.local/share/flatpak/exports/share/applications/com.mattermost.Desktop.desktop
-    dest: /home/{{ user_name }}/.config/autostart/com.mattermost.Desktop.desktop
-    owner: "{{ user_name }}"
-    group: "{{ user_name }}"
-    state: link
-  when: mattermost is defined and mattermost == true
