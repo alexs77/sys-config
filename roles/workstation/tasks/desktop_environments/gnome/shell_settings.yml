@@ -198,4 +198,4 @@
     value: "{{ item.value }}"
   loop:
     - {key: "visual-bell", value: "true"}
-    - {key: "visual-bell-type", value: "frame-flash"}  # or: fullscreen-flash
+    - {key: "visual-bell-type", value: "'frame-flash'"}  # or: fullscreen-flash
