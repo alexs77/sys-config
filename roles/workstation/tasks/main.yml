@@ -10,65 +10,65 @@
 - name: workstation | tasks
   block:
   ## User configs
-  - name: workstation | import task | create user
+  - name: workstation | import task | create user
     ansible.builtin.import_tasks: users/user.yml
 
-  ## desktop environments
-  - name: "workstation | include task | mate"
-    ansible.builtin.include_tasks: "desktop_environments/mate/{{ inc_task }}.yml"
-    when: mate is defined and mate == true
-    with_items:
-      # Do *NOT* sort these!
-      - appearance
-      - caja
-      - keybindings
-      - packages
-      - peripherals
-      - terminal
-      - workspace_settings
-    loop_control:
-        loop_var: inc_task
+  # ## desktop environments
+  # - name: "workstation | include task | mate"
+  #   ansible.builtin.include_tasks: "desktop_environments/mate/{{ inc_task }}.yml"
+  #   when: mate is defined and mate == true
+  #   with_items:
+  #     # Do *NOT* sort these!
+  #     - appearance
+  #     - caja
+  #     - keybindings
+  #     - packages
+  #     - peripherals
+  #     - terminal
+  #     - workspace_settings
+  #   loop_control:
+  #       loop_var: inc_task
 
-  - name: "workstation | include task | gnome"
-    ansible.builtin.include_tasks: "desktop_environments/gnome/{{ inc_task }}.yml"
-    when: gnome is defined and gnome == true
-    with_items:
-      # Do *NOT* sort these!
-      - appearance
-      - extensions
-      - keybindings
-      - nautilus
-      - packages
-      - peripherals
-      - shell_settings
-      - terminal
-      - tracker
-    loop_control:
-        loop_var: inc_task
+  # - name: "workstation | include task | gnome"
+  #   ansible.builtin.include_tasks: "desktop_environments/gnome/{{ inc_task }}.yml"
+  #   when: gnome is defined and gnome == true
+  #   with_items:
+  #     # Do *NOT* sort these!
+  #     - appearance
+  #     - extensions
+  #     - keybindings
+  #     - nautilus
+  #     - packages
+  #     - peripherals
+  #     - shell_settings
+  #     - terminal
+  #     - tracker
+  #   loop_control:
+  #       loop_var: inc_task
 
-  ## system setup
-  - name: "workstation | include task | system setup"
-    ansible.builtin.include_tasks: "system_setup/{{ inc_task }}.yml"
-    with_items:
-      # Do *NOT* sort these!
-      - autofs 
-      - scripts
-      - tweaks
-    loop_control:
-        loop_var: inc_task
+  # ## system setup
+  # - name: "workstation | include task | system setup"
+  #   ansible.builtin.include_tasks: "system_setup/{{ inc_task }}.yml"
+  #   with_items:
+  #     # Do *NOT* sort these!
+  #     - autofs 
+  #     - scripts
+  #     - tweaks
+  #   loop_control:
+  #       loop_var: inc_task
 
-  ## install software
-  - name: software | packages | apts
-    tags: packages,apt,workstation-packages
-    ansible.builtin.include_tasks: "software/_apt_repo_pkg.yml"
-    loop: "{{ packages }}"
-    loop_control:
-      loop_var: package
-    when:
-      - package.name in _names
-      - ansible_os_family == "Debian"
-    vars:
-      _names: "{{ apts | map(attribute='name') | list }}"
+  # ## install software
+  # - name: software | packages | apts
+  #   tags: packages,apt,workstation-packages
+  #   ansible.builtin.include_tasks: "software/_apt_repo_pkg.yml"
+  #   loop: "{{ packages }}"
+  #   loop_control:
+  #     loop_var: package
+  #   when:
+  #     - package.name in _names
+  #     - ansible_os_family == "Debian"
+  #   vars:
+  #     _names: "{{ apts | map(attribute='name') | list }}"
 
   - name: software | packages | flatpaks
     tags: packages,flatpak,workstation-packages
