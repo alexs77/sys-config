@@ -59,3 +59,51 @@ apts:
   - {name: virtualbox, key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc, repo: "deb https://download.virtualbox.org/virtualbox/debian buster contrib", pkg: "{{ virtualbox_package }}"}
   - {name: vivaldi-stable, key_url: https://repo.vivaldi.com/stable/linux_signing_key.pub, repo: "deb https://repo.vivaldi.com/stable/deb/ stable main", pkg: vivaldi-stable}
   - {name: vscode, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/repos/code stable main", pkg: code}
+
+misc_packages:
+  - acpid
+  - alsa-utils
+  - arandr
+  - asunder
+  - cifs-utils
+  - "{{ cups_package }}"
+  - "{{ cryptsetup_package }}"
+  - dconf-editor
+  - dialog
+  - easytag
+  - exfat-utils
+  - "{{ font_fira_mono_package }}"
+  - "{{ font_hack_ttf_package }}"
+  - "{{ font_inconsolata_package }}"
+  - "{{ font_noto_emoji_package }}"
+  - "{{ font_terminus_package }}"
+  #- geany
+  - gparted
+  - "{{ hunspell_package }}"
+  - "{{ hyphen_package }}"
+  - jq
+  - "{{ p7zip_package }}"
+  - "{{ libnotify_package }}"
+  - meld
+  - "{{ mpv_package}}"
+  - "{{ network_manager_openconnect_package }}"
+  - "{{ network_manager_openvpn_package }}"
+  - "{{ network_manager_package }}"
+  - "{{ network_manager_pptp_package }}"
+  - "{{ network_manager_vpnc_package }}"
+  - pavucontrol
+  - resolvconf
+  - shotwell
+  - simplescreenrecorder
+  - smbclient
+  - sshpass
+  - "{{ ssh_askpass_package }}"
+  - terminator
+  - transmission-gtk
+  - unrar
+  - "{{ wireguard_package }}"
+  - "{{ wireless_tools_package }}"
+  - "{{ wpa_supplicant_package }}"
+  - xserver-xorg-input-synaptics
+  - xsel
+  #- x2goclient
