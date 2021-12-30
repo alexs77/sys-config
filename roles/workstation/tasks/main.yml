@@ -15,6 +15,7 @@
 
   ## desktop environments
   - name: "workstation | include task | mate"
+    tags: packages,mate,workstation-packages
     ansible.builtin.include_tasks: "desktop_environments/mate/{{ inc_task }}.yml"
     when: mate is defined and mate == true
     with_items:
@@ -30,6 +31,7 @@
       loop_var: inc_task
 
   - name: "workstation | include task | gnome"
+    tags: packages,gnome,workstation-packages
     ansible.builtin.include_tasks: "desktop_environments/gnome/{{ inc_task }}.yml"
     when: gnome is defined and gnome == true
     with_items:
