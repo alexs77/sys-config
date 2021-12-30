@@ -133,7 +133,7 @@
     value: "{{ item.value }}"
   with_items:
     - { key: per-window, value: "false" }
-    - { key: xkb-options, value: "['compose:menu']" }
+    - { key: xkb-options, value: "['compose:caps']" }
 
 - name: gnome | keybindings | set misc key bindings
   become_user: "{{ user_name }}"
