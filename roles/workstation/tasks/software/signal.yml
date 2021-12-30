@@ -5,6 +5,7 @@
     dest: "/home/{{ user_name }}/.config/autostart/org.signal.Signal.desktop"
     owner: "{{ user_name }}"
     group: "{{ user_name }}"
+    state: link
   when:
     - packages | selectattr('name', 'equalto', 'signal') != []
     - (packages | selectattr('name', 'equalto', 'signal') | first).state not in ['false', 'absent', 'no', false]
