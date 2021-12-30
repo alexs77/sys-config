@@ -42,15 +42,17 @@ packages:
   - {name: azure_cli, state: true}
   - {name: bitwarden, state: true}
   - {name: brave, state: beta}
+  - {name: brave-beta, state: true}
   - {name: chromium, state: true}
   - {name: edge, state: dev}
+  - {name: edge-beta, state: true}
   - {name: darktable, state: false}
   - {name: firefox, state: true}
   - {name: flameshot, state: present}
   - {name: foliate, state: false}
   - {name: games, state: false}
   - {name: glimpse, state: true}
-  - {name: google_chrome, state: true}
+  - {name: chrome, state: true}
   - {name: keepassxc, state: true}
   - {name: keybase, state: true}
   - {name: ksnip, state: present}
@@ -58,6 +60,7 @@ packages:
   - {name: lutris, state: false}
   - {name: mattermost, state: false}
   - {name: minecraft, state: false}
+  - {name: mssql-tools, state: true}
   - {name: neovim, state: true}
   - {name: packer, state: false}
   - {name: podman, state: true}
@@ -81,6 +84,7 @@ packages:
   - {name: vagrant, state: false}
   - {name: virtualbox, state: true}
   - {name: vivaldi, state: true}
+  - {name: vivaldi-stable, state: true}
   - {name: vlc, state: true}
   - {name: vscode, state: true}
   - {name: xonotic, state: true}
