@@ -30,10 +30,123 @@ Host srv
 
 # Cedric
 Host contabo
-    HostName    ctbo.skwar.xyz 
+    HostName    ctbo.skwar.xyz
     # aka bitwarden.systeme.guru
     Port        22
     User        alexander
+
+##################################################################
+# Advellence                                                     #
+##################################################################
+
+### Advellence / Sharedien Internal
+## Build Ops
+Host shr-build-ops adv-shr-build-ops
+    HostName adv-shr-build-ops.westeurope.cloudapp.azure.com
+    User     askwar
+
+## Demo US East
+Host shr-demo-useast adv-sharedien-elasticsearch-demo-useast
+    HostName adv-shr-es-demo-useast.eastus.cloudapp.azure.com
+    User     shradmin
+
+## Release Candidate
+Host shr-rc adv-sharedien-elasticsearch-rc
+    HostName adv-shr-es-rc.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## Training
+Host shr-trng adv-sharedien-elasticsearch-trng
+    HostName adv-shr-es-trng.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## Demo Europe
+Host shr-demo adv-sharedien-elasticsearch2-demo
+    HostName adv-shr-es-demo.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## Dev
+Host shr-dev adv-sharedien-elasticsearch2-dev
+    HostName adv-shr-es-dev.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## Bastion
+Host shr-bastion adv-shr-bastion
+    HostName adv-shr-bastion.westeurope.cloudapp.azure.com
+    User     askwar
+
+### Actaqua
+## p
+Host acta-p acta-shr-es-p
+    HostName acta-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### Alfred Kärcher
+## p
+Host krr-p krr-shr-es-p
+    HostName krr-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## q
+Host krr-q krr-shr-es-q
+    HostName krr-shr-es-q.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### BDF
+## p
+Host bdf-p bdf-sharedien-elasticsearch2-p
+    HostName bdf-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## q
+Host bdf-q bdf-sharedien-elasticsearch2-q
+    HostName bdf-sharedien-elasticsearch2-q.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### Bosch IO
+## p
+Host bshdc-p bshdc-shr-es-p
+    HostName bshdc-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### ECCO
+## p
+Host ecco-p ecco-sharedien-elasticsearch-p
+    HostName ecco-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## q
+Host ecco-q ecco-sharedien-elasticsearch-q
+    HostName ecco-shr-es-q.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### Markant
+## p
+Host mrkt-p mrkt-shr-es-p
+    HostName mrkt-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### Otto
+## d
+Host otto-d otto-sharedien-elasticsearch-d
+    HostName otto-shr-es-d.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## p
+Host otto-p otto-sharedien-elasticsearch-p
+    HostName otto-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
+
+## q
+Host otto-q otto-sharedien-elasticsearch-q
+    HostName otto-shr-es-q.westeurope.cloudapp.azure.com
+    User     shradmin
+
+### wedi
+## p
+Host wedi-p wedi-sharedien-elasticsearch-p
+    HostName wedi-shr-es-p.westeurope.cloudapp.azure.com
+    User     shradmin
 
 ##################################################################
 # include                                                        #
