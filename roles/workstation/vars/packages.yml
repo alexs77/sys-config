@@ -29,11 +29,14 @@ snaps:
   - {name: todoist}
 
 generic_packages:
-  - {name: solaar, pkg: solaar}
   # - caffeine
+  - {name: docker_compose, pkg: docker-compose}
+  - {name: gimp, pkg: gimp}
+  - {name: falkon, pkg: falkon}
   - {name: gstreamer_libav_package, pkg: lookup('vars', gstreamer_libav_package)}
   - {name: gstreamer_plugins_bad_package, pkg: lookup('vars', gstreamer_plugins_bad_package)}
-  - {name: docker_compose, pkg: docker-compose}
+  - {name: midori, pkg: midori}
+  - {name: solaar, pkg: solaar}
 
 packages_games_remove:
   - chromium-bsu
@@ -49,17 +52,18 @@ apts:
   - {name: azure_cli, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ (ansible_distribution_release == 'impish') | ternary('hirsute', ansible_distribution_release) }} main", pkg: azure-cli}
   - {name: brave-beta, key_url: https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg, repo: "deb [arch=amd64] https://brave-browser-apt-beta.s3.brave.com/ stable main", pkg: "brave-browser-beta"}
   - {name: chrome-stable, key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub, repo: "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main", pkg: google-chrome-stable}
-  - {name: edga-beta, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main", repo_file: "microsoft-edge-beta", pkg: "microsoft-edge-beta"}
+  - {name: edge-beta, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main", repo_file: "microsoft-edge-beta", pkg: "microsoft-edge-beta"}
   - {name: keybase, key_url: https://keybase.io/docs/server_security/code_signing_key.asc, repo: "deb http://prerelease.keybase.io/deb stable main", pkg: keybase}
   - {name: lutris, repo: "ppa:lutris-team/lutris", pkg: lutris}
-#  - {name: mssql-tools, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/{{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}/prod {{ (ansible_distribution_release == 'impish') | ternary('hirsute', {{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}) }} main", pkg: "mssql-tools"}
   - {name: neovim, repo: "ppa:neovim-ppa/stable", pkg: neovim}
+  - {name: opera-beta, key_url: https://deb.opera.com/archive.key, repo: "deb https://deb.opera.com/opera-stable/ stable non-free", repo_file: "opera-beta", pkg: "opera-beta"}
   - {name: podman, key_url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ (ansible_distribution in ['Pop!_OS', 'Ubuntu']) | ternary('xUbuntu', ansible_distribution) }}_{{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}/Release.key", repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ (ansible_distribution in ['Pop!_OS', 'Ubuntu']) | ternary('xUbuntu', ansible_distribution) }}_{{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}/ /", pkg: podman}
   - {name: shutter, repo: ppa:shutter/ppa, pkg: shutter}
   - {name: ulauncher, repo: ppa:agornostal/ulauncher, pkg: ulauncher}
   - {name: virtualbox, key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc, repo: "deb https://download.virtualbox.org/virtualbox/debian buster contrib", pkg: "{{ virtualbox_package }}"}
   - {name: vivaldi-stable, key_url: https://repo.vivaldi.com/stable/linux_signing_key.pub, repo: "deb [arch=amd64] https://repo.vivaldi.com/stable/deb/ stable main", repo_file: vivaldi, pkg: vivaldi-stable}
   - {name: vscode, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64,arm64,armhf] http://packages.microsoft.com/repos/code stable main", repo_file: vscode, pkg: code}
+#  - {name: mssql-tools, key_url: https://packages.microsoft.com/keys/microsoft.asc, repo: "deb [arch=amd64] https://packages.microsoft.com/ubuntu/{{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}/prod {{ (ansible_distribution_release == 'impish') | ternary('hirsute', {{ (ansible_distribution_release == 'impish') | ternary('21.04', ansible_distribution_version) }}) }} main", pkg: "mssql-tools"}
 
 misc_packages:
   - acpid
