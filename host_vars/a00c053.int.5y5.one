@@ -41,38 +41,42 @@ packages:
   - {name: awscliv2, state: true}
   - {name: azure_cli, state: true}
   - {name: bitwarden, state: true}
-  - {name: brave, state: beta}
+  - {name: boto, state: present}
   - {name: brave-beta, state: true}
+  - {name: brave, state: beta}
+  - {name: chrome, state: true}
   - {name: chromium, state: true}
-  - {name: edge, state: dev}
-  - {name: edge-beta, state: true}
   - {name: darktable, state: false}
+  - {name: docker_compose, state: present}
+  - {name: edge-beta, state: true}
+  - {name: edge, state: dev}
+  - {name: falkon, state: true}
   - {name: firefox, state: true}
   - {name: flameshot, state: present}
   - {name: foliate, state: false}
   - {name: games, state: false}
-  - {name: glimpse, state: true}
-  - {name: chrome, state: true}
+  - {name: glimpse, state: false}
+  - {name: gstreamer_libav_package, state: present}
+  - {name: gstreamer_plugins_bad_package, state: present}
   - {name: keepassxc, state: true}
   - {name: keybase, state: true}
   - {name: ksnip, state: present}
+  - {name: gimp, state: true}
   - {name: libreoffice, state: true}
+  - {name: linode_cli, state: absent}
   - {name: lutris, state: false}
   - {name: mattermost, state: false}
+  - {name: midori, state: true}
   - {name: minecraft, state: false}
   - {name: mssql-tools, state: true}
   - {name: neovim, state: true}
+  - {name: opera-beta, state: true}
   - {name: packer, state: false}
   - {name: podman, state: true}
   - {name: shutter, state: absent}
   - {name: signal, state: true}
-  - {name: spotify, state: true}
-  - {name: linode_cli, state: absent}
-  - {name: boto, state: present}
-  - {name: docker_compose, state: present}
   - {name: solaar, state: absent}
-  - {name: gstreamer_libav_package, state: present}
-  - {name: gstreamer_plugins_bad_package, state: present}
+  - {name: spotify, state: true}
   - {name: steam, state: false}
   - {name: syncthing, state: false}
   - {name: teams, state: false}
@@ -83,8 +87,8 @@ packages:
   - {name: ulauncher, state: false}
   - {name: vagrant, state: false}
   - {name: virtualbox, state: true}
-  - {name: vivaldi, state: true}
   - {name: vivaldi-stable, state: true}
+  - {name: vivaldi, state: true}
   - {name: vlc, state: true}
   - {name: vscode, state: true}
   - {name: xonotic, state: true}
