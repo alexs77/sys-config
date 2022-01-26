@@ -24,7 +24,7 @@ p7zip_package: p7zip-full
 packer_version: 1.6.5
 ssh_askpass_package: ssh-askpass-gnome
 steam_package: steam-installer
-terraform_version: 0.13.5
+terraform_version: 1.1.4
 vagrant_version: 2.2.14
 virtualbox_package: virtualbox
 wireless_tools_package: wireless-tools
