@@ -9,3 +9,11 @@
   when:
     - packages | selectattr('name', 'equalto', 'terraform') != []
     - (packages | selectattr('name', 'equalto', 'terraform') | first).state not in ['false', 'absent', 'no', false]
+    - ansible_distribution not in ["Pop!_OS", "Ubuntu"]
+
+- name: software | terraform | remove old binary
+  ansible.builtin.file:
+    path: /usr/local/bin/terraform
+    state: absent
+  when:
+    - ansible_distribution in ["Pop!_OS", "Ubuntu"]
